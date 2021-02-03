@@ -1,7 +1,7 @@
 # Личный проект «Что посмотреть» [![Build status][travis-image]][travis-url]
 
 * Студент: [Анастасия](https://up.htmlacademy.ru/react/6/user/342107).
-* Наставник: `Неизвестно`.
+* Наставник: [Иван Шалагин](https://up.htmlacademy.ru/ecmascript/13/user/386947).
 
 ---
 
