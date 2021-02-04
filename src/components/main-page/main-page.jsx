@@ -1,13 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Film from '../film/film.jsx';
 
 const MOVIE_CARDS_COUNT = 20;
-const createMoviesList = (element) => {
-  return new Array(MOVIE_CARDS_COUNT).fill(element);
-};
 
 const MainPage = (props) => {
-  const {name, genre, promoReleaseDate} = props;
+  const {promoName, promoGenre, promoReleaseDate} = props;
 
   return (
     <div>
@@ -41,14 +39,14 @@ const MainPage = (props) => {
             </div>
 
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="movie-card__title">{promoName}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">Drama</span>
-                <span className="movie-card__year">2014</span>
+                <span className="movie-card__genre">{promoGenre}</span>
+                <span className="movie-card__year">{promoReleaseDate}</span>
               </p>
 
               <div className="movie-card__buttons">
-              <button className="btn btn--play movie-card__button" type="button">
+                <button className="btn btn--play movie-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -104,7 +102,7 @@ const MainPage = (props) => {
           </ul>
 
           <div className="catalog__movies-list">
-            {createMoviesList(<Film name={name} genre={genre} promoReleaseDate={promoReleaseDate} />)}
+            {new Array(MOVIE_CARDS_COUNT).fill(<Film />)}
           </div>
 
           <div className="catalog__more">
@@ -128,6 +126,12 @@ const MainPage = (props) => {
       </div>
     </div>
   );
+};
+
+MainPage.propTypes = {
+  promoName: PropTypes.string,
+  promoGenre: PropTypes.string,
+  promoReleaseDate: PropTypes.string
 };
 
 export default MainPage;
