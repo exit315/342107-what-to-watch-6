@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import MainPage from '../main-page/main-page.jsx';
 
 const App = (props) => {
-  const {promoName, promoGenre, promoReleaseDate, movieName} = props;
+  const {promoName, promoGenre, promoReleaseDate, movieName, movieId} = props;
 
   return (
     <MainPage
@@ -11,6 +11,7 @@ const App = (props) => {
       promoGenre={promoGenre}
       promoReleaseDate={promoReleaseDate}
       movieName={movieName}
+      movieId={movieId}
     />
   );
 };
@@ -20,6 +21,7 @@ App.propTypes = {
   promoGenre: PropTypes.string,
   promoReleaseDate: PropTypes.string,
   movieName: PropTypes.string,
+  movieId: PropTypes.number
 };
 
 export default App;

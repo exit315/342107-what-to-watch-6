@@ -5,7 +5,7 @@ import Film from '../film/film.jsx';
 const MOVIE_CARDS_COUNT = 20;
 
 const MainPage = (props) => {
-  const {promoName, promoGenre, promoReleaseDate, movieName} = props;
+  const {promoName, promoGenre, promoReleaseDate, movieName, movieId} = props;
 
   return (
     <div>
@@ -102,7 +102,7 @@ const MainPage = (props) => {
           </ul>
 
           <div className="catalog__movies-list">
-            {new Array(MOVIE_CARDS_COUNT).fill(<Film movieName={movieName}/>)}
+            {new Array(MOVIE_CARDS_COUNT).fill(<Film key={movieId} movieName={movieName}/>)}
           </div>
 
           <div className="catalog__more">
@@ -132,7 +132,8 @@ MainPage.propTypes = {
   promoName: PropTypes.string,
   promoGenre: PropTypes.string,
   promoReleaseDate: PropTypes.string,
-  movieName: PropTypes.string
+  movieName: PropTypes.string,
+  movieId: PropTypes.number
 };
 
 export default MainPage;

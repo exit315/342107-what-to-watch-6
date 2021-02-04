@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import App from './components/app/app.jsx';
 
 const movieData = {
-  movieName: `No Country For An Old Men`
+  movieName: `No Country For An Old Men`,
+  movieId: 1
 };
 
 const promoFilmData = {
@@ -18,6 +19,7 @@ ReactDOM.render(
       promoGenre={promoFilmData.promoGenre}
       promoReleaseDate={promoFilmData.promoReleaseDate}
       movieName={movieData.movieName}
+      movieId={movieData.movieId}
     />,
     document.querySelector(`#root`)
 );
