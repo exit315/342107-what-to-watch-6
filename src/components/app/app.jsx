@@ -18,18 +18,18 @@ const App = (props) => {
       <Switch>
         <Route exact path="/">
           <MainPage
-              promoName={promoName}
-              promoGenre={promoGenre}
-              promoReleaseDate={promoReleaseDate}
-              movieName={movieName}
-              movieId={movieId}
-            />
+            promoName={promoName}
+            promoGenre={promoGenre}
+            promoReleaseDate={promoReleaseDate}
+            movieName={movieName}
+            movieId={movieId}
+          />
         </Route>
         <Route exact path="/login">
           <SignIn />
         </Route>
         <Route exact path="/mylist">
-          <MyList /> 
+          <MyList />
         </Route>
         <Route exact path="/films:id">
           <Film />

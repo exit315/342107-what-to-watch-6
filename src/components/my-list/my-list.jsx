@@ -125,7 +125,7 @@ const MyList = () => {
         </div>
       </footer>
     </div>
-  )
-}
+  );
+};
 
 export default MyList;

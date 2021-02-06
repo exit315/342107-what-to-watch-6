@@ -38,7 +38,7 @@ const NotFoundScreen = () => {
         </footer>
       </div>
     </React.Fragment>
-  )
-}
+  );
+};
 
 export default NotFoundScreen;

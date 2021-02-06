@@ -35,7 +35,7 @@ const Player = () => {
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 export default Player;
