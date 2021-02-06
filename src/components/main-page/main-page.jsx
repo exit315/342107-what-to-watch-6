@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Film from '../film/film.jsx';
+import MovieItemCard from '../movie-item-card/movie-item-card.jsx';
 
 const MOVIE_CARDS_COUNT = 20;
 
@@ -102,7 +102,7 @@ const MainPage = (props) => {
           </ul>
 
           <div className="catalog__movies-list">
-            {new Array(MOVIE_CARDS_COUNT).fill(<Film key={movieId} movieName={movieName}/>)}
+            {new Array(MOVIE_CARDS_COUNT).fill(<MovieItemCard key={movieId} movieName={movieName}/>)}
           </div>
 
           <div className="catalog__more">
