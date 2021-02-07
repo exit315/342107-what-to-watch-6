@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Film from '../film/film.jsx';
+import Header from '../header/header';
+import MovieItemCard from '../movie-item-card/movie-item-card.jsx';
+import Footer from '../footer/footer';
 
 const MOVIE_CARDS_COUNT = 20;
 
@@ -16,21 +18,7 @@ const MainPage = (props) => {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <header className="page-header movie-card__head">
-          <div className="logo">
-            <a className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-            </div>
-          </div>
-        </header>
+        <Header />
 
         <div className="movie-card__wrap">
           <div className="movie-card__info">
@@ -102,7 +90,7 @@ const MainPage = (props) => {
           </ul>
 
           <div className="catalog__movies-list">
-            {new Array(MOVIE_CARDS_COUNT).fill(<Film key={movieId} movieName={movieName}/>)}
+            {new Array(MOVIE_CARDS_COUNT).fill(<MovieItemCard key={movieId} movieName={movieName}/>)}
           </div>
 
           <div className="catalog__more">
@@ -110,19 +98,7 @@ const MainPage = (props) => {
           </div>
         </section>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <a className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </div>
   );
