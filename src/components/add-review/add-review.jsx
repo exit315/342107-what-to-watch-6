@@ -87,7 +87,6 @@ const AddReview = () => {
           </div>
         </form>
       </div>
-
     </section>
   );
 };

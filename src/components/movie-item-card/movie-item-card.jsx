@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Film = (props) => {
+const MovieItemCard = (props) => {
   const {movieName} = props;
 
   return (
@@ -16,8 +16,8 @@ const Film = (props) => {
   );
 };
 
-Film.propTypes = {
+MovieItemCard.propTypes = {
   movieName: PropTypes.string
 };
 
-export default Film;
+export default MovieItemCard;
