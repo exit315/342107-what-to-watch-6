@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Header from '../header/header';
 import FilmsLikeThis from '../films-like-this/films-like-this';
 import Footer from '../footer/footer';
@@ -98,6 +99,11 @@ const Film = (props) => {
       </div>
     </React.Fragment>
   );
+};
+
+Film.propTypes = {
+  movieName: PropTypes.string,
+  movieId: PropTypes.number
 };
 
 export default Film;
