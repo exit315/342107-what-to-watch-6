@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import AddReviewForm from '../add-review-form/add-review-form.jsx';
 
 const AddReview = ({film}) => {

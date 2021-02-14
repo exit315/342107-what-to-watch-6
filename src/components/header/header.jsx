@@ -14,7 +14,8 @@ const UserPicElement = () => {
   );
 };
 
-const Header = () => {
+const Header = (props) => {
+  const {title} = props;
   const isGuest = false;
 
   return (
@@ -26,6 +27,8 @@ const Header = () => {
           <span className="logo__letter logo__letter--3">W</span>
         </a>
       </div>
+
+      <h1 className="page-title user-page__title">{title}</h1>
 
       <div className="user-block">
         {isGuest ? <SignInLinkElement /> : <UserPicElement />}

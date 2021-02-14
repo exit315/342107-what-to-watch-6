@@ -1,13 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Header from '../header/header';
-import MovieItemCard from '../movie-item-card/movie-item-card.jsx';
+import FilmsList from '../films-list/films-list.jsx';
 import Footer from '../footer/footer';
 
-const MOVIE_CARDS_COUNT = 20;
-
 const MainPage = (props) => {
-  const {promoName, promoGenre, promoReleaseDate, movieName, movieId} = props;
+  const {promoName, promoGenre, promoReleaseDate, films} = props;
 
   return (
     <div>
@@ -89,9 +86,9 @@ const MainPage = (props) => {
             </li>
           </ul>
 
-          <div className="catalog__movies-list">
-            {new Array(MOVIE_CARDS_COUNT).fill(<MovieItemCard key={movieId} movieName={movieName}/>)}
-          </div>
+          <FilmsList
+            films={films} onFilmClick={() => {}}
+          />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
@@ -102,14 +99,6 @@ const MainPage = (props) => {
       </div>
     </div>
   );
-};
-
-MainPage.propTypes = {
-  promoName: PropTypes.string,
-  promoGenre: PropTypes.string,
-  promoReleaseDate: PropTypes.string,
-  movieName: PropTypes.string,
-  movieId: PropTypes.number
 };
 
 export default MainPage;
