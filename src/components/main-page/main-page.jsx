@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Header from '../header/header';
 import FilmsList from '../films-list/films-list.jsx';
 import Footer from '../footer/footer';
@@ -99,6 +100,13 @@ const MainPage = (props) => {
       </div>
     </div>
   );
+};
+
+MainPage.propTypes = {
+  promoName: PropTypes.string,
+  promoGenre: PropTypes.string,
+  promoReleaseDate: PropTypes.string,
+  films: PropTypes.array
 };
 
 export default MainPage;

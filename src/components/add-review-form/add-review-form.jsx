@@ -53,7 +53,7 @@ const AddReviewForm = () => {
       </div>
 
       <div className="add-review__text">
-        <textarea className="add-review__textarea" name="comment" id="comment" placeholder="Review text" 
+        <textarea className="add-review__textarea" name="comment" id="comment" placeholder="Review text"
           onChange={handleCommentChange}>
         </textarea>
         <div className="add-review__submit">

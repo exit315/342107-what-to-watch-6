@@ -1,13 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import Header from '../header/header';
 import Footer from '../footer/footer';
 
-const Film = ({film}) => {
-  const {id, name, description, director, scores_count, genre, released, rating, starring, poster_image, background_image} = film;
-  const scoreCount = scores_count;
-  const posterImage = poster_image;
-  const backgroundImage = background_image;
+const Film = (props) => {
+  const {id, name, description, director, scoreCount, genre, released, rating, starring, posterImage, backgroundImage} = props;
 
   return (
     <React.Fragment>
@@ -89,11 +87,24 @@ const Film = ({film}) => {
       </section>
 
       <div className="page-content">
-        
         <Footer />
       </div>
     </React.Fragment>
   );
+};
+
+Film.propTypes = {
+  id: PropTypes.number,
+  name: PropTypes.string,
+  description: PropTypes.string,
+  director: PropTypes.string,
+  scoreCount: PropTypes.number,
+  genre: PropTypes.string,
+  released: PropTypes.number,
+  rating: PropTypes.number,
+  starring: PropTypes.string,
+  posterImage: PropTypes.string,
+  backgroundImage: PropTypes.string
 };
 
 export default Film;

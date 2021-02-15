@@ -1,8 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const Player = ({film}) => {
-  const {name, video_link} = film;
-  const videoLink = video_link;
+const Player = (props) => {
+  const {name, videoLink} = props;
 
   return (
     <div className="player">
@@ -38,6 +38,11 @@ const Player = ({film}) => {
       </div>
     </div>
   );
+};
+
+Player.propTypes = {
+  name: PropTypes.string,
+  videoLink: PropTypes.string
 };
 
 export default Player;

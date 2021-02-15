@@ -1,15 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import MovieItemCard from '../movie-item-card/movie-item-card.jsx';
 
 const FilmsLikeThis = (props) => {
   const {films} = props;
-  console.log(films)
+
   return (
     <section className="catalog catalog--like-this">
       <h2 className="catalog__title">More like this</h2>
 
       <div className="catalog__movies-list">
-        {films.map((film) => <MovieItemCard 
+        {films.map((film) => <MovieItemCard
           key={`${film.name}-${film.id}`}
           id={film.id}
           name={film.name}
@@ -21,6 +22,10 @@ const FilmsLikeThis = (props) => {
       </div>
     </section>
   );
+};
+
+FilmsLikeThis.propTypes = {
+  films: PropTypes.array
 };
 
 export default FilmsLikeThis;

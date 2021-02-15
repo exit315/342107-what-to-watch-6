@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
 const MovieItemCard = (props) => {
   const {id, name, src} = props;
-  const [activeCard, setActiveCard] = useState(0);
+  // const [activeCard, setActiveCard] = useState(0);
 
   const handleFilmFocus = (() => {});
 
@@ -17,6 +18,12 @@ const MovieItemCard = (props) => {
       </h3>
     </article>
   );
+};
+
+MovieItemCard.propTypes = {
+  src: PropTypes.string,
+  name: PropTypes.string,
+  id: PropTypes.number
 };
 
 export default MovieItemCard;

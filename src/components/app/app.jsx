@@ -38,12 +38,12 @@ const App = (props) => {
           />
         </Route>
         <Route exact path="/films/:id/review">
-          <AddReview 
+          <AddReview
             film={film}
           />
         </Route>
         <Route exact path="/player/:id">
-          <Player 
+          <Player
             film={film}
           />
         </Route>
@@ -59,17 +59,7 @@ App.propTypes = {
   promoName: PropTypes.string,
   promoGenre: PropTypes.string,
   promoReleaseDate: PropTypes.string,
-  id: PropTypes.number,
-  name: PropTypes.string,
-  description: PropTypes.string,
-  director: PropTypes.string,
-  scores_count: PropTypes.number,
-  genre: PropTypes.string,
-  released: PropTypes.number,
-  rating: PropTypes.number,
-  starring: PropTypes.string,
-  poster_image: PropTypes.string,
-  background_image: PropTypes.string
+  films: PropTypes.array
 };
 
 export default App;

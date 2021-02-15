@@ -1,10 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import AddReviewForm from '../add-review-form/add-review-form.jsx';
 
-const AddReview = ({film}) => {
-  const {name, poster_image, background_image} = film;
-  const posterImage = poster_image;
-  const backgroundImage = background_image;
+const AddReview = (props) => {
+  const {name, posterImage, backgroundImage} = props;
 
   return (
     <section className="movie-card movie-card--full">
@@ -52,6 +51,12 @@ const AddReview = ({film}) => {
       </div>
     </section>
   );
+};
+
+AddReview.propTypes = {
+  name: PropTypes.string,
+  posterImage: PropTypes.string,
+  backgroundImage: PropTypes.string
 };
 
 export default AddReview;
