@@ -88,7 +88,7 @@ const MainPage = (props) => {
           </ul>
 
           <FilmsList
-            films={films} onFilmClick={() => {}}
+            films={films} 
           />
 
           <div className="catalog__more">
