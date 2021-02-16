@@ -6,7 +6,7 @@ import Footer from '../footer/footer';
 
 const Film = (props) => {
   const {films, match} = props;
-  const currentFilm = films.find((el) => el.id === parseInt(match.params.id));
+  const currentFilm = films.find((el) => el.id === parseInt(match.params.id, 10));
 
   return (
     <React.Fragment>
@@ -95,17 +95,8 @@ const Film = (props) => {
 };
 
 Film.propTypes = {
-  id: PropTypes.number,
-  name: PropTypes.string,
-  description: PropTypes.string,
-  director: PropTypes.string,
-  scoreCount: PropTypes.number,
-  genre: PropTypes.string,
-  released: PropTypes.number,
-  rating: PropTypes.number,
-  starring: PropTypes.string,
-  posterImage: PropTypes.string,
-  backgroundImage: PropTypes.string
+  films: PropTypes.array.isRequired,
+  match: PropTypes.object.isRequired
 };
 
 export default withRouter(Film);

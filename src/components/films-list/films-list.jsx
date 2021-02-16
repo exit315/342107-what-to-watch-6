@@ -8,9 +8,7 @@ const FilmsList = (props) => {
   const [activeCard, setActiveCard] = useState(null);
   const handleActiveCardChange = (id = null) => {
     setActiveCard(id);
-  }
-
-  console.log(activeCard)
+  };
 
   return (
     <div className="catalog__movies-list">
@@ -19,7 +17,9 @@ const FilmsList = (props) => {
         id={film.id}
         name={film.name}
         src={film.previewImage}
+        previewVideoLink={film.previewVideoLink}
         handleActiveCardChange={handleActiveCardChange}
+        activeCard={activeCard}
       />)}
     </div>
   );

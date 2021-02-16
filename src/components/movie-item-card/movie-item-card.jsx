@@ -3,16 +3,24 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
 const MovieItemCard = (props) => {
-  const {id, name, src, handleActiveCardChange} = props;
+  const {id, name, src, handleActiveCardChange, previewVideoLink, activeCard} = props;
 
   const onFilmHover = (e) => {
-    handleActiveCardChange(e.currentTarget.id);
-  }
+    setTimeout(handleActiveCardChange, 1000, e.currentTarget.id);
+  };
+
+  const onFilmUnhover = () => {
+    handleActiveCardChange(null);
+  };
 
   return (
-    <article className="small-movie-card catalog__movies-card" id={id} key={`${name}-${id}`} onMouseEnter={onFilmHover}>
+    <article className="small-movie-card catalog__movies-card"
+      id={id}
+      key={`${name}-${id}`}
+      onMouseEnter={onFilmHover}
+      onMouseLeave={onFilmUnhover}>
       <div className="small-movie-card__image">
-        <img src={src} alt={name} width="280" height="175"/>
+        {parseInt(activeCard, 10) === id ? <video src={previewVideoLink} width="280" height="175"></video> : <img src={src} alt={name} width="280" height="175"/>}
       </div>
       <h3 className="small-movie-card__title">
         <Link to={`films/${id}`} className="small-movie-card__link">{name}</Link>
@@ -24,7 +32,10 @@ const MovieItemCard = (props) => {
 MovieItemCard.propTypes = {
   src: PropTypes.string,
   name: PropTypes.string,
-  id: PropTypes.number
+  id: PropTypes.number,
+  handleActiveCardChange: PropTypes.func,
+  previewVideoLink: PropTypes.string,
+  activeCard: PropTypes.string
 };
 
 export default MovieItemCard;

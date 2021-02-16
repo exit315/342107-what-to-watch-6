@@ -15,7 +15,11 @@ const MyList = (props) => {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <div className="catalog__movies-list">
-          {films.map((film) => <MovieItemCard key={`${film.name}-${film.id}`} name={film.name} id={film.id} src={film.previewImage} />)}
+          {films.map((film) => <MovieItemCard
+            key={`${film.name}-${film.id}`}
+            name={film.name} id={film.id}
+            src={film.previewImage}
+          />)}
         </div>
       </section>
 
