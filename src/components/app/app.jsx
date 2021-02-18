@@ -9,9 +9,9 @@ import AddReview from '../add-review/add-review.jsx';
 import Film from '../film/film.jsx';
 import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
 
-
 const App = (props) => {
-  const {promoName, promoGenre, promoReleaseDate, movieName, movieId} = props;
+  const {promoName, promoGenre, promoReleaseDate, films} = props;
+  const [film] = films;
 
   return (
     <BrowserRouter>
@@ -21,34 +21,37 @@ const App = (props) => {
             promoName={promoName}
             promoGenre={promoGenre}
             promoReleaseDate={promoReleaseDate}
-            movieName={movieName}
-            movieId={movieId}
+            films={films}
           />
         </Route>
         <Route exact path="/login">
           <SignIn />
         </Route>
         <Route exact path="/mylist">
-          <MyList />
+          <MyList
+            films={films}
+          />
         </Route>
-        <Route exact path="/films:id">
+        <Route exact path="/films/:id">
           <Film
-            movieName={movieName}
-            movieId={movieId}
+            films={films}
           />
         </Route>
         <Route exact path="/films/:id/review">
-          <AddReview />
+          <AddReview
+            film={film}
+          />
         </Route>
         <Route exact path="/player/:id">
-          <Player />
+          <Player
+            film={film}
+          />
         </Route>
         <Route>
           <NotFoundScreen />
         </Route>
       </Switch>
     </BrowserRouter>
-
   );
 };
 
@@ -56,8 +59,7 @@ App.propTypes = {
   promoName: PropTypes.string,
   promoGenre: PropTypes.string,
   promoReleaseDate: PropTypes.string,
-  movieName: PropTypes.string,
-  movieId: PropTypes.number
+  films: PropTypes.array
 };
 
 export default App;

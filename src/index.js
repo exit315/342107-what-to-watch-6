@@ -1,11 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app.jsx';
-
-const movieData = {
-  movieName: `No Country For An Old Men`,
-  movieId: 1
-};
+import films from './mocks/films.js';
 
 const promoFilmData = {
   promoName: `The Grand Budapest Hotel`,
@@ -18,8 +14,7 @@ ReactDOM.render(
       promoName={promoFilmData.promoName}
       promoGenre={promoFilmData.promoGenre}
       promoReleaseDate={promoFilmData.promoReleaseDate}
-      movieName={movieData.movieName}
-      movieId={movieData.movieId}
+      films={films}
     />,
     document.querySelector(`#root`)
 );

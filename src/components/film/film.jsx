@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link, withRouter} from 'react-router-dom';
 import Header from '../header/header';
-import FilmsLikeThis from '../films-like-this/films-like-this';
 import Footer from '../footer/footer';
 
 const Film = (props) => {
-  const {movieName, movieId} = props;
+  const {films, match} = props;
+  const currentFilm = films.find((el) => el.id === parseInt(match.params.id, 10));
 
   return (
     <React.Fragment>
       <section className="movie-card movie-card--full">
         <div className="movie-card__hero">
           <div className="movie-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+            <img src={currentFilm.backgroundImage} alt={currentFilm.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -21,10 +22,10 @@ const Film = (props) => {
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="movie-card__title">{currentFilm.name}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">Drama</span>
-                <span className="movie-card__year">2014</span>
+                <span className="movie-card__genre">{currentFilm.genre}</span>
+                <span className="movie-card__year">{currentFilm.released}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -40,7 +41,7 @@ const Film = (props) => {
                   </svg>
                   <span>My list</span>
                 </button>
-                <a href="add-review.html" className="btn movie-card__button">Add review</a>
+                <Link to={`${currentFilm.id}/review`} className="btn movie-card__button">Add review</Link>
               </div>
             </div>
           </div>
@@ -49,7 +50,7 @@ const Film = (props) => {
         <div className="movie-card__wrap movie-card__translate-top">
           <div className="movie-card__info">
             <div className="movie-card__poster movie-card__poster--big">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={currentFilm.posterImage} alt={currentFilm.name} width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
@@ -68,21 +69,18 @@ const Film = (props) => {
               </nav>
 
               <div className="movie-rating">
-                <div className="movie-rating__score">8,9</div>
+                <div className="movie-rating__score">{currentFilm.rating}</div>
                 <p className="movie-rating__meta">
                   <span className="movie-rating__level">Very good</span>
-                  <span className="movie-rating__count">240 ratings</span>
+                  <span className="movie-rating__count">{currentFilm.scoresCount} ratings</span>
                 </p>
               </div>
 
               <div className="movie-card__text">
-                <p>In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave&apos;s friend and protege.</p>
+                {currentFilm.description}
+                <p className="movie-card__director"><strong>Director: {currentFilm.director}</strong></p>
 
-                <p>Gustave prides himself on providing first-className service to the hotel&apos;s guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave&apos;s lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.</p>
-
-                <p className="movie-card__director"><strong>Director: Wes Andreson</strong></p>
-
-                <p className="movie-card__starring"><strong>Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other</strong></p>
+                <p className="movie-card__starring"><strong>Starring: {currentFilm.starring.join(`, `)} and other</strong></p>
               </div>
             </div>
           </div>
@@ -90,11 +88,6 @@ const Film = (props) => {
       </section>
 
       <div className="page-content">
-        <FilmsLikeThis
-          movieName={movieName}
-          movieId={movieId}
-        />
-
         <Footer />
       </div>
     </React.Fragment>
@@ -102,8 +95,8 @@ const Film = (props) => {
 };
 
 Film.propTypes = {
-  movieName: PropTypes.string,
-  movieId: PropTypes.number
+  films: PropTypes.array.isRequired,
+  match: PropTypes.object.isRequired
 };
 
-export default Film;
+export default withRouter(Film);

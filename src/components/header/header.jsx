@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const SignInLinkElement = () => {
   return (
@@ -14,7 +15,8 @@ const UserPicElement = () => {
   );
 };
 
-const Header = () => {
+const Header = (props) => {
+  const {title} = props;
   const isGuest = false;
 
   return (
@@ -27,11 +29,17 @@ const Header = () => {
         </a>
       </div>
 
+      <h1 className="page-title user-page__title">{title}</h1>
+
       <div className="user-block">
         {isGuest ? <SignInLinkElement /> : <UserPicElement />}
       </div>
     </header>
   );
+};
+
+Header.propTypes = {
+  title: PropTypes.string
 };
 
 export default Header;
