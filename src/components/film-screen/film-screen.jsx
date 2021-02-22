@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import {Link, withRouter} from 'react-router-dom';
+import {Link, withRouter, Redirect} from 'react-router-dom';
 import {TabType} from '../../const.js';
 import Header from '../header/header';
 import Footer from '../footer/footer';
@@ -41,6 +41,7 @@ const FilmScreen = (props) => {
           />
         );
     }
+    return <Redirect to="/" />;
   };
 
   return (

@@ -1,9 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {Link, withRouter} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 
-const FilmReviews = (props) => {
-  const {currentFilm} = props;
+const FilmReviews = () => {
 
   return (
     <React.Fragment>
@@ -11,7 +9,7 @@ const FilmReviews = (props) => {
         <div className="movie-card__reviews-col">
           <div className="review">
             <blockquote className="review__quote">
-              <p className="review__text">Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.</p>
+              <p className="review__text">Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director&apos;s funniest and most exquisitely designed movies in years.</p>
 
               <footer className="review__details">
                 <cite className="review__author">Kate Muir</cite>
@@ -24,7 +22,7 @@ const FilmReviews = (props) => {
 
           <div className="review">
             <blockquote className="review__quote">
-              <p className="review__text">Anderson's films are too precious for some, but for those of us willing to lose ourselves in them, they're a delight. "The Grand Budapest Hotel" is no different, except that he has added a hint of gravitas to the mix, improving the recipe.</p>
+              <p className="review__text">Anderson&apos;s films are too precious for some, but for those of us willing to lose ourselves in them, they&apos;re a delight. &quot;The Grand Budapest Hotel&quot; is no different, except that he has added a hint of gravitas to the mix, improving the recipe.</p>
 
               <footer className="review__details">
                 <cite className="review__author">Bill Goodykoontz</cite>
@@ -37,7 +35,7 @@ const FilmReviews = (props) => {
 
           <div className="review">
             <blockquote className="review__quote">
-              <p className="review__text">I didn't find it amusing, and while I can appreciate the creativity, it's an hour and 40 minutes I wish I could take back.</p>
+              <p className="review__text">I didn&apos;t find it amusing, and while I can appreciate the creativity, it&apos;s an hour and 40 minutes I wish I could take back.</p>
 
               <footer className="review__details">
                 <cite className="review__author">Amanda Greever</cite>

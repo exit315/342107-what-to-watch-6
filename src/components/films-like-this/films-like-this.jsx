@@ -10,10 +10,10 @@ const FilmsLikeThis = (props) => {
     if (el.name === currentFilm.name) {
       return null;
     } else {
-      return el.genre === currentFilm.genre;;
+      return el.genre === currentFilm.genre;
     }
   });
-  
+
   return (
     <section className="catalog catalog--like-this">
       <h2 className="catalog__title">More like this</h2>
@@ -39,7 +39,8 @@ const FilmsLikeThis = (props) => {
 };
 
 FilmsLikeThis.propTypes = {
-  films: PropTypes.array
+  films: PropTypes.array.isRequired,
+  currentFilm: PropTypes.object.isRequired
 };
 
 export default FilmsLikeThis;

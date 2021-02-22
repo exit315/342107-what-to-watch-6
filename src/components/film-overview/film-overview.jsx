@@ -7,7 +7,6 @@ const FilmOverview = (props) => {
 
   return (
     <React.Fragment>
-      
       <div className="movie-rating">
         <div className="movie-rating__score">{currentFilm.rating}</div>
         <p className="movie-rating__meta">
@@ -19,7 +18,6 @@ const FilmOverview = (props) => {
       <div className="movie-card__text">
         {currentFilm.description}
         <p className="movie-card__director"><strong>Director: {currentFilm.director}</strong></p>
-
         <p className="movie-card__starring"><strong>Starring: {currentFilm.starring.join(`, `)} and other</strong></p>
       </div>
     </React.Fragment>

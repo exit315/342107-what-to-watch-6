@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {TabType} from '../../const.js';
@@ -9,7 +9,7 @@ const Tabs = (props) => {
   const onTabClick = (evt) => {
     changeTabHandler(evt.target.textContent);
   };
-  
+
   return (
     <nav className="movie-nav movie-card__nav">
       <ul className="movie-nav__list">
@@ -24,7 +24,7 @@ const Tabs = (props) => {
         </li>
       </ul>
     </nav>
-  )
+  );
 };
 
 Tabs.propTypes = {
