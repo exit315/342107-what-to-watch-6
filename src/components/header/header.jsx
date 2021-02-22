@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
 const SignInLinkElement = () => {
   return (
-    <a href="sign-in.html" className="user-block__link">Sign in</a>
+    <Link to="/login" className="user-block__link">Sign in</Link>
   );
 };
 
@@ -17,16 +18,16 @@ const UserPicElement = () => {
 
 const Header = (props) => {
   const {title} = props;
-  const isGuest = false;
+  const isGuest = true;
 
   return (
     <header className="page-header user-page__head">
       <div className="logo">
-        <a className="logo__link">
+        <Link to="/" className="logo__link">
           <span className="logo__letter logo__letter--1">W</span>
           <span className="logo__letter logo__letter--2">T</span>
           <span className="logo__letter logo__letter--3">W</span>
-        </a>
+        </Link>
       </div>
 
       <h1 className="page-title user-page__title">{title}</h1>
