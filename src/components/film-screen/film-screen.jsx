@@ -1,12 +1,47 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {Link, withRouter} from 'react-router-dom';
+import {TabType} from '../../const.js';
 import Header from '../header/header';
 import Footer from '../footer/footer';
+import Tabs from '../tabs/tabs';
+import FilmOverview from '../film-overview/film-overview';
+import FilmDetails from '../film-details/film-details';
+import FilmReviews from '../film-reviews/film-reviews';
+import FilmsLikeThis from '../films-like-this/films-like-this';
 
-const Film = (props) => {
+const FilmScreen = (props) => {
   const {films, match} = props;
   const currentFilm = films.find((el) => el.id === parseInt(match.params.id, 10));
+
+  const [activeTab, setActiveTab] = useState(TabType.OVERVIEW);
+
+  const changeTabHandler = (tab) => {
+    setActiveTab(tab);
+  };
+
+  const changeScreenHandler = (tab) => {
+    switch (tab) {
+      case TabType.OVERVIEW:
+        return (
+          <FilmOverview
+            currentFilm={currentFilm}
+          />
+        );
+      case TabType.DETAILS:
+        return (
+          <FilmDetails
+            currentFilm={currentFilm}
+          />
+        );
+      case TabType.REVIEWS:
+        return (
+          <FilmReviews
+            currentFilm={currentFilm}
+          />
+        );
+    }
+  };
 
   return (
     <React.Fragment>
@@ -54,49 +89,26 @@ const Film = (props) => {
             </div>
 
             <div className="movie-card__desc">
-              <nav className="movie-nav movie-card__nav">
-                <ul className="movie-nav__list">
-                  <li className="movie-nav__item movie-nav__item--active">
-                    <a href="#" className="movie-nav__link">Overview</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Details</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
+              <Tabs changeTabHandler={changeTabHandler} activeTab={activeTab}/>
 
-              <div className="movie-rating">
-                <div className="movie-rating__score">{currentFilm.rating}</div>
-                <p className="movie-rating__meta">
-                  <span className="movie-rating__level">Very good</span>
-                  <span className="movie-rating__count">{currentFilm.scoresCount} ratings</span>
-                </p>
-              </div>
-
-              <div className="movie-card__text">
-                {currentFilm.description}
-                <p className="movie-card__director"><strong>Director: {currentFilm.director}</strong></p>
-
-                <p className="movie-card__starring"><strong>Starring: {currentFilm.starring.join(`, `)} and other</strong></p>
-              </div>
+              {changeScreenHandler(activeTab)}
             </div>
+
           </div>
         </div>
       </section>
 
       <div className="page-content">
+        <FilmsLikeThis films={films} currentFilm={currentFilm} />
         <Footer />
       </div>
     </React.Fragment>
   );
 };
 
-Film.propTypes = {
+FilmScreen.propTypes = {
   films: PropTypes.array.isRequired,
   match: PropTypes.object.isRequired
 };
 
-export default withRouter(Film);
+export default withRouter(FilmScreen);
