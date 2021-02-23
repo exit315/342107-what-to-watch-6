@@ -6,7 +6,7 @@ import MyList from '../my-list/my-list.jsx';
 import Player from '../player/player.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
 import AddReview from '../add-review/add-review.jsx';
-import Film from '../film/film.jsx';
+import FilmScreen from '../film-screen/film-screen.jsx';
 import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
 
 const App = (props) => {
@@ -33,13 +33,13 @@ const App = (props) => {
           />
         </Route>
         <Route exact path="/films/:id">
-          <Film
+          <FilmScreen
             films={films}
           />
         </Route>
         <Route exact path="/films/:id/review">
           <AddReview
-            film={film}
+            films={films}
           />
         </Route>
         <Route exact path="/player/:id">

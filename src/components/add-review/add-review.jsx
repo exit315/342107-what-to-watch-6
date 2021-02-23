@@ -1,15 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link, withRouter} from 'react-router-dom';
 import AddReviewForm from '../add-review-form/add-review-form.jsx';
 
 const AddReview = (props) => {
-  const {name, posterImage, backgroundImage} = props;
+  const {films, match} = props;
+  const currentFilm = films.find((el) => el.id === parseInt(match.params.id, 10));
 
   return (
     <section className="movie-card movie-card--full">
       <div className="movie-card__header">
         <div className="movie-card__bg">
-          <img src={`${backgroundImage}`} alt={`${name}`} />
+          <img src={currentFilm.backgroundImage} alt={currentFilm.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -26,7 +28,7 @@ const AddReview = (props) => {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <a href="movie-page.html" className="breadcrumbs__link">{name}</a>
+                <Link to={`/films/${currentFilm.id}`} className="breadcrumbs__link">{currentFilm.name}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <a className="breadcrumbs__link">Add review</a>
@@ -42,7 +44,7 @@ const AddReview = (props) => {
         </header>
 
         <div className="movie-card__poster movie-card__poster--small">
-          <img src={`${posterImage}`} alt={name} width="218" height="327" />
+          <img src={currentFilm.posterImage} alt={currentFilm.name} width="218" height="327" />
         </div>
       </div>
 
@@ -54,9 +56,8 @@ const AddReview = (props) => {
 };
 
 AddReview.propTypes = {
-  name: PropTypes.string,
-  posterImage: PropTypes.string,
-  backgroundImage: PropTypes.string
+  films: PropTypes.array.isRequired,
+  match: PropTypes.object.isRequired
 };
 
-export default AddReview;
+export default withRouter(AddReview);
