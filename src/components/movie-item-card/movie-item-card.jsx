@@ -1,16 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import VideoPlayer from '../video-player/video-player';
 
 const MovieItemCard = (props) => {
   const {id, name, src, handleActiveCardChange, previewVideoLink, activeCard} = props;
+  const [timer, setTimer] = useState(null);
 
   const onFilmHover = (e) => {
-    setTimeout(handleActiveCardChange, 1000, e.currentTarget.id);
+    setTimer(setTimeout(handleActiveCardChange, 1000, e.currentTarget.id));
   };
 
   const onFilmUnhover = () => {
+    clearTimeout(timer);
+    setTimer(null);
     handleActiveCardChange(null);
   };
 
