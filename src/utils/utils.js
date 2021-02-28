@@ -5,7 +5,7 @@ export const filterFilmsByGenre = (films, genre) => {
 export const createGenreTypesList = (films) => {
   const allGenreTypes = [];
 
-  films.forEach(element => {
+  films.forEach((element) => {
     allGenreTypes.push(element.genre);
   });
 

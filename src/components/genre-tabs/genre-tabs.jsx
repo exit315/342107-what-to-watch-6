@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-import {createGenreTypesList} from '../../utils/utils'
+import {createGenreTypesList} from '../../utils/utils';
 import FilmsList from '../films-list/films-list';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
 import {filterFilmsByGenre} from '../../utils/utils';
-import {GenreType} from '../../utils/const'
+import {GenreType} from '../../utils/const';
 
 const GenreTabs = (props) => {
   const {films, genre, onTabClick} = props;
@@ -16,7 +16,7 @@ const GenreTabs = (props) => {
 
   const currentGenre = filterTypesList.find((element) => element === genre);
 
-  const renderFilteredFilmsList = (films, genre) => {
+  const renderFilteredFilmsList = () => {
     switch (genre) {
       case GenreType.ALL:
         return (
@@ -43,16 +43,16 @@ const GenreTabs = (props) => {
 
   const renderGenreTypesList = () => {
     const genreTypesList = [];
-    
+
     filterTypesList.forEach((item) => {
       genreTypesList.push(
-      <li className={`catalog__genres-item ${genre === item ? `catalog__genres-item--active` : ``}`} onClick={onTabClick} key={item}>
-        <Link to="#" className="catalog__genres-link">{item}</Link>
-      </li>)
+          <li className={`catalog__genres-item ${genre === item ? `catalog__genres-item--active` : ``}`} onClick={onTabClick} key={item}>
+            <Link to="#" className="catalog__genres-link">{item}</Link>
+          </li>);
     });
 
     return genreTypesList;
-  }
+  };
 
   return (
     <React.Fragment>
@@ -67,6 +67,8 @@ const GenreTabs = (props) => {
 
 GenreTabs.propTypes = {
   films: PropTypes.array.isRequired,
+  genre: PropTypes.string.isRequired,
+  onTabClick: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({

@@ -303,5 +303,4 @@ export default [
     released: 2011,
     isFavorite: false
   }
-  
 ];

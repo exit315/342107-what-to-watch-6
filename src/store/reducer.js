@@ -1,10 +1,10 @@
-import {GenreType} from '../utils/const'
+import {GenreType} from '../utils/const';
 import {ActionType} from './action';
 import films from '../mocks/films';
 
 const initialState = {
   genre: GenreType.ALL,
-  films: films,
+  films,
 };
 
 const reducer = (state = initialState, action) => {

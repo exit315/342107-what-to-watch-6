@@ -15,13 +15,13 @@ const promoFilmData = {
 };
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App
-      promoName={promoFilmData.promoName}
-      promoGenre={promoFilmData.promoGenre}
-      promoReleaseDate={promoFilmData.promoReleaseDate}
-      films={store.getState().films}
-    />,
-  </Provider>,
-  document.querySelector(`#root`)
+    <Provider store={store}>
+      <App
+        promoName={promoFilmData.promoName}
+        promoGenre={promoFilmData.promoGenre}
+        promoReleaseDate={promoFilmData.promoReleaseDate}
+        films={store.getState().films}
+      />,
+    </Provider>,
+    document.querySelector(`#root`)
 );
