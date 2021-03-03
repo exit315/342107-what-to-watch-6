@@ -10,7 +10,7 @@ import FilmScreen from '../film-screen/film-screen.jsx';
 import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
 
 const App = (props) => {
-  const {promoName, promoGenre, promoReleaseDate, films} = props;
+  const {promoName, promoGenre, promoReleaseDate, films, genre} = props;
   const [film] = films;
 
   return (
@@ -22,6 +22,7 @@ const App = (props) => {
             promoGenre={promoGenre}
             promoReleaseDate={promoReleaseDate}
             films={films}
+            genre={genre}
           />
         </Route>
         <Route exact path="/login">
@@ -59,7 +60,8 @@ App.propTypes = {
   promoName: PropTypes.string,
   promoGenre: PropTypes.string,
   promoReleaseDate: PropTypes.string,
-  films: PropTypes.array
+  films: PropTypes.array,
+  genre: PropTypes.string,
 };
 
 export default App;

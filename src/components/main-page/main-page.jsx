@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import Header from '../header/header';
 import GenreTabs from '../genre-tabs/genre-tabs';
 import Footer from '../footer/footer';
+import FilmsList from '../films-list/films-list';
 
 const MainPage = (props) => {
-  const {promoName, promoGenre, promoReleaseDate} = props;
+  const {promoName, promoGenre, promoReleaseDate, films, genre} = props;
 
   return (
     <div>
@@ -56,6 +57,10 @@ const MainPage = (props) => {
 
           <GenreTabs />
 
+          <FilmsList
+            films={films} genre={genre}
+          />
+
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
           </div>
@@ -71,7 +76,8 @@ MainPage.propTypes = {
   promoName: PropTypes.string,
   promoGenre: PropTypes.string,
   promoReleaseDate: PropTypes.string,
-  films: PropTypes.array
+  films: PropTypes.array,
+  genre: PropTypes.string
 };
 
 export default MainPage;

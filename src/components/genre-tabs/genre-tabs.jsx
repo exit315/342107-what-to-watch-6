@@ -2,10 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {createGenreTypesList} from '../../utils/utils';
-import FilmsList from '../films-list/films-list';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
-import {filterFilmsByGenre} from '../../utils/utils';
 import {GenreType} from '../../utils/const';
 
 const GenreTabs = (props) => {
@@ -14,32 +12,6 @@ const GenreTabs = (props) => {
   const filterTypesList = Array.from(createGenreTypesList(films));
   filterTypesList.unshift(GenreType.ALL);
 
-  const currentGenre = filterTypesList.find((element) => element === genre);
-
-  const renderFilteredFilmsList = () => {
-    switch (genre) {
-      case GenreType.ALL:
-        return (
-          <FilmsList
-            films={films}
-          />
-        );
-      case currentGenre:
-        let filteredFilms = filterFilmsByGenre(films, currentGenre);
-
-        return (
-          <FilmsList
-            films={filteredFilms}
-          />
-        );
-      default:
-        return (
-          <FilmsList
-            films={films}
-          />
-        );
-    }
-  };
 
   const renderGenreTypesList = () => {
     const genreTypesList = [];
@@ -60,7 +32,6 @@ const GenreTabs = (props) => {
         {renderGenreTypesList()}
       </ul>
 
-      {renderFilteredFilmsList(films, currentGenre)}
     </React.Fragment>
   );
 };
