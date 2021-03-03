@@ -1,9 +1,26 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {filterFilmsByGenre} from '../../utils/utils';
+import {GenreType} from '../../utils/const';
 import MovieItemCard from '../movie-item-card/movie-item-card.jsx';
 
 const FilmsList = (props) => {
-  const {films} = props;
+  const {films, genre} = props;
+
+  const renderFilteredFilmsList = () => {
+    switch (genre) {
+      case GenreType.ALL:
+        return films;
+      case genre:
+        let filteredFilms = filterFilmsByGenre(films, genre);
+        return filteredFilms;
+      default:
+        return films;
+    }
+  };
+
+  const curentFilms = renderFilteredFilmsList();
 
   const [activeCard, setActiveCard] = useState(null);
   const handleActiveCardChange = (id = null) => {
@@ -12,7 +29,7 @@ const FilmsList = (props) => {
 
   return (
     <div className="catalog__movies-list">
-      {films.map((film) => <MovieItemCard
+      {curentFilms.map((film) => <MovieItemCard
         key={`${film.name}-${film.id}`}
         id={film.id}
         name={film.name}
@@ -20,13 +37,21 @@ const FilmsList = (props) => {
         previewVideoLink={film.previewVideoLink}
         handleActiveCardChange={handleActiveCardChange}
         activeCard={activeCard}
+        genre={genre}
       />)}
     </div>
   );
 };
 
 FilmsList.propTypes = {
-  films: PropTypes.array
+  films: PropTypes.array,
+  genre: PropTypes.string,
 };
 
-export default FilmsList;
+const mapStateToProps = (state) => ({
+  genre: state.genre,
+  films: state.films,
+});
+
+export {FilmsList};
+export default connect(mapStateToProps, null)(FilmsList);

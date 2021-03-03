@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-import {TabType} from '../../const.js';
+import {TabType} from '../../utils/const.js';
 
 const Tabs = (props) => {
   const {changeTabHandler, activeTab} = props;

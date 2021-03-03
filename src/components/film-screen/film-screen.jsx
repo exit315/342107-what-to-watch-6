@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {Link, withRouter, Redirect} from 'react-router-dom';
-import {TabType} from '../../const.js';
+import {TabType} from '../../utils/const.js';
 import Header from '../header/header';
 import Footer from '../footer/footer';
 import Tabs from '../tabs/tabs';

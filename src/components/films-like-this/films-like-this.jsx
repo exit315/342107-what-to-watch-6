@@ -26,7 +26,7 @@ const FilmsLikeThis = (props) => {
             name={film.name}
             src={film.previewImage}
           />) :
-          filmsList.splice(4).map((film) => <MovieItemCard
+          filmsList.splice(FILMS_LIKE_THIS).map((film) => <MovieItemCard
             key={`${film.name}-${film.id}`}
             id={film.id}
             name={film.name}
