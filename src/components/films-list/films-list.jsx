@@ -33,8 +33,8 @@ const FilmsList = (props) => {
         key={`${film.name}-${film.id}`}
         id={film.id}
         name={film.name}
-        src={film.previewImage}
-        previewVideoLink={film.previewVideoLink}
+        src={film.preview_image}
+        previewVideoLink={film.preview_video_link}
         handleActiveCardChange={handleActiveCardChange}
         activeCard={activeCard}
         genre={genre}

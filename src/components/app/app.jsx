@@ -10,7 +10,7 @@ import FilmScreen from '../film-screen/film-screen.jsx';
 import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
 
 const App = (props) => {
-  const {promoName, promoGenre, promoReleaseDate, films, genre} = props;
+  const {promoName, promoGenre, promoReleaseDate, films} = props;
   const [film] = films;
 
   return (
@@ -21,8 +21,6 @@ const App = (props) => {
             promoName={promoName}
             promoGenre={promoGenre}
             promoReleaseDate={promoReleaseDate}
-            films={films}
-            genre={genre}
           />
         </Route>
         <Route exact path="/login">
@@ -34,9 +32,7 @@ const App = (props) => {
           />
         </Route>
         <Route exact path="/films/:id">
-          <FilmScreen
-            films={films}
-          />
+          <FilmScreen />
         </Route>
         <Route exact path="/films/:id/review">
           <AddReview

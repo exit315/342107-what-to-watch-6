@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {Link, withRouter, Redirect} from 'react-router-dom';
 import {TabType} from '../../utils/const.js';
 import Header from '../header/header';
@@ -49,7 +50,7 @@ const FilmScreen = (props) => {
       <section className="movie-card movie-card--full">
         <div className="movie-card__hero">
           <div className="movie-card__bg">
-            <img src={currentFilm.backgroundImage} alt={currentFilm.name} />
+            <img src={currentFilm.background_image} alt={currentFilm.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -86,7 +87,7 @@ const FilmScreen = (props) => {
         <div className="movie-card__wrap movie-card__translate-top">
           <div className="movie-card__info">
             <div className="movie-card__poster movie-card__poster--big">
-              <img src={currentFilm.posterImage} alt={currentFilm.name} width="218" height="327" />
+              <img src={currentFilm.poster_image} alt={currentFilm.name} width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
@@ -112,4 +113,9 @@ FilmScreen.propTypes = {
   match: PropTypes.object.isRequired
 };
 
-export default withRouter(FilmScreen);
+const mapStateToProps = (state) => ({
+  films: state.films,
+});
+
+export {FilmScreen};
+export default connect(mapStateToProps, null)(withRouter(FilmScreen));
