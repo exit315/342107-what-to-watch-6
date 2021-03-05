@@ -10,6 +10,11 @@ export const ActionCreator = {
     payload: films
   }),
 
+  requireAuthorization: (status) => ({
+    type: ActionType.REQUIRED_AUTHORIZATION,
+    payload: status,
+  }),
+
   changeGenre: (evt) => ({
     type: ActionType.CHANGE_GENRE,
     payload: evt.target.textContent

@@ -5,6 +5,7 @@ const initialState = {
   films: [],
   genre: GenreType.ALL,
   authorizationStatus: AuthorizationStatus.NO_AUTH,
+  isDataLoaded: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -13,6 +14,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         films: action.payload,
+        isDataLoaded: true
       };
     case ActionType.CHANGE_GENRE:
       return {

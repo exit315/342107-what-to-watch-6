@@ -3,7 +3,7 @@ import {AuthorizationStatus} from "../utils/const";
 
 export const fetchFilmsList = () => (dispatch, _getState, api) => (
   api.get(`/films`)
-    .then(({data}) => dispatch(ActionCreator.loadfilms(data)))
+    .then(({data}) => dispatch(ActionCreator.loadFilms(data)))
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (
