@@ -1,27 +1,13 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import Header from '../header/header';
 import GenreTabs from '../genre-tabs/genre-tabs';
 import Footer from '../footer/footer';
 import FilmsList from '../films-list/films-list';
-import LoadingScreen from '../loading-screen/loading-screen';
-import {fetchFilmsList} from "../../api/api-actions";
 
 const MainPage = (props) => {
-  const {promoName, promoGenre, promoReleaseDate, films, genre, isDataLoaded, onLoadData} = props;
-
-  useEffect(() => {
-    if (!isDataLoaded) {
-      onLoadData();
-    }
-  }, [isDataLoaded]);
-
-  if (!isDataLoaded) {
-    return (
-      <LoadingScreen />
-    );
-  }
+  const {promoName, promoGenre, promoReleaseDate, films, genre} = props;
 
   return (
     <div>
@@ -93,19 +79,11 @@ MainPage.propTypes = {
   promoReleaseDate: PropTypes.string,
   films: PropTypes.array,
   genre: PropTypes.string,
-  isDataLoaded: PropTypes.bool.isRequired,
-  onLoadData: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   films: state.films,
-  isDataLoaded: state.isDataLoaded,
+  genre: state.genre,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onLoadData() {
-    dispatch(fetchFilmsList());
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
+export default connect(mapStateToProps, null)(MainPage);

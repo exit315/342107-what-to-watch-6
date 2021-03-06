@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {connect} from 'react-redux';
 import MainPage from '../main-page/main-page.jsx';
 import MyList from '../my-list/my-list.jsx';
 import Player from '../player/player.jsx';
@@ -8,10 +9,24 @@ import SignIn from '../sign-in/sign-in.jsx';
 import AddReview from '../add-review/add-review.jsx';
 import FilmScreen from '../film-screen/film-screen.jsx';
 import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
+import LoadingScreen from '../loading-screen/loading-screen';
+import {fetchFilmsList} from "../../api/api-actions";
 
 const App = (props) => {
-  const {promoName, promoGenre, promoReleaseDate, films} = props;
+  const {promoName, promoGenre, promoReleaseDate, films, isDataLoaded, onLoadData} = props;
   const [film] = films;
+
+  useEffect(() => {
+    if (!isDataLoaded) {
+      onLoadData();
+    }
+  }, [isDataLoaded]);
+
+  if (!isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <BrowserRouter>
@@ -58,6 +73,19 @@ App.propTypes = {
   promoReleaseDate: PropTypes.string,
   films: PropTypes.array,
   genre: PropTypes.string,
+  isDataLoaded: PropTypes.bool.isRequired,
+  onLoadData: PropTypes.func.isRequired,
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  films: state.films,
+  isDataLoaded: state.isDataLoaded,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onLoadData() {
+    dispatch(fetchFilmsList());
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

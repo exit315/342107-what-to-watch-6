@@ -11,7 +11,7 @@ const AddReview = (props) => {
     <section className="movie-card movie-card--full">
       <div className="movie-card__header">
         <div className="movie-card__bg">
-          <img src={currentFilm.backgroundImage} alt={currentFilm.name} />
+          <img src={currentFilm.background_image} alt={currentFilm.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -44,7 +44,7 @@ const AddReview = (props) => {
         </header>
 
         <div className="movie-card__poster movie-card__poster--small">
-          <img src={currentFilm.posterImage} alt={currentFilm.name} width="218" height="327" />
+          <img src={currentFilm.poster_image} alt={currentFilm.name} width="218" height="327" />
         </div>
       </div>
 
