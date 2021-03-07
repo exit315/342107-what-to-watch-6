@@ -1,11 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import MovieItemCard from '../movie-item-card/movie-item-card.jsx';
 import Header from '../header/header.jsx';
 import Footer from '../footer/footer.jsx';
 
 const MyList = (props) => {
   const {films} = props;
+
+  const filmsList = films.filter((el) => {
+    if (el.is_favorite === false) {
+      return null;
+    } else {
+      return el.is_favorite === true;
+    }
+  });
 
   return (
     <div className="user-page">
@@ -15,10 +24,10 @@ const MyList = (props) => {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <div className="catalog__movies-list">
-          {films.map((film) => <MovieItemCard
+          {filmsList.map((film) => <MovieItemCard
             key={`${film.name}-${film.id}`}
             name={film.name} id={film.id}
-            src={film.previewImage}
+            src={film.preview_image}
           />)}
         </div>
       </section>
@@ -32,4 +41,9 @@ MyList.propTypes = {
   films: PropTypes.array
 };
 
-export default MyList;
+const mapStateToProps = (state) => ({
+  films: state.films,
+});
+
+export {MyList};
+export default connect(mapStateToProps, null)(MyList);

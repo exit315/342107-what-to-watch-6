@@ -7,8 +7,3 @@ export const TabType = {
 export const GenreType = {
   ALL: `All genres`
 };
-
-export const AuthorizationStatus = {
-  AUTH: `AUTH`,
-  NO_AUTH: `NO_AUTH`,
-};
