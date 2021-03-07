@@ -12,6 +12,7 @@ import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {fetchFilmsList} from "../../api/api-actions";
 import PrivateRoute from '../private-route/private-route';
+import {AppRoute} from '../../utils/const';
 
 const App = (props) => {
   const {promoName, promoGenre, promoReleaseDate, films, isDataLoaded, onLoadData, authorizationStatus} = props;
@@ -32,7 +33,7 @@ const App = (props) => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/">
+        <Route exact path={AppRoute.ROOT}>
           <MainPage
             promoName={promoName}
             promoGenre={promoGenre}
@@ -41,7 +42,7 @@ const App = (props) => {
         </Route>
         <Route
           exact
-          path="/login">
+          path={AppRoute.LOGIN}>
           {authorizationStatus ? <MainPage
             promoName={promoName}
             promoGenre={promoGenre}
@@ -50,20 +51,20 @@ const App = (props) => {
         </Route>
         <PrivateRoute
           exact
-          path="/mylist"
+          path={AppRoute.MYLIST}
           render={() => <MyList films={films} />}>
         </PrivateRoute>
         <PrivateRoute
           exact
-          path="/films/:id/review"
+          path={AppRoute.REVIEW}
           render={() => <AddReview films={films} />}>
         </PrivateRoute>
-        <Route exact path="/player/:id">
+        <Route exact path={AppRoute.PLAYER}>
           <Player
             film={film}
           />
         </Route>
-        <Route exact path="/films/:id">
+        <Route exact path={AppRoute.FILM}>
           <FilmScreen />
         </Route>
         <Route>
