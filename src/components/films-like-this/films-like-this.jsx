@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import MovieItemCard from '../movie-item-card/movie-item-card.jsx';
 
 const FILMS_LIKE_THIS = 4;
@@ -24,13 +25,13 @@ const FilmsLikeThis = (props) => {
             key={`${film.name}-${film.id}`}
             id={film.id}
             name={film.name}
-            src={film.previewImage}
+            src={film.preview_image}
           />) :
           filmsList.splice(FILMS_LIKE_THIS).map((film) => <MovieItemCard
             key={`${film.name}-${film.id}`}
             id={film.id}
             name={film.name}
-            src={film.previewImage}
+            src={film.preview_image}
           />)
         }
       </div>
@@ -43,4 +44,10 @@ FilmsLikeThis.propTypes = {
   currentFilm: PropTypes.object.isRequired
 };
 
-export default FilmsLikeThis;
+const mapStateToProps = (state) => ({
+  genre: state.genre,
+  films: state.films,
+});
+
+export {FilmsLikeThis};
+export default connect(mapStateToProps, null)(FilmsLikeThis);

@@ -1,12 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore} from 'redux';
-import {Provider} from 'react-redux';
-import {composeWithDevTools} from 'redux-devtools-extension';
+import thunk from "redux-thunk";
 import App from './components/app/app';
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware} from 'redux';
+import {composeWithDevTools} from 'redux-devtools-extension';
+
+import {AuthorizationStatus} from "./utils/const";
+import {createAPI} from "./api/api";
+import {checkAuth} from "./api/api-actions";
+import {ActionCreator} from './store/action';
 import {reducer} from './store/reducer';
 
-const store = createStore(reducer, composeWithDevTools());
+const api = createAPI(
+    () => store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH))
+);
+
+const store = createStore(
+    reducer,
+    composeWithDevTools(
+        applyMiddleware(thunk.withExtraArgument(api))
+    )
+);
+
+store.dispatch(checkAuth());
 
 const promoFilmData = {
   promoName: `The Grand Budapest Hotel`,

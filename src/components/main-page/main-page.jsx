@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import Header from '../header/header';
 import GenreTabs from '../genre-tabs/genre-tabs';
 import Footer from '../footer/footer';
@@ -77,7 +78,12 @@ MainPage.propTypes = {
   promoGenre: PropTypes.string,
   promoReleaseDate: PropTypes.string,
   films: PropTypes.array,
-  genre: PropTypes.string
+  genre: PropTypes.string,
 };
 
-export default MainPage;
+const mapStateToProps = (state) => ({
+  films: state.films,
+  genre: state.genre,
+});
+
+export default connect(mapStateToProps, null)(MainPage);
