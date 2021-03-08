@@ -16,3 +16,5 @@ export const AppRoute = {
   PLAYER: `/player/:id`,
   FILM: `/films/:id`,
 };
+
+export const FILM_COUNT_PER_STEP = 8;

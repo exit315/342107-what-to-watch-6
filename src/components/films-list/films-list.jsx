@@ -4,9 +4,13 @@ import {connect} from 'react-redux';
 import {filterFilmsByGenre} from '../../utils/utils';
 import {GenreType} from '../../utils/const';
 import MovieItemCard from '../movie-item-card/movie-item-card.jsx';
+import ShowMoreBtn from '../show-more-btn/show-more-btn';
+import {FILM_COUNT_PER_STEP} from '../../utils/const';
 
 const FilmsList = (props) => {
   const {films, genre} = props;
+
+  const initialFilmsList = films;
 
   const renderFilteredFilmsList = () => {
     switch (genre) {
@@ -28,18 +32,22 @@ const FilmsList = (props) => {
   };
 
   return (
-    <div className="catalog__movies-list">
-      {curentFilms.map((film) => <MovieItemCard
-        key={`${film.name}-${film.id}`}
-        id={film.id}
-        name={film.name}
-        src={film.preview_image}
-        previewVideoLink={film.preview_video_link}
-        handleActiveCardChange={handleActiveCardChange}
-        activeCard={activeCard}
-        genre={genre}
-      />)}
-    </div>
+    <>
+      <div className="catalog__movies-list">
+        {curentFilms.map((film) => <MovieItemCard
+          key={`${film.name}-${film.id}`}
+          id={film.id}
+          name={film.name}
+          src={film.preview_image}
+          previewVideoLink={film.preview_video_link}
+          handleActiveCardChange={handleActiveCardChange}
+          activeCard={activeCard}
+          genre={genre}
+        />)}
+      </div>
+
+      {curentFilms.length > FILM_COUNT_PER_STEP ? <ShowMoreBtn /> : ``}
+    </>
   );
 };
 
