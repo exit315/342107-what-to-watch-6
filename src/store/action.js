@@ -2,6 +2,7 @@ export const ActionType = {
   CHANGE_GENRE: `films/changeGenre`,
   LOAD_FILMS: `films/loadFilms`,
   REQUIRED_AUTHORIZATION: `user/requiredAuthorization`,
+  REMEMBER_USER: `user/rememberUser`,
 };
 
 export const ActionCreator = {
@@ -18,5 +19,10 @@ export const ActionCreator = {
   changeGenre: (evt) => ({
     type: ActionType.CHANGE_GENRE,
     payload: evt.target.textContent
+  }),
+
+  rememberUser: (userEmail) => ({
+    type: ActionType.REMEMBER_USER,
+    payload: userEmail
   })
 };

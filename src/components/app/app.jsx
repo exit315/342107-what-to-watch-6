@@ -11,9 +11,11 @@ import FilmScreen from '../film-screen/film-screen.jsx';
 import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {fetchFilmsList} from "../../api/api-actions";
+import PrivateRoute from '../private-route/private-route';
+import {AppRoute} from '../../utils/const';
 
 const App = (props) => {
-  const {promoName, promoGenre, promoReleaseDate, films, isDataLoaded, onLoadData} = props;
+  const {promoName, promoGenre, promoReleaseDate, films, isDataLoaded, onLoadData, authorizationStatus} = props;
   const [film] = films;
 
   useEffect(() => {
@@ -31,33 +33,39 @@ const App = (props) => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/">
+        <Route exact path={AppRoute.ROOT}>
           <MainPage
             promoName={promoName}
             promoGenre={promoGenre}
             promoReleaseDate={promoReleaseDate}
           />
         </Route>
-        <Route exact path="/login">
-          <SignIn />
+        <Route
+          exact
+          path={AppRoute.LOGIN}>
+          {authorizationStatus ? <MainPage
+            promoName={promoName}
+            promoGenre={promoGenre}
+            promoReleaseDate={promoReleaseDate}
+          /> : <SignIn />}
         </Route>
-        <Route exact path="/mylist">
-          <MyList
-            films={films}
-          />
-        </Route>
-        <Route exact path="/films/:id">
-          <FilmScreen />
-        </Route>
-        <Route exact path="/films/:id/review">
-          <AddReview
-            films={films}
-          />
-        </Route>
-        <Route exact path="/player/:id">
+        <PrivateRoute
+          exact
+          path={AppRoute.MYLIST}
+          render={() => <MyList films={films} />}>
+        </PrivateRoute>
+        <PrivateRoute
+          exact
+          path={AppRoute.REVIEW}
+          render={() => <AddReview films={films} />}>
+        </PrivateRoute>
+        <Route exact path={AppRoute.PLAYER}>
           <Player
             film={film}
           />
+        </Route>
+        <Route exact path={AppRoute.FILM}>
+          <FilmScreen />
         </Route>
         <Route>
           <NotFoundScreen />
@@ -75,11 +83,13 @@ App.propTypes = {
   genre: PropTypes.string,
   isDataLoaded: PropTypes.bool.isRequired,
   onLoadData: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   films: state.films,
   isDataLoaded: state.isDataLoaded,
+  authorizationStatus: state.authorizationStatus,
 });
 
 const mapDispatchToProps = (dispatch) => ({

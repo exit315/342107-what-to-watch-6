@@ -1,11 +1,12 @@
-import {GenreType, AuthorizationStatus} from '../utils/const';
+import {GenreType} from '../utils/const';
 import {ActionType} from './action';
 
 const initialState = {
   films: [],
   genre: GenreType.ALL,
-  authorizationStatus: AuthorizationStatus.NO_AUTH,
-  isDataLoaded: false
+  authorizationStatus: false,
+  isDataLoaded: false,
+  userEmail: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -25,6 +26,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         authorizationStatus: action.payload,
+      };
+    case ActionType.REMEMBER_USER:
+      return {
+        ...state,
+        userEmail: action.payload,
       };
 
     default:

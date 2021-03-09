@@ -8,7 +8,11 @@ export const GenreType = {
   ALL: `All genres`
 };
 
-export const AuthorizationStatus = {
-  AUTH: `AUTH`,
-  NO_AUTH: `NO_AUTH`,
+export const AppRoute = {
+  ROOT: `/`,
+  LOGIN: `/login`,
+  MYLIST: `/mylist`,
+  REVIEW: `/films/:id/review`,
+  PLAYER: `/player/:id`,
+  FILM: `/films/:id`,
 };

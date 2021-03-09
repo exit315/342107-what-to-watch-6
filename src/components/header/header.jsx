@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from "react-redux";
 import {Link} from 'react-router-dom';
+import {logout} from "../../api/api-actions";
 
 const SignInLinkElement = () => {
   return (
@@ -8,17 +10,24 @@ const SignInLinkElement = () => {
   );
 };
 
-const UserPicElement = () => {
+const UserPicElement = (props) => {
+  const {onClick, userEmail} = props;
+
   return (
-    <div className="user-block__avatar">
-      <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-    </div>
+    <>
+      <div className="user-block__avatar">
+        <Link to="/mylist" className="logo__link">
+          <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+        </Link>
+
+      </div>
+      <Link to="/" className="user-block__link" onClick={onClick}>{userEmail}</Link>
+    </>
   );
 };
 
 const Header = (props) => {
-  const {title} = props;
-  const isGuest = true;
+  const {title, authorizationStatus, onClick, userEmail} = props;
 
   return (
     <header className="page-header user-page__head">
@@ -33,14 +42,33 @@ const Header = (props) => {
       <h1 className="page-title user-page__title">{title}</h1>
 
       <div className="user-block">
-        {isGuest ? <SignInLinkElement /> : <UserPicElement />}
+        {authorizationStatus ? <UserPicElement onClick={onClick} userEmail={userEmail}/> : <SignInLinkElement />}
       </div>
     </header>
   );
 };
 
 Header.propTypes = {
-  title: PropTypes.string
+  title: PropTypes.string,
+  authorizationStatus: PropTypes.bool.isRequired,
+  userEmail: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
 };
 
-export default Header;
+UserPicElement.propTypes = {
+  userEmail: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  authorizationStatus: state.authorizationStatus,
+  userEmail: state.userEmail,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onClick(authData) {
+    dispatch(logout(authData));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

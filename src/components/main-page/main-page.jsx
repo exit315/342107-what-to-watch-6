@@ -84,6 +84,7 @@ MainPage.propTypes = {
 const mapStateToProps = (state) => ({
   films: state.films,
   genre: state.genre,
+  userEmail: state.userEmail
 });
 
 export default connect(mapStateToProps, null)(MainPage);
