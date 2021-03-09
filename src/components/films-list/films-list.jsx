@@ -10,8 +10,6 @@ import {FILM_COUNT_PER_STEP} from '../../utils/const';
 const FilmsList = (props) => {
   const {films, genre} = props;
 
-  const initialFilmsList = films;
-
   const renderFilteredFilmsList = () => {
     switch (genre) {
       case GenreType.ALL:
@@ -31,6 +29,14 @@ const FilmsList = (props) => {
     setActiveCard(id);
   };
 
+  const [filmCount, setFilmCount] = useState(0);
+  console.log(filmCount)
+
+  const handleFilmCountChange = (evt) => {
+    evt.preventDefault();
+    setFilmCount(filmCount + FILM_COUNT_PER_STEP);
+  };
+
   return (
     <>
       <div className="catalog__movies-list">
@@ -43,10 +49,10 @@ const FilmsList = (props) => {
           handleActiveCardChange={handleActiveCardChange}
           activeCard={activeCard}
           genre={genre}
-        />)}
+        />).splice(0, filmCount + FILM_COUNT_PER_STEP)}
       </div>
 
-      {curentFilms.length > FILM_COUNT_PER_STEP ? <ShowMoreBtn /> : ``}
+      {curentFilms.length >= filmCount ? <ShowMoreBtn handleFilmCountChange={handleFilmCountChange} filmCount={filmCount} /> : ``}
     </>
   );
 };

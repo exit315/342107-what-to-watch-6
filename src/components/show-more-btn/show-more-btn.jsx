@@ -1,11 +1,12 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-const ShowMoreBtn = () => {
+const ShowMoreBtn = (props) => {
+  const {handleFilmCountChange, filmCount} = props;
 
   return (
     <div className="catalog__more">
-      <button className="catalog__button" type="button">Show more</button>
+      <button className="catalog__button" type="button" onClick={handleFilmCountChange}>Show more</button>
     </div>
   );
 };
