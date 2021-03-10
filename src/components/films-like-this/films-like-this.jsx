@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import MovieItemCard from '../movie-item-card/movie-item-card.jsx';
@@ -19,11 +19,6 @@ const FilmsLikeThis = (props) => {
       return el.genre === currentFilm.genre;
     }
   });
-
-  useEffect(() => {
-    console.log(`777`);
-    return () => {console.log(`333`)};
-  })
 
   return (
     <section className="catalog catalog--like-this">

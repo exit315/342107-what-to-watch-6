@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import MovieItemCard from '../movie-item-card/movie-item-card.jsx';
@@ -12,11 +12,6 @@ const MyList = (props) => {
   const handleActiveCardChange = (id = null) => {
     setActiveCard(id);
   };
-
-  useEffect(() => {
-    console.log(`777`);
-    return () => {console.log(`333`)};
-  })
 
   const filmsList = films.filter((el) => {
     if (el.is_favorite === false) {
