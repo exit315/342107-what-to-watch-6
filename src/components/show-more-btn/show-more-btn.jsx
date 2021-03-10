@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ShowMoreBtn = (props) => {
-  const {handleFilmCountChange, filmCount} = props;
+  const {handleFilmCountChange} = props;
 
   return (
     <div className="catalog__more">
@@ -11,10 +11,8 @@ const ShowMoreBtn = (props) => {
   );
 };
 
-// ShowMoreBtn.propTypes = {
-//   previewVideoLink: PropTypes.string.isRequired,
-//   defaultIsPlaying: PropTypes.bool.isRequired,
-//   defaultIsMuted: PropTypes.bool.isRequired,
-// };
+ShowMoreBtn.propTypes = {
+  handleFilmCountChange: PropTypes.func.isRequired,
+};
 
 export default ShowMoreBtn;
