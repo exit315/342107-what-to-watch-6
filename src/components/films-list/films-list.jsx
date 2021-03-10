@@ -10,20 +10,6 @@ import {FILM_COUNT_PER_STEP, INITIAL_FILM_COUNT} from '../../utils/const';
 const FilmsList = (props) => {
   const {films, genre} = props;
 
-  const renderFilteredFilmsList = () => {
-    switch (genre) {
-      case GenreType.ALL:
-        return films;
-      case genre:
-        let filteredFilms = filterFilmsByGenre(films, genre);
-        return filteredFilms;
-      default:
-        return films;
-    }
-  };
-
-  const curentFilms = renderFilteredFilmsList();
-
   const [activeCard, setActiveCard] = useState(null);
   const handleActiveCardChange = (id = null) => {
     setActiveCard(id);
@@ -34,6 +20,23 @@ const FilmsList = (props) => {
     evt.preventDefault();
     setFilmCount(filmCount + FILM_COUNT_PER_STEP);
   };
+
+  const renderFilteredFilmsList = () => {
+    switch (genre) {
+      case GenreType.ALL:
+        return films;
+      case genre:
+        let filteredFilms = filterFilmsByGenre(films, genre);
+        if (filmCount !== FILM_COUNT_PER_STEP) {
+          setFilmCount(FILM_COUNT_PER_STEP);
+        }
+        return filteredFilms;
+      default:
+        return films;
+    }
+  };
+
+  const curentFilms = renderFilteredFilmsList();
 
   return (
     <>
