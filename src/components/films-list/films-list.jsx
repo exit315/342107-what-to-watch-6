@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {filterFilmsByGenre} from '../../utils/utils';
@@ -20,6 +20,11 @@ const FilmsList = (props) => {
     evt.preventDefault();
     setFilmCount(filmCount + FILM_COUNT_PER_STEP);
   };
+
+  useEffect(() => {
+    console.log(`777`);
+    return () => {console.log(`333`)};
+  })
 
   const renderFilteredFilmsList = () => {
     switch (genre) {
@@ -53,7 +58,7 @@ const FilmsList = (props) => {
         />).splice(INITIAL_FILM_COUNT, filmCount)}
       </div>
 
-      {curentFilms.length >= filmCount ? <ShowMoreBtn handleFilmCountChange={handleFilmCountChange} filmCount={filmCount} /> : ``}
+      <ShowMoreBtn handleFilmCountChange={handleFilmCountChange} filmCount={filmCount} showBtn={curentFilms.length >= filmCount}/>
     </>
   );
 };

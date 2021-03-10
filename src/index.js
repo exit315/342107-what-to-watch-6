@@ -37,7 +37,7 @@ ReactDOM.render(
         promoReleaseDate={promoFilmData.promoReleaseDate}
         films={store.getState().films}
         genre={store.getState().genre}
-      />,
+      />
     </Provider>,
     document.querySelector(`#root`)
 );

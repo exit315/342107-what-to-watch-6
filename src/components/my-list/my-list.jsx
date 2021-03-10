@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import MovieItemCard from '../movie-item-card/movie-item-card.jsx';
@@ -7,6 +7,16 @@ import Footer from '../footer/footer.jsx';
 
 const MyList = (props) => {
   const {films} = props;
+
+  const [activeCard, setActiveCard] = useState(null);
+  const handleActiveCardChange = (id = null) => {
+    setActiveCard(id);
+  };
+
+  useEffect(() => {
+    console.log(`777`);
+    return () => {console.log(`333`)};
+  })
 
   const filmsList = films.filter((el) => {
     if (el.is_favorite === false) {
@@ -28,6 +38,9 @@ const MyList = (props) => {
             key={`${film.name}-${film.id}`}
             name={film.name} id={film.id}
             src={film.preview_image}
+            previewVideoLink={film.preview_video_link}
+            handleActiveCardChange={handleActiveCardChange}
+            activeCard={activeCard}
           />)}
         </div>
       </section>

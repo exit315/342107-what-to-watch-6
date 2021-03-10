@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import MovieItemCard from '../movie-item-card/movie-item-card.jsx';
@@ -7,6 +7,11 @@ const FILMS_LIKE_THIS = 4;
 const FilmsLikeThis = (props) => {
   const {films, currentFilm} = props;
 
+  const [activeCard, setActiveCard] = useState(null);
+  const handleActiveCardChange = (id = null) => {
+    setActiveCard(id);
+  };
+
   const filmsList = films.filter((el) => {
     if (el.name === currentFilm.name) {
       return null;
@@ -14,6 +19,11 @@ const FilmsLikeThis = (props) => {
       return el.genre === currentFilm.genre;
     }
   });
+
+  useEffect(() => {
+    console.log(`777`);
+    return () => {console.log(`333`)};
+  })
 
   return (
     <section className="catalog catalog--like-this">
@@ -26,12 +36,18 @@ const FilmsLikeThis = (props) => {
             id={film.id}
             name={film.name}
             src={film.preview_image}
+            previewVideoLink={film.preview_video_link}
+            handleActiveCardChange={handleActiveCardChange}
+            activeCard={activeCard}
           />) :
           filmsList.splice(FILMS_LIKE_THIS).map((film) => <MovieItemCard
             key={`${film.name}-${film.id}`}
             id={film.id}
             name={film.name}
             src={film.preview_image}
+            previewVideoLink={film.preview_video_link}
+            handleActiveCardChange={handleActiveCardChange}
+            activeCard={activeCard}
           />)
         }
       </div>
