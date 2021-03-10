@@ -5,7 +5,7 @@ import {filterFilmsByGenre} from '../../utils/utils';
 import {GenreType} from '../../utils/const';
 import MovieItemCard from '../movie-item-card/movie-item-card.jsx';
 import ShowMoreBtn from '../show-more-btn/show-more-btn';
-import {FILM_COUNT_PER_STEP} from '../../utils/const';
+import {FILM_COUNT_PER_STEP, INITIAL_FILM_COUNT} from '../../utils/const';
 
 const FilmsList = (props) => {
   const {films, genre} = props;
@@ -29,9 +29,7 @@ const FilmsList = (props) => {
     setActiveCard(id);
   };
 
-  const [filmCount, setFilmCount] = useState(0);
-  console.log(filmCount)
-
+  const [filmCount, setFilmCount] = useState(FILM_COUNT_PER_STEP);
   const handleFilmCountChange = (evt) => {
     evt.preventDefault();
     setFilmCount(filmCount + FILM_COUNT_PER_STEP);
@@ -49,7 +47,7 @@ const FilmsList = (props) => {
           handleActiveCardChange={handleActiveCardChange}
           activeCard={activeCard}
           genre={genre}
-        />).splice(0, filmCount + FILM_COUNT_PER_STEP)}
+        />).splice(INITIAL_FILM_COUNT, filmCount)}
       </div>
 
       {curentFilms.length >= filmCount ? <ShowMoreBtn handleFilmCountChange={handleFilmCountChange} filmCount={filmCount} /> : ``}
