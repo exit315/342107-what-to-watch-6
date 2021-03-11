@@ -6,9 +6,6 @@ import {getRunTime} from '../../utils/utils';
 const FilmDetails = (props) => {
   const {currentFilm} = props;
 
-
-  console.log(getRunTime(currentFilm.run_time))
-
   return (
     <React.Fragment>
       <div className="movie-card__text movie-card__row">

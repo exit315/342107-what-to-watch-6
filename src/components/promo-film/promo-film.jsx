@@ -1,10 +1,20 @@
-import React, {useState} from 'react';
+import React, {useRef} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {changeFavorite} from "../../api/api-actions";
 import Header from '../header/header';
 
 const PromoFilm = (props) => {
-  const {promoFilm} = props;
+  const {promoFilm, onFavoriteClick} = props;
+
+  const favoriteRef = useRef();
+
+  const handleFavoriteClick = () => {
+    onFavoriteClick({
+      id: promoFilm.id,
+      status: +(!promoFilm.is_favorite),
+    });
+  };
 
   // const [favorite, setFavorite] = useState(promoFilm.is_favorite);
   // const handleChangeFavorite = () => {
@@ -41,7 +51,7 @@ const PromoFilm = (props) => {
                 </svg>
                 <span>Play</span>
               </button>
-              <button className="btn btn--list movie-card__button" type="button" >
+              <button className="btn btn--list movie-card__button" type="button" ref={favoriteRef} onClick={handleFavoriteClick}>
                 <svg viewBox="0 0 19 20" width="19" height="20">
                   <use xlinkHref="#add"></use>
                 </svg>
@@ -57,10 +67,17 @@ const PromoFilm = (props) => {
 
 PromoFilm.propTypes = {
   promoFilm: PropTypes.object,
+  onFavoriteClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   promoFilm: state.promoFilm,
 });
 
-export default connect(mapStateToProps, null)(PromoFilm);
+const mapDispatchToProps = (dispatch) => ({
+  onFavoriteClick(favorite) {
+    dispatch(changeFavorite(favorite));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PromoFilm);

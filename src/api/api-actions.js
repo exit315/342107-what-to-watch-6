@@ -1,28 +1,34 @@
 import {ActionCreator} from "../store/action";
+import {AppRoute} from '../utils/const';
 
 export const fetchFilmsList = () => (dispatch, _getState, api) => (
-  api.get(`/films`)
+  api.get(AppRoute.FILMS)
     .then(({data}) => dispatch(ActionCreator.loadFilms(data)))
 );
 
 export const fetchPromoFilm = () => (dispatch, _getState, api) => (
-  api.get(`/films/promo`)
+  api.get(AppRoute.PROMO)
     .then(({data}) => dispatch(ActionCreator.loadPromoFilm(data)))
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (
-  api.get(`/login`)
+  api.get(AppRoute.LOGIN)
     .then((response) => dispatch(ActionCreator.rememberUser(response.data.email)))
     .then(() => dispatch(ActionCreator.requireAuthorization(true)))
     .catch(() => {})
 );
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
-  api.post(`/login`, {email, password})
+  api.post(AppRoute.LOGIN, {email, password})
     .then(() => dispatch(ActionCreator.requireAuthorization(true)))
 );
 
+export const changeFavorite = ({favorite: status, id}) => (_dispatch, _getState, api) => (
+  api.post(`/favorite/${id}/${status}`, {id, status})
+  .then((response) => console.log(response))
+);
+
 export const logout = ({login: email, password}) => (dispatch, _getState, api) => (
-  api.get(`/logout`, {email, password})
+  api.get(AppRoute.LOGOUT, {email, password})
     .then(() => dispatch(ActionCreator.requireAuthorization(false)))
 );
