@@ -5,7 +5,7 @@ import {Link, withRouter, Redirect} from 'react-router-dom';
 import {TabType} from '../../utils/const.js';
 import Header from '../header/header';
 import Footer from '../footer/footer';
-import Tabs from '../tabs/tabs';
+import FilmTabs from '../film-tabs/film-tabs';
 import FilmOverview from '../film-overview/film-overview';
 import FilmDetails from '../film-details/film-details';
 import FilmReviews from '../film-reviews/film-reviews';
@@ -91,7 +91,7 @@ const FilmScreen = (props) => {
             </div>
 
             <div className="movie-card__desc">
-              <Tabs changeTabHandler={changeTabHandler} activeTab={activeTab}/>
+              <FilmTabs changeTabHandler={changeTabHandler} activeTab={activeTab}/>
 
               {changeScreenHandler(activeTab)}
             </div>

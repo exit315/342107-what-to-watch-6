@@ -9,14 +9,22 @@ import {GenreType} from '../../utils/const';
 const GenreTabs = (props) => {
   const {films, genre, onTabClick} = props;
 
-  const filterTypesList = Array.from(createGenreTypesList(films));
-  filterTypesList.unshift(GenreType.ALL);
+  const createFilterTypesList = () => {
+    let filterTypesList = Array.from(createGenreTypesList(films));
 
+    if (filterTypesList.length > 9) {
+      filterTypesList = filterTypesList.slice(0, 9);
+    }
+
+    filterTypesList.unshift(GenreType.ALL);
+
+    return filterTypesList;
+  };
 
   const renderGenreTypesList = () => {
     const genreTypesList = [];
 
-    filterTypesList.forEach((item) => {
+    createFilterTypesList().forEach((item) => {
       genreTypesList.push(
           <li className={`catalog__genres-item ${genre === item ? `catalog__genres-item--active` : ``}`} onClick={onTabClick} key={item}>
             <Link to="#" className="catalog__genres-link">{item}</Link>

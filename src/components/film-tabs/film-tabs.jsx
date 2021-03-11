@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {TabType} from '../../utils/const.js';
 
-const Tabs = (props) => {
+const FilmTabs = (props) => {
   const {changeTabHandler, activeTab} = props;
 
   const onTabClick = (evt) => {
@@ -27,9 +27,9 @@ const Tabs = (props) => {
   );
 };
 
-Tabs.propTypes = {
+FilmTabs.propTypes = {
   changeTabHandler: PropTypes.func.isRequired,
   activeTab: PropTypes.string.isRequired
 };
 
-export default Tabs;
+export default FilmTabs;
