@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {Link, withRouter} from 'react-router-dom';
 import AddReviewForm from '../add-review-form/add-review-form.jsx';
 
@@ -60,4 +61,9 @@ AddReview.propTypes = {
   match: PropTypes.object.isRequired
 };
 
-export default withRouter(AddReview);
+const mapStateToProps = (state) => ({
+  films: state.films,
+});
+
+export {AddReview};
+export default connect(mapStateToProps, null)(withRouter(AddReview));
