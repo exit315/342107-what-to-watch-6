@@ -12,7 +12,7 @@ import FilmReviews from '../film-reviews/film-reviews';
 import FilmsLikeThis from '../films-like-this/films-like-this';
 
 const FilmScreen = (props) => {
-  const {films, match} = props;
+  const {films, match, authorizationStatus} = props;
   const currentFilm = films.find((el) => el.id === parseInt(match.params.id, 10));
 
   const [activeTab, setActiveTab] = useState(TabType.OVERVIEW);
@@ -78,7 +78,7 @@ const FilmScreen = (props) => {
                   </svg>
                   <span>My list</span>
                 </button>
-                <Link to={`${currentFilm.id}/review`} className="btn movie-card__button">Add review</Link>
+                {authorizationStatus && <Link to={`${currentFilm.id}/review`} className="btn movie-card__button">Add review</Link>}
               </div>
             </div>
           </div>
@@ -110,11 +110,13 @@ const FilmScreen = (props) => {
 
 FilmScreen.propTypes = {
   films: PropTypes.array.isRequired,
-  match: PropTypes.object.isRequired
+  match: PropTypes.object.isRequired,
+  authorizationStatus: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   films: state.films,
+  authorizationStatus: state.authorizationStatus,
 });
 
 export {FilmScreen};
