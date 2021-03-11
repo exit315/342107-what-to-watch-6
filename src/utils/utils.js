@@ -13,3 +13,9 @@ export const createGenreTypesList = (films) => {
 
   return uniqGenreTypes;
 };
+
+export const getRunTime = (time) => {
+  const hours = Math.trunc(time / 60);
+  const minutes = time % 60;
+  return hours + 'h ' + minutes + 'm';
+};
