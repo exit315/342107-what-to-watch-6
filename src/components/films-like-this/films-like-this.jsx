@@ -35,7 +35,7 @@ const FilmsLikeThis = (props) => {
             handleActiveCardChange={handleActiveCardChange}
             activeCard={activeCard}
           />) :
-          filmsList.splice(FILMS_LIKE_THIS).map((film) => <MovieItemCard
+          filmsList.slice(0, FILMS_LIKE_THIS).map((film) => <MovieItemCard
             key={`${film.name}-${film.id}`}
             id={film.id}
             name={film.name}
