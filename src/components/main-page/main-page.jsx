@@ -7,13 +7,13 @@ import Footer from '../footer/footer';
 import FilmsList from '../films-list/films-list';
 
 const MainPage = (props) => {
-  const {promoName, promoGenre, promoReleaseDate, films, genre} = props;
+  const {promoFilm, films, genre} = props;
 
   return (
     <div>
       <section className="movie-card">
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={promoFilm.background_image} alt="The Grand Budapest Hotel" />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -23,14 +23,14 @@ const MainPage = (props) => {
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={promoFilm.poster_image} alt="The Grand Budapest Hotel poster" width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">{promoName}</h2>
+              <h2 className="movie-card__title">{promoFilm.name}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{promoGenre}</span>
-                <span className="movie-card__year">{promoReleaseDate}</span>
+                <span className="movie-card__genre">{promoFilm.genre}</span>
+                <span className="movie-card__year">{promoFilm.released}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -70,15 +70,15 @@ const MainPage = (props) => {
 };
 
 MainPage.propTypes = {
-  promoName: PropTypes.string,
-  promoGenre: PropTypes.string,
-  promoReleaseDate: PropTypes.string,
+  promoFilm: PropTypes.object,
   films: PropTypes.array,
   genre: PropTypes.string,
+  userEmail: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
   films: state.films,
+  promoFilm: state.promoFilm,
   genre: state.genre,
   userEmail: state.userEmail
 });

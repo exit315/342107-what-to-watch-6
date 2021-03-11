@@ -3,6 +3,7 @@ import {ActionType} from './action';
 
 const initialState = {
   films: [],
+  promoFilm: null,
   genre: GenreType.ALL,
   authorizationStatus: false,
   isDataLoaded: false,
@@ -17,16 +18,26 @@ const reducer = (state = initialState, action) => {
         films: action.payload,
         isDataLoaded: true
       };
+
+    case ActionType.LOAD_PROMO_FILM:
+      return {
+        ...state,
+        promoFilm: action.payload,
+        isDataLoaded: true
+      };
+
     case ActionType.CHANGE_GENRE:
       return {
         ...state,
         genre: action.payload
       };
+
     case ActionType.REQUIRED_AUTHORIZATION:
       return {
         ...state,
         authorizationStatus: action.payload,
       };
+
     case ActionType.REMEMBER_USER:
       return {
         ...state,

@@ -10,12 +10,12 @@ import AddReview from '../add-review/add-review.jsx';
 import FilmScreen from '../film-screen/film-screen.jsx';
 import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
 import LoadingScreen from '../loading-screen/loading-screen';
-import {fetchFilmsList} from "../../api/api-actions";
+import {fetchFilmsList, fetchPromoFilm} from "../../api/api-actions";
 import PrivateRoute from '../private-route/private-route';
 import {AppRoute} from '../../utils/const';
 
 const App = (props) => {
-  const {promoName, promoGenre, promoReleaseDate, films, isDataLoaded, onLoadData, authorizationStatus} = props;
+  const {films, isDataLoaded, onLoadData, authorizationStatus} = props;
   const [film] = films;
 
   useEffect(() => {
@@ -34,30 +34,22 @@ const App = (props) => {
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.ROOT}>
-          <MainPage
-            promoName={promoName}
-            promoGenre={promoGenre}
-            promoReleaseDate={promoReleaseDate}
-          />
+          <MainPage />
         </Route>
         <Route
           exact
           path={AppRoute.LOGIN}>
-          {authorizationStatus ? <MainPage
-            promoName={promoName}
-            promoGenre={promoGenre}
-            promoReleaseDate={promoReleaseDate}
-          /> : <SignIn />}
+          {authorizationStatus ? <MainPage /> : <SignIn />}
         </Route>
         <PrivateRoute
           exact
           path={AppRoute.MYLIST}
-          render={() => <MyList films={films} />}>
+          render={() => <MyList />}>
         </PrivateRoute>
         <PrivateRoute
           exact
           path={AppRoute.REVIEW}
-          render={() => <AddReview films={films} />}>
+          render={() => <AddReview />}>
         </PrivateRoute>
         <Route exact path={AppRoute.PLAYER}>
           <Player
@@ -76,9 +68,7 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  promoName: PropTypes.string,
-  promoGenre: PropTypes.string,
-  promoReleaseDate: PropTypes.string,
+  promoFilm: PropTypes.object,
   films: PropTypes.array,
   genre: PropTypes.string,
   isDataLoaded: PropTypes.bool.isRequired,
@@ -88,12 +78,14 @@ App.propTypes = {
 
 const mapStateToProps = (state) => ({
   films: state.films,
+  promoFilm: state.promoFilm,
   isDataLoaded: state.isDataLoaded,
   authorizationStatus: state.authorizationStatus,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onLoadData() {
+    dispatch(fetchPromoFilm());
     dispatch(fetchFilmsList());
   },
 });
