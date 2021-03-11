@@ -8,6 +8,7 @@ const initialState = {
   authorizationStatus: false,
   isDataLoaded: false,
   userEmail: null,
+  isPromoFilmDataLoaded: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -23,7 +24,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         promoFilm: action.payload,
-        isDataLoaded: true
+        isPromoFilmDataLoaded: true
       };
 
     case ActionType.CHANGE_GENRE:

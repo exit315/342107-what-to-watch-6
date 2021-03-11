@@ -10,17 +10,17 @@ import AddReview from '../add-review/add-review.jsx';
 import FilmScreen from '../film-screen/film-screen.jsx';
 import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
 import LoadingScreen from '../loading-screen/loading-screen';
-import {fetchFilmsList, fetchPromoFilm} from "../../api/api-actions";
+import {fetchFilmsList} from "../../api/api-actions";
 import PrivateRoute from '../private-route/private-route';
 import {AppRoute} from '../../utils/const';
 
 const App = (props) => {
-  const {films, isDataLoaded, onLoadData, authorizationStatus} = props;
+  const {films, isDataLoaded, onLoadFilmsData, authorizationStatus} = props;
   const [film] = films;
 
   useEffect(() => {
     if (!isDataLoaded) {
-      onLoadData();
+      onLoadFilmsData();
     }
   }, [isDataLoaded]);
 
@@ -68,24 +68,21 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  promoFilm: PropTypes.object,
   films: PropTypes.array,
   genre: PropTypes.string,
   isDataLoaded: PropTypes.bool.isRequired,
-  onLoadData: PropTypes.func.isRequired,
+  onLoadFilmsData: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   films: state.films,
-  promoFilm: state.promoFilm,
   isDataLoaded: state.isDataLoaded,
   authorizationStatus: state.authorizationStatus,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onLoadData() {
-    dispatch(fetchPromoFilm());
+  onLoadFilmsData() {
     dispatch(fetchFilmsList());
   },
 });
