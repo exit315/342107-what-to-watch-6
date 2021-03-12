@@ -23,12 +23,12 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
     .then(() => dispatch(ActionCreator.requireAuthorization(true)))
 );
 
-export const changeFavorite = ({favorite: status, id}) => (_dispatch, _getState, api) => (
-  api.post(`/favorite/${id}/${status}`, {id, status})
+export const changeFavorite = ({id, status}) => (_dispatch, _getState, api) => (
+  api.post(`${AppRoute.FAVORITE}/${id}/${status}`, {id, status})
 );
 
 export const loadFavorite = () => (dispatch, _getState, api) => (
-  api.get(`/favorite`)
+  api.get(AppRoute.FAVORITE)
   .then(({data}) => dispatch(ActionCreator.loadMyFilmsList(data)))
 );
 
