@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link, withRouter, Redirect} from 'react-router-dom';
-import {TabType} from '../../utils/const.js';
+import {TabType, AppRoute} from '../../utils/const';
 import Header from '../header/header';
 import Footer from '../footer/footer';
 import FilmTabs from '../film-tabs/film-tabs';
@@ -42,7 +42,7 @@ const FilmScreen = (props) => {
           />
         );
     }
-    return <Redirect to="/" />;
+    return <Redirect to={AppRoute.ROOT} />;
   };
 
   return (

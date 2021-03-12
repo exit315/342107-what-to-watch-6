@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link, withRouter} from 'react-router-dom';
 import AddReviewForm from '../add-review-form/add-review-form.jsx';
+import {AppRoute} from '../../utils/const';
 
 const AddReview = (props) => {
   const {films, match} = props;
@@ -29,7 +30,7 @@ const AddReview = (props) => {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={`/films/${currentFilm.id}`} className="breadcrumbs__link">{currentFilm.name}</Link>
+                <Link to={`${AppRoute.FILMS}/${currentFilm.id}`} className="breadcrumbs__link">{currentFilm.name}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <a className="breadcrumbs__link">Add review</a>

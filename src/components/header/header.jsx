@@ -7,7 +7,7 @@ import {AppRoute} from '../../utils/const';
 
 const SignInLinkElement = () => {
   return (
-    <Link to="/login" className="user-block__link">Sign in</Link>
+    <Link to={AppRoute.LOGIN} className="user-block__link">Sign in</Link>
   );
 };
 
@@ -22,7 +22,7 @@ const UserPicElement = (props) => {
         </Link>
 
       </div>
-      <Link to="/" className="user-block__link" onClick={onClick}>{userEmail}</Link>
+      <Link to={AppRoute.ROOT} className="user-block__link" onClick={onClick}>{userEmail}</Link>
     </>
   );
 };
@@ -33,7 +33,7 @@ const Header = (props) => {
   return (
     <header className="page-header user-page__head">
       <div className="logo">
-        <Link to="/" className="logo__link">
+        <Link to={AppRoute.ROOT} className="logo__link">
           <span className="logo__letter logo__letter--1">W</span>
           <span className="logo__letter logo__letter--2">T</span>
           <span className="logo__letter logo__letter--3">W</span>
