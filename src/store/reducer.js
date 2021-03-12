@@ -3,12 +3,14 @@ import {ActionType} from './action';
 
 const initialState = {
   films: [],
+  myFilmsList: [],
   promoFilm: null,
   genre: GenreType.ALL,
   authorizationStatus: false,
-  isDataLoaded: false,
   userEmail: null,
+  isDataLoaded: false,
   isPromoFilmDataLoaded: false,
+  isMyFilmsListDataLoaded: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -43,6 +45,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         userEmail: action.payload,
+      };
+
+    case ActionType.LOAD_MY_FILMS_LIST:
+      return {
+        ...state,
+        myFilmsList: action.payload,
+        isMyFilmsListDataLoaded: true
       };
 
     default:

@@ -4,6 +4,7 @@ export const ActionType = {
   LOAD_PROMO_FILM: `films/loadPromoFilm`,
   REQUIRED_AUTHORIZATION: `user/requiredAuthorization`,
   REMEMBER_USER: `user/rememberUser`,
+  LOAD_MY_FILMS_LIST: `films/loadMyFilmsList`,
 };
 
 export const ActionCreator = {
@@ -30,5 +31,10 @@ export const ActionCreator = {
   rememberUser: (userEmail) => ({
     type: ActionType.REMEMBER_USER,
     payload: userEmail
+  }),
+
+  loadMyFilmsList: (myFilmsList) => ({
+    type: ActionType.LOAD_MY_FILMS_LIST,
+    payload: myFilmsList
   })
 };

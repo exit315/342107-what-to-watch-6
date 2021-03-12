@@ -9,7 +9,7 @@ import FilmsList from '../films-list/films-list';
 import LoadingScreen from '../loading-screen/loading-screen';
 
 const MainPage = (props) => {
-  const {promoFilm, films, genre, onLoadPromoFilmData, isPromoFilmDataLoaded} = props;
+  const {films, genre, onLoadPromoFilmData, isPromoFilmDataLoaded} = props;
 
   useEffect(() => {
     if (!isPromoFilmDataLoaded) {

@@ -25,7 +25,11 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
 
 export const changeFavorite = ({favorite: status, id}) => (_dispatch, _getState, api) => (
   api.post(`/favorite/${id}/${status}`, {id, status})
-  .then((response) => console.log(response))
+);
+
+export const loadFavorite = () => (dispatch, _getState, api) => (
+  api.get(`/favorite`)
+  .then(({data}) => dispatch(ActionCreator.loadMyFilmsList(data)))
 );
 
 export const logout = ({login: email, password}) => (dispatch, _getState, api) => (

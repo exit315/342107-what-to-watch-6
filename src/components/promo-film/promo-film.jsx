@@ -6,7 +6,6 @@ import Header from '../header/header';
 
 const PromoFilm = (props) => {
   const {promoFilm, onFavoriteClick} = props;
-
   const favoriteRef = useRef();
 
   const handleFavoriteClick = () => {
@@ -15,11 +14,6 @@ const PromoFilm = (props) => {
       status: +(!promoFilm.is_favorite),
     });
   };
-
-  // const [favorite, setFavorite] = useState(promoFilm.is_favorite);
-  // const handleChangeFavorite = () => {
-  //   setFavorite(!favorite);
-  // };
 
   return (
     <section className="movie-card">

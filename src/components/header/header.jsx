@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {Link} from 'react-router-dom';
 import {logout} from "../../api/api-actions";
+import {AppRoute} from '../../utils/const';
 
 const SignInLinkElement = () => {
   return (
@@ -16,7 +17,7 @@ const UserPicElement = (props) => {
   return (
     <>
       <div className="user-block__avatar">
-        <Link to="/mylist" className="logo__link">
+        <Link to={AppRoute.MYLIST} className="logo__link">
           <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
         </Link>
 

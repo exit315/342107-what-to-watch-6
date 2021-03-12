@@ -1,25 +1,24 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {loadFavorite} from "../../api/api-actions";
 import MovieItemCard from '../movie-item-card/movie-item-card.jsx';
 import Header from '../header/header.jsx';
 import Footer from '../footer/footer.jsx';
 
 const MyList = (props) => {
-  const {films} = props;
+  const {myFilmsList, onLoadMyFilmsListData, isMyFilmsListDataLoaded} = props;
 
   const [activeCard, setActiveCard] = useState(null);
   const handleActiveCardChange = (id = null) => {
     setActiveCard(id);
   };
 
-  const filmsList = films.filter((el) => {
-    if (el.is_favorite === false) {
-      return null;
-    } else {
-      return el.is_favorite === true;
+  useEffect(() => {
+    if (!isMyFilmsListDataLoaded) {
+      onLoadMyFilmsListData();
     }
-  });
+  }, [isMyFilmsListDataLoaded]);
 
   return (
     <div className="user-page">
@@ -29,7 +28,7 @@ const MyList = (props) => {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <div className="catalog__movies-list">
-          {filmsList.map((film) => <MovieItemCard
+          {myFilmsList.map((film) => <MovieItemCard
             key={`${film.name}-${film.id}`}
             name={film.name} id={film.id}
             src={film.preview_image}
@@ -46,12 +45,21 @@ const MyList = (props) => {
 };
 
 MyList.propTypes = {
-  films: PropTypes.array
+  myFilmsList: PropTypes.array,
+  onLoadMyFilmsListData: PropTypes.func.isRequired,
+  isMyFilmsListDataLoaded: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
-  films: state.films,
+  myFilmsList: state.myFilmsList,
+  isMyFilmsListDataLoaded: state.isMyFilmsListDataLoaded,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onLoadMyFilmsListData() {
+    dispatch(loadFavorite());
+  },
 });
 
 export {MyList};
-export default connect(mapStateToProps, null)(MyList);
+export default connect(mapStateToProps, mapDispatchToProps)(MyList);

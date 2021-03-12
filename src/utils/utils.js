@@ -17,5 +17,5 @@ export const createGenreTypesList = (films) => {
 export const getRunTime = (time) => {
   const hours = Math.trunc(time / 60);
   const minutes = time % 60;
-  return hours + 'h ' + minutes + 'm';
+  return hours + `h ` + minutes + `m`;
 };
