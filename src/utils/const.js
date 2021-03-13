@@ -24,3 +24,5 @@ export const AppRoute = {
 export const FILM_COUNT_PER_STEP = 8;
 
 export const INITIAL_FILM_COUNT = 0;
+
+export const MAX_GENRE_COUNT = 9;

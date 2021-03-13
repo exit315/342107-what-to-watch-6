@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import {createGenreTypesList} from '../../utils/utils';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
-import {GenreType} from '../../utils/const';
+import {GenreType, MAX_GENRE_COUNT} from '../../utils/const';
 
 const GenreTabs = (props) => {
   const {films, genre, onTabClick} = props;
@@ -12,8 +12,8 @@ const GenreTabs = (props) => {
   const createFilterTypesList = () => {
     let filterTypesList = Array.from(createGenreTypesList(films));
 
-    if (filterTypesList.length > 9) {
-      filterTypesList = filterTypesList.slice(0, 9);
+    if (filterTypesList.length > MAX_GENRE_COUNT) {
+      filterTypesList = filterTypesList.slice(0, MAX_GENRE_COUNT);
     }
 
     filterTypesList.unshift(GenreType.ALL);
