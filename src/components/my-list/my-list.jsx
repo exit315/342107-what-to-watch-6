@@ -14,7 +14,7 @@ const MyList = (props) => {
   const handleActiveCardChange = (id = null) => {
     setActiveCard(id);
   };
-  
+
   const [isMyFilmsListDataLoaded, setIsMyFilmsListDataLoaded] = useState(false);
 
   useEffect(() => {
