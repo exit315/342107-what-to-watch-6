@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link, withRouter, Redirect} from 'react-router-dom';
@@ -11,9 +11,10 @@ import FilmOverview from '../film-overview/film-overview';
 import FilmDetails from '../film-details/film-details';
 import FilmReviews from '../film-reviews/film-reviews';
 import FilmsLikeThis from '../films-like-this/films-like-this';
+import {loadComments} from "../../api/api-actions";
 
 const FilmScreen = (props) => {
-  const {films, match, authorizationStatus, onFavoriteClick} = props;
+  const {films, match, authorizationStatus, onFavoriteClick, onLoadReviewsData} = props;
   const currentFilm = films.find((el) => el.id === parseInt(match.params.id, 10));
 
   const [activeTab, setActiveTab] = useState(TabType.OVERVIEW);
@@ -52,6 +53,17 @@ const FilmScreen = (props) => {
       status: +(!currentFilm.is_favorite),
     });
   };
+
+  const [isReviewsDataLoaded, setIsReviewsDataLoaded] = useState(false);
+
+  useEffect(() => {
+    if (!isReviewsDataLoaded) {
+      onLoadReviewsData({
+        id: currentFilm.id
+      });
+      setIsReviewsDataLoaded(true);
+    }
+  }, []);
 
   return (
     <React.Fragment>
@@ -121,6 +133,7 @@ FilmScreen.propTypes = {
   match: PropTypes.object.isRequired,
   authorizationStatus: PropTypes.bool.isRequired,
   onFavoriteClick: PropTypes.func.isRequired,
+  onLoadReviewsData: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -131,7 +144,10 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onFavoriteClick(id, status) {
     dispatch(changeFavorite(id, status));
-  }
+  },
+  onLoadReviewsData(id) {
+    dispatch(loadComments(id));
+  },
 });
 
 export {FilmScreen};

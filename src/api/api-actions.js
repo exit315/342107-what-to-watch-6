@@ -23,16 +23,21 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
     .then(() => dispatch(ActionCreator.requireAuthorization(true)))
 );
 
+export const logout = ({login: email, password}) => (dispatch, _getState, api) => (
+  api.get(AppRoute.LOGOUT, {email, password})
+    .then(() => dispatch(ActionCreator.requireAuthorization(false)))
+);
+
 export const changeFavorite = ({id, status}) => (_dispatch, _getState, api) => (
   api.post(`${AppRoute.FAVORITE}/${id}/${status}`, {id, status})
 );
 
 export const loadFavorite = () => (dispatch, _getState, api) => (
   api.get(AppRoute.FAVORITE)
-  .then(({data}) => dispatch(ActionCreator.loadMyFilmsList(data)))
+    .then(({data}) => dispatch(ActionCreator.loadMyFilmsList(data)))
 );
 
-export const logout = ({login: email, password}) => (dispatch, _getState, api) => (
-  api.get(AppRoute.LOGOUT, {email, password})
-    .then(() => dispatch(ActionCreator.requireAuthorization(false)))
+export const loadComments = ({id}) => (dispatch, _getState, api) => (
+  api.get(`${AppRoute.COMMENTS}/${id}`)
+    .then((response) => dispatch(ActionCreator.loadReviews(response.data)))
 );

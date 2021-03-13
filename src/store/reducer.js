@@ -4,6 +4,7 @@ import {ActionType} from './action';
 const initialState = {
   films: [],
   myFilmsList: [],
+  filmReviews: [],
   promoFilm: null,
   genre: GenreType.ALL,
   authorizationStatus: false,
@@ -50,7 +51,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         myFilmsList: action.payload,
-        isMyFilmsListDataLoaded: true
+      };
+
+    case ActionType.LOAD_REVIEWS:
+      return {
+        ...state,
+        filmReviews: action.payload,
       };
 
     default:

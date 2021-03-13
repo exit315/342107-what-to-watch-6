@@ -5,6 +5,7 @@ export const ActionType = {
   REQUIRED_AUTHORIZATION: `user/requiredAuthorization`,
   REMEMBER_USER: `user/rememberUser`,
   LOAD_MY_FILMS_LIST: `films/loadMyFilmsList`,
+  LOAD_REVIEWS: `films/loadReviews`,
 };
 
 export const ActionCreator = {
@@ -36,5 +37,10 @@ export const ActionCreator = {
   loadMyFilmsList: (myFilmsList) => ({
     type: ActionType.LOAD_MY_FILMS_LIST,
     payload: myFilmsList
+  }),
+
+  loadReviews: (reviews) => ({
+    type: ActionType.LOAD_REVIEWS,
+    payload: reviews
   })
 };
