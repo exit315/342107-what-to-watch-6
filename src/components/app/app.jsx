@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {Router as BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import MainPage from '../main-page/main-page.jsx';
 import MyList from '../my-list/my-list.jsx';
@@ -13,6 +13,7 @@ import LoadingScreen from '../loading-screen/loading-screen';
 import {fetchFilmsList} from "../../api/api-actions";
 import PrivateRoute from '../private-route/private-route';
 import {AppRoute} from '../../utils/const';
+import browserHistory from "../../browser-history";
 
 const App = (props) => {
   const {films, isDataLoaded, onLoadFilmsData, authorizationStatus} = props;
@@ -31,7 +32,7 @@ const App = (props) => {
   }
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path={AppRoute.ROOT}>
           <MainPage />
@@ -39,7 +40,7 @@ const App = (props) => {
         <Route
           exact
           path={AppRoute.LOGIN}>
-          {authorizationStatus ? <MainPage /> : <SignIn />}
+          {authorizationStatus ? <Redirect to={AppRoute.ROOT} /> : <SignIn />}
         </Route>
         <PrivateRoute
           exact
