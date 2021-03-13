@@ -10,7 +10,6 @@ const initialState = {
   userEmail: null,
   isDataLoaded: false,
   isPromoFilmDataLoaded: false,
-  isMyFilmsListDataLoaded: false,
 };
 
 const reducer = (state = initialState, action) => {

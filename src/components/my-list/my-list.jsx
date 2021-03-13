@@ -2,23 +2,33 @@ import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {loadFavorite} from "../../api/api-actions";
+import LoadingScreen from '../loading-screen/loading-screen';
 import MovieItemCard from '../movie-item-card/movie-item-card.jsx';
 import Header from '../header/header.jsx';
 import Footer from '../footer/footer.jsx';
 
 const MyList = (props) => {
-  const {myFilmsList, onLoadMyFilmsListData, isMyFilmsListDataLoaded} = props;
+  const {myFilmsList, onLoadMyFilmsListData} = props;
 
   const [activeCard, setActiveCard] = useState(null);
   const handleActiveCardChange = (id = null) => {
     setActiveCard(id);
   };
+  
+  const [isMyFilmsListDataLoaded, setIsMyFilmsListDataLoaded] = useState(false);
 
   useEffect(() => {
     if (!isMyFilmsListDataLoaded) {
       onLoadMyFilmsListData();
+      setIsMyFilmsListDataLoaded(true);
     }
-  }, [isMyFilmsListDataLoaded]);
+  }, []);
+
+  if (!isMyFilmsListDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <div className="user-page">
@@ -47,12 +57,10 @@ const MyList = (props) => {
 MyList.propTypes = {
   myFilmsList: PropTypes.array,
   onLoadMyFilmsListData: PropTypes.func.isRequired,
-  isMyFilmsListDataLoaded: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
   myFilmsList: state.myFilmsList,
-  isMyFilmsListDataLoaded: state.isMyFilmsListDataLoaded,
 });
 
 const mapDispatchToProps = (dispatch) => ({
