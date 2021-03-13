@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
+import {getTextRating} from '../../utils/utils';
 
 const FilmOverview = (props) => {
   const {currentFilm} = props;
@@ -10,7 +11,7 @@ const FilmOverview = (props) => {
       <div className="movie-rating">
         <div className="movie-rating__score">{currentFilm.rating}</div>
         <p className="movie-rating__meta">
-          <span className="movie-rating__level">Very good</span>
+          <span className="movie-rating__level">{getTextRating(currentFilm.rating)}</span>
           <span className="movie-rating__count">{currentFilm.scores_count} ratings</span>
         </p>
       </div>
