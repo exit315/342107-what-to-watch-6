@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link, withRouter, Redirect} from 'react-router-dom';
 import {TabType, AppRoute} from '../../utils/const';
+import {changeFavorite} from "../../api/api-actions";
 import Header from '../header/header';
 import Footer from '../footer/footer';
 import FilmTabs from '../film-tabs/film-tabs';
@@ -12,7 +13,7 @@ import FilmReviews from '../film-reviews/film-reviews';
 import FilmsLikeThis from '../films-like-this/films-like-this';
 
 const FilmScreen = (props) => {
-  const {films, match, authorizationStatus} = props;
+  const {films, match, authorizationStatus, onFavoriteClick} = props;
   const currentFilm = films.find((el) => el.id === parseInt(match.params.id, 10));
 
   const [activeTab, setActiveTab] = useState(TabType.OVERVIEW);
@@ -45,6 +46,13 @@ const FilmScreen = (props) => {
     return <Redirect to={AppRoute.ROOT} />;
   };
 
+  const handleFavoriteClick = () => {
+    onFavoriteClick({
+      id: currentFilm.id,
+      status: +(!currentFilm.is_favorite),
+    });
+  };
+
   return (
     <React.Fragment>
       <section className="movie-card movie-card--full">
@@ -72,7 +80,7 @@ const FilmScreen = (props) => {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list movie-card__button" type="button">
+                <button className="btn btn--list movie-card__button" type="button" onClick={handleFavoriteClick}>
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref="#add"></use>
                   </svg>
@@ -112,6 +120,7 @@ FilmScreen.propTypes = {
   films: PropTypes.array.isRequired,
   match: PropTypes.object.isRequired,
   authorizationStatus: PropTypes.bool.isRequired,
+  onFavoriteClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -119,5 +128,11 @@ const mapStateToProps = (state) => ({
   authorizationStatus: state.authorizationStatus,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  onFavoriteClick(id, status) {
+    dispatch(changeFavorite(id, status));
+  }
+});
+
 export {FilmScreen};
-export default connect(mapStateToProps, null)(withRouter(FilmScreen));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(FilmScreen));
