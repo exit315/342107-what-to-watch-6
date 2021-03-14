@@ -24,7 +24,7 @@ const SignIn = ({onSubmit}) => {
 
   return (
     <div className="user-page">
-      <Header />
+      <Header title={`Sign in`} isUserBlockShown={false}/>
 
       <div className="sign-in user-page__content">
         <form action="#" className="sign-in__form" onSubmit={handleSubmit}>

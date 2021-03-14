@@ -23,7 +23,7 @@ const PromoFilm = (props) => {
 
       <h1 className="visually-hidden">WTW</h1>
 
-      <Header />
+      <Header isUserBlockShown={true}/>
 
       <div className="movie-card__wrap">
         <div className="movie-card__info">

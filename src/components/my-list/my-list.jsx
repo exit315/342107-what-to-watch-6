@@ -32,7 +32,7 @@ const MyList = (props) => {
 
   return (
     <div className="user-page">
-      <Header title={`My List`}/>
+      <Header title={`My List`} isUserBlockShown={true}/>
 
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
