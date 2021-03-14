@@ -15,6 +15,7 @@ import {loadComments} from "../../api/api-actions";
 
 const FilmScreen = (props) => {
   const {films, match, authorizationStatus, onFavoriteClick, onLoadReviewsData} = props;
+
   const currentFilm = films.find((el) => el.id === parseInt(match.params.id, 10));
 
   const [activeTab, setActiveTab] = useState(TabType.OVERVIEW);
@@ -86,12 +87,12 @@ const FilmScreen = (props) => {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
+                <Link to={`/player/${currentFilm.id}`} className="btn btn--play movie-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
-                </button>
+                </Link>
                 <button className="btn btn--list movie-card__button" type="button" onClick={handleFavoriteClick}>
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref="#add"></use>

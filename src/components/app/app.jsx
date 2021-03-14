@@ -16,8 +16,7 @@ import {AppRoute} from '../../utils/const';
 import browserHistory from "../../browser-history";
 
 const App = (props) => {
-  const {films, isDataLoaded, onLoadFilmsData, authorizationStatus} = props;
-  const [film] = films;
+  const {isDataLoaded, onLoadFilmsData, authorizationStatus} = props;
 
   useEffect(() => {
     if (!isDataLoaded) {
@@ -45,18 +44,21 @@ const App = (props) => {
         <PrivateRoute
           exact
           path={AppRoute.MYLIST}
-          render={() => <MyList />}>
-        </PrivateRoute>
+          render={() => <MyList />} />
         <PrivateRoute
           exact
           path={AppRoute.REVIEW}
-          render={() => <AddReview />}>
-        </PrivateRoute>
-        <Route exact path={AppRoute.PLAYER}>
-          <Player
-            film={film}
-          />
-        </Route>
+          render={() => <AddReview />}
+        />
+        <Route
+          exact
+          path={AppRoute.PLAYER}
+          render={({history}) => (
+            <Player
+              onExitPlayerClick={() => history.goBack()}
+            />
+          )}
+        />
         <Route exact path={AppRoute.FILM}>
           <FilmScreen />
         </Route>
