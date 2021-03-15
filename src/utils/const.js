@@ -1,3 +1,11 @@
+export const FILM_COUNT_PER_STEP = 8;
+
+export const INITIAL_FILM_COUNT = 0;
+
+export const MAX_GENRE_COUNT = 9;
+
+export const MAX_RATING = 10;
+
 export const TabType = {
   OVERVIEW: `Overview`,
   DETAILS: `Details`,
@@ -21,9 +29,3 @@ export const AppRoute = {
   FAVORITE: `/favorite`,
   COMMENTS: `/comments`
 };
-
-export const FILM_COUNT_PER_STEP = 8;
-
-export const INITIAL_FILM_COUNT = 0;
-
-export const MAX_GENRE_COUNT = 9;

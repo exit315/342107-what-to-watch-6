@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-
-const MAX_RATING = 10;
+import {MAX_RATING} from '../../utils/const';
 
 const AddReviewForm = () => {
   const [review, setReview] = useState({
