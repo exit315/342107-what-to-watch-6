@@ -2,32 +2,45 @@ import React, {useState, useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
+import {getRunTimeInPlayer} from '../../utils/utils';
 
 const Player = (props) => {
   const {films, match, onExitPlayerClick} = props;
+
   const currentFilm = films.find((el) => el.id === parseInt(match.params.id, 10));
 
   const [isLoading, setIsLoading] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [videoTime, setVideoTime] = useState(``);
 
   const videoRef = useRef();
 
   useEffect(() => {
-    videoRef.current.oncanplaythrough = () => setIsLoading(false);
+    videoRef.current.oncanplaythrough = () => {
+      setVideoTime(getRunTimeInPlayer(videoRef.current.duration));
+      setIsLoading(false);
+    };
+
+    videoRef.current.ontimeupdate = () => {
+      setVideoTime(getRunTimeInPlayer(videoRef.current.duration - videoRef.current.currentTime));
+    };
+
     videoRef.current.onplay = () => setIsPlaying(true);
     videoRef.current.onpause = () => setIsPlaying(false);
 
     return () => {
       videoRef.current.pause();
       videoRef.current.oncanplaythrough = null;
+      videoRef.current.ontimeupdate = null;
       videoRef.current.onplay = null;
       videoRef.current.onpause = null;
     };
-  }, [currentFilm.video_link]);
+  }, []);
 
   useEffect(() => {
     if (isPlaying) {
       videoRef.current.play();
+
       return;
     }
 
@@ -46,7 +59,7 @@ const Player = (props) => {
 
       <div className="player__controls">
         <div className="player__controls-row">
-          <div className="player__time-value">{videoRef.duration}</div>
+          <div className="player__time-value">{videoTime}</div>
         </div>
 
         <div className="player__controls-row">

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-import VideoPlayer from '../video-player/video-player';
+import VideoPlayer from '../preview-player/video-playerer';
 import {AppRoute} from '../../utils/const';
 
 const MovieItemCard = (props) => {

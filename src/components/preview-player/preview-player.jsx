@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 
-const VideoPlayer = ({previewVideoLink, defaultIsPlaying, defaultIsMuted}) => {
+const PreviewPlayer = ({previewVideoLink, defaultIsPlaying, defaultIsMuted}) => {
 
   return (
     <Fragment>
@@ -10,10 +10,10 @@ const VideoPlayer = ({previewVideoLink, defaultIsPlaying, defaultIsMuted}) => {
   );
 };
 
-VideoPlayer.propTypes = {
+PreviewPlayer.propTypes = {
   previewVideoLink: PropTypes.string.isRequired,
   defaultIsPlaying: PropTypes.bool.isRequired,
   defaultIsMuted: PropTypes.bool.isRequired,
 };
 
-export default VideoPlayer;
+export default PreviewPlayer;
