@@ -28,7 +28,7 @@ const UserPicElement = (props) => {
 };
 
 const Header = (props) => {
-  const {title, authorizationStatus, onClick, userEmail, isUserBlockShown} = props;
+  const {title, authorizationStatus, onClick, userEmail, isUserBlockShown, breadcrumbs} = props;
 
   return (
     <header className="page-header user-page__head">
@@ -42,6 +42,8 @@ const Header = (props) => {
 
       <h1 className="page-title user-page__title">{title}</h1>
 
+      {breadcrumbs}
+
       {isUserBlockShown ? <div className="user-block">
         {authorizationStatus ? <UserPicElement onClick={onClick} userEmail={userEmail}/> : <SignInLinkElement />}
       </div> : ``}
@@ -54,7 +56,8 @@ Header.propTypes = {
   authorizationStatus: PropTypes.bool.isRequired,
   userEmail: PropTypes.string,
   onClick: PropTypes.func.isRequired,
-  isUserBlockShown: PropTypes.bool.isRequired,
+  isUserBlockShown: PropTypes.bool,
+  breadcrumbs: PropTypes.object,
 };
 
 UserPicElement.propTypes = {

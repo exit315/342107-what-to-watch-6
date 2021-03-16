@@ -4,10 +4,26 @@ import {connect} from 'react-redux';
 import {Link, withRouter} from 'react-router-dom';
 import AddReviewForm from '../add-review-form/add-review-form.jsx';
 import {AppRoute} from '../../utils/const';
+import Header from '../header/header';
 
 const AddReview = (props) => {
   const {films, match} = props;
   const currentFilm = films.find((el) => el.id === parseInt(match.params.id, 10));
+
+  const breadcrumbs = () => {
+    return (
+      <nav className="breadcrumbs">
+        <ul className="breadcrumbs__list">
+          <li className="breadcrumbs__item">
+            <Link to={`${AppRoute.FILMS}/${currentFilm.id}`} className="breadcrumbs__link">{currentFilm.name}</Link>
+          </li>
+          <li className="breadcrumbs__item">
+            <a className="breadcrumbs__link">Add review</a>
+          </li>
+        </ul>
+      </nav>
+    );
+  };
 
   return (
     <section className="movie-card movie-card--full">
@@ -18,32 +34,7 @@ const AddReview = (props) => {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <header className="page-header">
-          <div className="logo">
-            <a href="main.html" className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <nav className="breadcrumbs">
-            <ul className="breadcrumbs__list">
-              <li className="breadcrumbs__item">
-                <Link to={`${AppRoute.FILMS}/${currentFilm.id}`} className="breadcrumbs__link">{currentFilm.name}</Link>
-              </li>
-              <li className="breadcrumbs__item">
-                <a className="breadcrumbs__link">Add review</a>
-              </li>
-            </ul>
-          </nav>
-
-          <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-            </div>
-          </div>
-        </header>
+        <Header isUserBlockShown={true} breadcrumbs={breadcrumbs()}/>
 
         <div className="movie-card__poster movie-card__poster--small">
           <img src={currentFilm.poster_image} alt={currentFilm.name} width="218" height="327" />
@@ -51,7 +42,7 @@ const AddReview = (props) => {
       </div>
 
       <div className="add-review">
-        <AddReviewForm />
+        <AddReviewForm id={currentFilm.id} />
       </div>
     </section>
   );
