@@ -6,6 +6,8 @@ export const MAX_GENRE_COUNT = 9;
 
 export const MAX_RATING = 10;
 
+export const COMMENT_MIN_LENGTH = 50;
+
 export const TabType = {
   OVERVIEW: `Overview`,
   DETAILS: `Details`,
