@@ -42,6 +42,8 @@ export const loadComments = ({id}) => (dispatch, _getState, api) => (
     .then((response) => dispatch(ActionCreator.loadReviews(response.data)))
 );
 
-export const sendComment = ({id, rating, comment}) => (_dispatch, _getState, api) => (
+export const sendComment = ({id, rating, comment}) => (dispatch, _getState, api) => (
   api.post(`${AppRoute.COMMENTS}/${id}`, {rating, comment})
+    .then((response) => dispatch(ActionCreator.getStatusCode(response.status)))
+    .catch(() => {})
 );

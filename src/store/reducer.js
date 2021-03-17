@@ -11,6 +11,7 @@ const initialState = {
   userEmail: null,
   isDataLoaded: false,
   isPromoFilmDataLoaded: false,
+  sendStatusCode: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -57,6 +58,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         filmReviews: action.payload,
+      };
+
+    case ActionType.GET_STATUS_CODE:
+      return {
+        ...state,
+        sendStatusCode: action.payload,
       };
 
     default:

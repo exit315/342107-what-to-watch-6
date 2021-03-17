@@ -6,6 +6,7 @@ export const ActionType = {
   REMEMBER_USER: `user/rememberUser`,
   LOAD_MY_FILMS_LIST: `films/loadMyFilmsList`,
   LOAD_REVIEWS: `films/loadReviews`,
+  GET_STATUS_CODE: `films/getStatusCode`
 };
 
 export const ActionCreator = {
@@ -42,5 +43,10 @@ export const ActionCreator = {
   loadReviews: (reviews) => ({
     type: ActionType.LOAD_REVIEWS,
     payload: reviews
+  }),
+
+  getStatusCode: (statusCode) => ({
+    type: ActionType.GET_STATUS_CODE,
+    payload: statusCode
   })
 };

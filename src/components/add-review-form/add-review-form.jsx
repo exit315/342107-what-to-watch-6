@@ -52,7 +52,8 @@ const AddReviewForm = ({onSubmit, id}) => {
       rating: +(review.rating),
       comment: review.comment,
     });
-    // history.back();
+
+    history.back();
   };
 
   return (
@@ -77,7 +78,7 @@ const AddReviewForm = ({onSubmit, id}) => {
 
 AddReviewForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
