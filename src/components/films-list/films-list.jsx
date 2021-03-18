@@ -10,11 +10,6 @@ import {FILM_COUNT_PER_STEP, INITIAL_FILM_COUNT} from '../../utils/const';
 const FilmsList = (props) => {
   const {films, genre} = props;
 
-  const [activeCard, setActiveCard] = useState(null);
-  const handleActiveCardChange = (id = null) => {
-    setActiveCard(id);
-  };
-
   const [filmCount, setFilmCount] = useState(FILM_COUNT_PER_STEP);
   const handleFilmCountChange = (evt) => {
     evt.preventDefault();
@@ -47,8 +42,6 @@ const FilmsList = (props) => {
           name={film.name}
           src={film.preview_image}
           previewVideoLink={film.preview_video_link}
-          handleActiveCardChange={handleActiveCardChange}
-          activeCard={activeCard}
           genre={genre}
         />).splice(INITIAL_FILM_COUNT, filmCount)}
       </div>

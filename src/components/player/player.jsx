@@ -10,7 +10,7 @@ const Player = (props) => {
   const currentFilm = films.find((el) => el.id === parseInt(match.params.id, 10));
 
   const [isLoading, setIsLoading] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const [videoTime, setVideoTime] = useState(``);
 
   const videoRef = useRef();

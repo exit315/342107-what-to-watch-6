@@ -1,29 +1,45 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import VideoPlayer from '../preview-player/preview-player';
 import {AppRoute} from '../../utils/const';
 
 const MovieItemCard = (props) => {
-  const {id, name, src, handleActiveCardChange, previewVideoLink, activeCard} = props;
+  const {id, name, src, previewVideoLink} = props;
+  const videoPlayerRef = useRef();
+
   const [timer, setTimer] = useState(null);
+  const [activeCard, setActiveCard] = useState(null);
 
-  const onFilmHover = (e) => {
-    setTimer(setTimeout(handleActiveCardChange, 1000, e.currentTarget.id));
-  };
+  useEffect(() => {
+    let isMounted = true;
 
-  const onFilmUnhover = () => {
-    clearTimeout(timer);
-    setTimer(null);
-    handleActiveCardChange(null);
-  };
+    videoPlayerRef.current.onmouseenter = (evt) => {
+      setTimer(setTimeout(() => {
+        if (isMounted) {
+          setActiveCard(id);
+        }
+      }, 1000, evt.currentTarget.id));
+    };
+
+    videoPlayerRef.current.onmouseleave = () => {
+      clearTimeout(timer);
+      setTimer(null);
+      setActiveCard(null);
+    };
+
+    return () => {
+      isMounted = false;
+      videoPlayerRef.current.onmouseenter = null;
+      videoPlayerRef.current.onmouseleave = null;
+    };
+  }, []);
 
   return (
     <article className="small-movie-card catalog__movies-card"
       id={id}
       key={`${name}-${id}`}
-      onMouseEnter={onFilmHover}
-      onMouseLeave={onFilmUnhover}>
+      ref={videoPlayerRef}>
       <div className="small-movie-card__image">
         {parseInt(activeCard, 10) === id ?
           <VideoPlayer previewVideoLink={previewVideoLink} defaultIsPlaying={true} defaultIsMuted={true}/> :
