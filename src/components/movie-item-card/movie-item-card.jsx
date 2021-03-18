@@ -8,28 +8,28 @@ const MovieItemCard = (props) => {
   const {id, name, src, previewVideoLink} = props;
   const videoPlayerRef = useRef();
 
-  const [timer, setTimer] = useState(null);
   const [activeCard, setActiveCard] = useState(null);
 
   useEffect(() => {
     let isMounted = true;
+    let timer = null;
 
     videoPlayerRef.current.onmouseenter = (evt) => {
-      setTimer(setTimeout(() => {
+      timer = setTimeout(() => {
         if (isMounted) {
           setActiveCard(id);
         }
-      }, 1000, evt.currentTarget.id));
+      }, 1000, evt.currentTarget.id);
     };
 
     videoPlayerRef.current.onmouseleave = () => {
       clearTimeout(timer);
-      setTimer(null);
       setActiveCard(null);
     };
 
     return () => {
       isMounted = false;
+      timer = null;
       videoPlayerRef.current.onmouseenter = null;
       videoPlayerRef.current.onmouseleave = null;
     };
