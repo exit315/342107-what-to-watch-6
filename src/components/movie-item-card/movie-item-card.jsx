@@ -56,9 +56,7 @@ MovieItemCard.propTypes = {
   src: PropTypes.string,
   name: PropTypes.string,
   id: PropTypes.number,
-  handleActiveCardChange: PropTypes.func,
   previewVideoLink: PropTypes.string,
-  activeCard: PropTypes.string
 };
 
 export default MovieItemCard;

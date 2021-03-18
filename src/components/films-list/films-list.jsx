@@ -42,7 +42,6 @@ const FilmsList = (props) => {
           name={film.name}
           src={film.preview_image}
           previewVideoLink={film.preview_video_link}
-          genre={genre}
         />).splice(INITIAL_FILM_COUNT, filmCount)}
       </div>
 
