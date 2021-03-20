@@ -31,7 +31,7 @@ const FilmsList = (props) => {
     }
   };
 
-  const curentFilms = renderFilteredFilmsList();
+  const curentFilms = renderFilteredFilmsList().slice(INITIAL_FILM_COUNT, filmCount);
 
   return (
     <>
@@ -42,7 +42,7 @@ const FilmsList = (props) => {
           name={film.name}
           src={film.preview_image}
           previewVideoLink={film.preview_video_link}
-        />).splice(INITIAL_FILM_COUNT, filmCount)}
+        />)}
       </div>
 
       <ShowMoreBtn handleFilmCountChange={handleFilmCountChange} filmCount={filmCount} showBtn={curentFilms.length >= filmCount}/>
