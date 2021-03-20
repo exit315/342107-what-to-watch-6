@@ -1,32 +1,32 @@
-import {ActionCreator} from "../store/action";
+import {loadFilms, loadPromoFilm, rememberUser, requireAuthorization, loadMyFilmsList, loadReviews} from "../store/action";
 import {AppRoute} from '../utils/const';
 
 export const fetchFilmsList = () => (dispatch, _getState, api) => (
   api.get(AppRoute.FILMS)
-    .then(({data}) => dispatch(ActionCreator.loadFilms(data)))
+    .then(({data}) => dispatch(loadFilms(data)))
 );
 
 export const fetchPromoFilm = () => (dispatch, _getState, api) => (
   api.get(AppRoute.PROMO)
-    .then(({data}) => dispatch(ActionCreator.loadPromoFilm(data)))
+    .then(({data}) => dispatch(loadPromoFilm(data)))
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(AppRoute.LOGIN)
-    .then((response) => dispatch(ActionCreator.rememberUser(response.data.email)))
-    .then(() => dispatch(ActionCreator.requireAuthorization(true)))
+    .then((response) => dispatch(rememberUser(response.data.email)))
+    .then(() => dispatch(requireAuthorization(true)))
     .catch(() => {})
 );
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
   api.post(AppRoute.LOGIN, {email, password})
-    .then(() => dispatch(ActionCreator.rememberUser(email)))
-    .then(() => dispatch(ActionCreator.requireAuthorization(true)))
+    .then(() => dispatch(rememberUser(email)))
+    .then(() => dispatch(requireAuthorization(true)))
 );
 
 export const logout = ({login: email, password}) => (dispatch, _getState, api) => (
   api.get(AppRoute.LOGOUT, {email, password})
-    .then(() => dispatch(ActionCreator.requireAuthorization(false)))
+    .then(() => dispatch(requireAuthorization(false)))
 );
 
 export const changeFavorite = ({id, status}) => (_dispatch, _getState, api) => (
@@ -35,12 +35,12 @@ export const changeFavorite = ({id, status}) => (_dispatch, _getState, api) => (
 
 export const loadFavorite = () => (dispatch, _getState, api) => (
   api.get(AppRoute.FAVORITE)
-    .then(({data}) => dispatch(ActionCreator.loadMyFilmsList(data)))
+    .then(({data}) => dispatch(loadMyFilmsList(data)))
 );
 
 export const loadComments = ({id}) => (dispatch, _getState, api) => (
   api.get(`${AppRoute.COMMENTS}/${id}`)
-    .then((response) => dispatch(ActionCreator.loadReviews(response.data)))
+    .then((response) => dispatch(loadReviews(response.data)))
 );
 
 export const sendComment = ({id, rating, comment}) => (dispatch, _getState, api) => (

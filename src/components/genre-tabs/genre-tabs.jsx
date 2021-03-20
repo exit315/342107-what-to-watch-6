@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {createGenreTypesList} from '../../utils/utils';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../store/action';
+import {changeGenre} from '../../store/action';
 import {GenreType, MAX_GENRE_COUNT} from '../../utils/const';
 
 const GenreTabs = (props) => {
@@ -57,7 +57,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onTabClick(evt) {
-    dispatch(ActionCreator.changeGenre(evt));
+    dispatch(changeGenre(evt));
   }
 });
 

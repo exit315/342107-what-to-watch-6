@@ -7,11 +7,11 @@ import {createStore, applyMiddleware} from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {createAPI} from "./api/api";
 import {checkAuth} from "./api/api-actions";
-import {ActionCreator} from './store/action';
+import {requireAuthorization} from './store/action';
 import {reducer} from './store/reducer';
 
 const api = createAPI(
-    () => store.dispatch(ActionCreator.requireAuthorization(false))
+    () => store.dispatch(requireAuthorization(false))
 );
 
 const store = createStore(
