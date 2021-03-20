@@ -1,5 +1,4 @@
 import React, {useRef} from 'react';
-import {useHistory} from 'react-router-dom';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {login} from "../../api/api-actions";
@@ -10,8 +9,6 @@ const SignIn = ({onSubmit}) => {
   const loginRef = useRef();
   const passwordRef = useRef();
 
-  const history = useHistory();
-
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
@@ -19,7 +16,6 @@ const SignIn = ({onSubmit}) => {
       login: loginRef.current.value,
       password: passwordRef.current.value,
     });
-    history.push(`/`);
   };
 
   return (

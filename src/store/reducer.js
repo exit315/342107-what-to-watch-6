@@ -12,6 +12,7 @@ const initialState = {
   isDataLoaded: false,
   isPromoFilmDataLoaded: false,
   sendStatusCode: null,
+  status: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -64,6 +65,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         sendStatusCode: action.payload,
+      };
+
+    case ActionType.DISABLE_FORM:
+      return {
+        ...state,
+        status: action.payload,
       };
 
     default:

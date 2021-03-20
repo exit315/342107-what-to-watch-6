@@ -6,7 +6,8 @@ export const ActionType = {
   REMEMBER_USER: `user/rememberUser`,
   LOAD_MY_FILMS_LIST: `films/loadMyFilmsList`,
   LOAD_REVIEWS: `films/loadReviews`,
-  GET_STATUS_CODE: `films/getStatusCode`
+  GET_STATUS_CODE: `films/getStatusCode`,
+  DISABLE_FORM: `user/disableForm`,
 };
 
 export const ActionCreator = {
@@ -48,5 +49,10 @@ export const ActionCreator = {
   getStatusCode: (statusCode) => ({
     type: ActionType.GET_STATUS_CODE,
     payload: statusCode
-  })
+  }),
+
+  disableForm: (status) => ({
+    type: ActionType.DISABLE_FORM,
+    payload: status
+  }),
 };

@@ -20,6 +20,7 @@ export const checkAuth = () => (dispatch, _getState, api) => (
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
   api.post(AppRoute.LOGIN, {email, password})
+    .then(() => dispatch(ActionCreator.rememberUser(email)))
     .then(() => dispatch(ActionCreator.requireAuthorization(true)))
 );
 
@@ -44,6 +45,5 @@ export const loadComments = ({id}) => (dispatch, _getState, api) => (
 
 export const sendComment = ({id, rating, comment}) => (dispatch, _getState, api) => (
   api.post(`${AppRoute.COMMENTS}/${id}`, {rating, comment})
-    .then((response) => dispatch(ActionCreator.getStatusCode(response.status)))
     .catch(() => {})
 );
