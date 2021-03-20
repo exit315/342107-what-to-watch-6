@@ -59,8 +59,8 @@ MyList.propTypes = {
   onLoadMyFilmsListData: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  myFilmsList: state.myFilmsList,
+const mapStateToProps = ({INTERACTION}) => ({
+  myFilmsList: INTERACTION.myFilmsList,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -89,8 +89,8 @@ Player.propTypes = {
   onExitPlayerClick: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  films: state.films,
+const mapStateToProps = ({DATA}) => ({
+  films: DATA.films,
 });
 
 export {Player};

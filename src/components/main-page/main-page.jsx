@@ -51,10 +51,10 @@ MainPage.propTypes = {
   isPromoFilmDataLoaded: PropTypes.bool,
 };
 
-const mapStateToProps = (state) => ({
-  films: state.films,
-  genre: state.genre,
-  isPromoFilmDataLoaded: state.isPromoFilmDataLoaded
+const mapStateToProps = ({DATA}) => ({
+  films: DATA.films,
+  genre: DATA.genre,
+  isPromoFilmDataLoaded: DATA.isPromoFilmDataLoaded
 });
 
 const mapDispatchToProps = (dispatch) => ({

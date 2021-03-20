@@ -8,14 +8,14 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import {createAPI} from "./api/api";
 import {checkAuth} from "./api/api-actions";
 import {requireAuthorization} from './store/action';
-import {reducer} from './store/reducer';
+import rootReducer from './store/root-reducer';
 
 const api = createAPI(
     () => store.dispatch(requireAuthorization(false))
 );
 
 const store = createStore(
-    reducer,
+    rootReducer,
     composeWithDevTools(
         applyMiddleware(thunk.withExtraArgument(api))
     )

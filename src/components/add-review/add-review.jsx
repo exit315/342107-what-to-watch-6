@@ -50,11 +50,15 @@ const AddReview = (props) => {
 
 AddReview.propTypes = {
   films: PropTypes.array.isRequired,
-  match: PropTypes.object.isRequired
+  match: PropTypes.object.isRequired,
+  status: PropTypes.bool
+
 };
 
-const mapStateToProps = (state) => ({
-  films: state.films,
+const mapStateToProps = ({DATA, INTERACTION}) => ({
+  films: DATA.films,
+  status: INTERACTION.status,
+
 });
 
 export {AddReview};

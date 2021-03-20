@@ -55,9 +55,9 @@ FilmsList.propTypes = {
   genre: PropTypes.string,
 };
 
-const mapStateToProps = (state) => ({
-  genre: state.genre,
-  films: state.films,
+const mapStateToProps = ({DATA}) => ({
+  genre: DATA.genre,
+  films: DATA.films,
 });
 
 export {FilmsList};

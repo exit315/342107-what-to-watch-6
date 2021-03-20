@@ -50,9 +50,9 @@ GenreTabs.propTypes = {
   onTabClick: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state) => ({
-  genre: state.genre,
-  films: state.films,
+const mapStateToProps = ({DATA}) => ({
+  genre: DATA.genre,
+  films: DATA.films,
 });
 
 const mapDispatchToProps = (dispatch) => ({

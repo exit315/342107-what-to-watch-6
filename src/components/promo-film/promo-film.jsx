@@ -64,8 +64,8 @@ PromoFilm.propTypes = {
   onFavoriteClick: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  promoFilm: state.promoFilm,
+const mapStateToProps = ({DATA}) => ({
+  promoFilm: DATA.promoFilm,
 });
 
 const mapDispatchToProps = (dispatch) => ({

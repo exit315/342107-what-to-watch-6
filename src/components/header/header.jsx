@@ -65,9 +65,9 @@ UserPicElement.propTypes = {
   onClick: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  authorizationStatus: state.authorizationStatus,
-  userEmail: state.userEmail,
+const mapStateToProps = ({USER}) => ({
+  authorizationStatus: USER.authorizationStatus,
+  userEmail: USER.userEmail,
 });
 
 const mapDispatchToProps = (dispatch) => ({

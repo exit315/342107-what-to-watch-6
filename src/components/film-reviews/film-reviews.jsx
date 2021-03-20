@@ -31,8 +31,8 @@ FilmReviews.propTypes = {
   filmReviews: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  filmReviews: state.filmReviews,
+const mapStateToProps = ({DATA}) => ({
+  filmReviews: DATA.filmReviews,
 });
 
 export {FilmReviews};

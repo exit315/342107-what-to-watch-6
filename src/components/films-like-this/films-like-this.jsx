@@ -55,9 +55,9 @@ FilmsLikeThis.propTypes = {
   currentFilm: PropTypes.object.isRequired
 };
 
-const mapStateToProps = (state) => ({
-  genre: state.genre,
-  films: state.films,
+const mapStateToProps = ({DATA}) => ({
+  genre: DATA.genre,
+  films: DATA.films,
 });
 
 export {FilmsLikeThis};
