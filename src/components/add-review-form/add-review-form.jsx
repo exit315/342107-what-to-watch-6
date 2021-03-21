@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {MAX_RATING, COMMENT_MIN_LENGTH} from '../../utils/const';
 import {sendComment} from "../../api/api-actions";
+import {getStatus} from '../../store/user-interaction/selectors';
 
 const AddReviewForm = ({onSubmit, id}) => {
   const [review, setReview] = useState({
@@ -77,8 +78,8 @@ AddReviewForm.propTypes = {
   status: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = ({INTERACTION}) => ({
-  status: INTERACTION.status,
+const mapStateToProps = (state) => ({
+  status: getStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import MovieItemCard from '../movie-item-card/movie-item-card.jsx';
+import {getFilms, getGenre} from '../../store/films-data/selectors';
 
 const FILMS_LIKE_THIS = 4;
 const FilmsLikeThis = (props) => {
@@ -55,9 +56,9 @@ FilmsLikeThis.propTypes = {
   currentFilm: PropTypes.object.isRequired
 };
 
-const mapStateToProps = ({DATA}) => ({
-  genre: DATA.genre,
-  films: DATA.films,
+const mapStateToProps = (state) => ({
+  genre: getGenre(state),
+  films: getFilms(state),
 });
 
 export {FilmsLikeThis};

@@ -6,6 +6,7 @@ import LoadingScreen from '../loading-screen/loading-screen';
 import MovieItemCard from '../movie-item-card/movie-item-card.jsx';
 import Header from '../header/header.jsx';
 import Footer from '../footer/footer.jsx';
+import {getMyFilmsList} from '../../store/user-interaction/selectors';
 
 const MyList = (props) => {
   const {myFilmsList, onLoadMyFilmsListData} = props;
@@ -59,8 +60,8 @@ MyList.propTypes = {
   onLoadMyFilmsListData: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({INTERACTION}) => ({
-  myFilmsList: INTERACTION.myFilmsList,
+const mapStateToProps = (state) => ({
+  myFilmsList: getMyFilmsList(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

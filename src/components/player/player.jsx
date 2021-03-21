@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {getRunTimeInPlayer} from '../../utils/utils';
+import {getFilms} from '../../store/films-data/selectors';
 
 const Player = (props) => {
   const {films, match, onExitPlayerClick} = props;
@@ -89,8 +90,8 @@ Player.propTypes = {
   onExitPlayerClick: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({DATA}) => ({
-  films: DATA.films,
+const mapStateToProps = (state) => ({
+  films: getFilms(state),
 });
 
 export {Player};

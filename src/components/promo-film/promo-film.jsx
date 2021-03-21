@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {changeFavorite} from "../../api/api-actions";
 import Header from '../header/header';
+import {getPromoFilm} from '../../store/films-data/selectors';
 
 const PromoFilm = (props) => {
   const {promoFilm, onFavoriteClick} = props;
@@ -64,8 +65,8 @@ PromoFilm.propTypes = {
   onFavoriteClick: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({DATA}) => ({
-  promoFilm: DATA.promoFilm,
+const mapStateToProps = (state) => ({
+  promoFilm: getPromoFilm(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

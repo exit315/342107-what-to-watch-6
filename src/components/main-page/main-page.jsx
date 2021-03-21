@@ -7,6 +7,7 @@ import GenreTabs from '../genre-tabs/genre-tabs';
 import Footer from '../footer/footer';
 import FilmsList from '../films-list/films-list';
 import LoadingScreen from '../loading-screen/loading-screen';
+import {getFilms, getGenre, getIsPromoFilmDataLoaded} from '../../store/films-data/selectors';
 
 const MainPage = (props) => {
   const {films, genre, onLoadPromoFilmData, isPromoFilmDataLoaded} = props;
@@ -51,10 +52,10 @@ MainPage.propTypes = {
   isPromoFilmDataLoaded: PropTypes.bool,
 };
 
-const mapStateToProps = ({DATA}) => ({
-  films: DATA.films,
-  genre: DATA.genre,
-  isPromoFilmDataLoaded: DATA.isPromoFilmDataLoaded
+const mapStateToProps = (state) => ({
+  genre: getGenre(state),
+  films: getFilms(state),
+  isPromoFilmDataLoaded: getIsPromoFilmDataLoaded(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

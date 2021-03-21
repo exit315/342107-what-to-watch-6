@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {Link} from 'react-router-dom';
 import {logout} from "../../api/api-actions";
 import {AppRoute} from '../../utils/const';
+import {getAuthorizationStatus, getUserEmail} from '../../store/user/selectors';
 
 const SignInLinkElement = () => {
   return (
@@ -65,9 +66,9 @@ UserPicElement.propTypes = {
   onClick: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({USER}) => ({
-  authorizationStatus: USER.authorizationStatus,
-  userEmail: USER.userEmail,
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
+  userEmail: getUserEmail(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

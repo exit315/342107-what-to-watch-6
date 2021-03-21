@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import dayjs from 'dayjs';
+import {getFilmReviews} from '../../store/films-data/selectors';
 
 const FilmReviews = (props) => {
   const {filmReviews} = props;
@@ -31,8 +32,8 @@ FilmReviews.propTypes = {
   filmReviews: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = ({DATA}) => ({
-  filmReviews: DATA.filmReviews,
+const mapStateToProps = (state) => ({
+  filmReviews: getFilmReviews(state),
 });
 
 export {FilmReviews};

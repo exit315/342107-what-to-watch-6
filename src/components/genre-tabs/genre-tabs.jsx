@@ -5,6 +5,7 @@ import {createGenreTypesList} from '../../utils/utils';
 import {connect} from 'react-redux';
 import {changeGenre} from '../../store/action';
 import {GenreType, MAX_GENRE_COUNT} from '../../utils/const';
+import {getFilms, getGenre} from '../../store/films-data/selectors';
 
 const GenreTabs = (props) => {
   const {films, genre, onTabClick} = props;
@@ -50,9 +51,9 @@ GenreTabs.propTypes = {
   onTabClick: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({DATA}) => ({
-  genre: DATA.genre,
-  films: DATA.films,
+const mapStateToProps = (state) => ({
+  genre: getGenre(state),
+  films: getFilms(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -12,6 +12,8 @@ import FilmDetails from '../film-details/film-details';
 import FilmReviews from '../film-reviews/film-reviews';
 import FilmsLikeThis from '../films-like-this/films-like-this';
 import {loadComments} from "../../api/api-actions";
+import {getFilms} from '../../store/films-data/selectors';
+import {getAuthorizationStatus} from '../../store/user/selectors';
 
 const FilmScreen = (props) => {
   const {films, match, authorizationStatus, onFavoriteClick, onLoadReviewsData} = props;
@@ -137,9 +139,9 @@ FilmScreen.propTypes = {
   onLoadReviewsData: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({DATA, USER}) => ({
-  films: DATA.films,
-  authorizationStatus: USER.authorizationStatus,
+const mapStateToProps = (state) => ({
+  films: getFilms(state),
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

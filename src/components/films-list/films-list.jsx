@@ -6,6 +6,7 @@ import {GenreType} from '../../utils/const';
 import MovieItemCard from '../movie-item-card/movie-item-card.jsx';
 import ShowMoreBtn from '../show-more-btn/show-more-btn';
 import {FILM_COUNT_PER_STEP, INITIAL_FILM_COUNT} from '../../utils/const';
+import {getFilms, getGenre} from '../../store/films-data/selectors';
 
 const FilmsList = (props) => {
   const {films, genre} = props;
@@ -55,9 +56,9 @@ FilmsList.propTypes = {
   genre: PropTypes.string,
 };
 
-const mapStateToProps = ({DATA}) => ({
-  genre: DATA.genre,
-  films: DATA.films,
+const mapStateToProps = (state) => ({
+  genre: getGenre(state),
+  films: getFilms(state),
 });
 
 export {FilmsList};

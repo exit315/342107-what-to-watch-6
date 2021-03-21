@@ -5,6 +5,8 @@ import {Link, withRouter} from 'react-router-dom';
 import AddReviewForm from '../add-review-form/add-review-form.jsx';
 import {AppRoute} from '../../utils/const';
 import Header from '../header/header';
+import {getFilms} from '../../store/films-data/selectors';
+import {getStatus} from '../../store/user-interaction/selectors';
 
 const AddReview = (props) => {
   const {films, match} = props;
@@ -55,9 +57,9 @@ AddReview.propTypes = {
 
 };
 
-const mapStateToProps = ({DATA, INTERACTION}) => ({
-  films: DATA.films,
-  status: INTERACTION.status,
+const mapStateToProps = (state) => ({
+  films: getFilms(state),
+  status: getStatus(state),
 
 });
 
