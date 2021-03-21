@@ -6,6 +6,7 @@ import {TabType, AppRoute} from '../../utils/const';
 import {changeFavorite} from "../../api/api-actions";
 import Header from '../header/header';
 import Footer from '../footer/footer';
+import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
 import FilmTabs from '../film-tabs/film-tabs';
 import FilmOverview from '../film-overview/film-overview';
 import FilmDetails from '../film-details/film-details';
@@ -18,10 +19,18 @@ import {getAuthorizationStatus} from '../../store/user/selectors';
 const FilmScreen = (props) => {
   const {films, match, authorizationStatus, onFavoriteClick, onLoadReviewsData} = props;
 
+  const currentFilmItem = films.findIndex((el) => el.id === parseInt(match.params.id, 10));
+
+  if (currentFilmItem === -1) {
+    return (
+      <NotFoundScreen />
+    );
+  }
+
   const currentFilm = films.find((el) => el.id === parseInt(match.params.id, 10));
 
   const [activeTab, setActiveTab] = useState(TabType.OVERVIEW);
-
+  
   const changeTabHandler = (tab) => {
     setActiveTab(tab);
   };

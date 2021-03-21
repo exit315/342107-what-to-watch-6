@@ -2,12 +2,12 @@ export const ActionType = {
   CHANGE_GENRE: `films/changeGenre`,
   LOAD_FILMS: `films/loadFilms`,
   LOAD_PROMO_FILM: `films/loadPromoFilm`,
-  REQUIRED_AUTHORIZATION: `user/requiredAuthorization`,
-  REMEMBER_USER: `user/rememberUser`,
   LOAD_MY_FILMS_LIST: `films/loadMyFilmsList`,
   LOAD_REVIEWS: `films/loadReviews`,
   GET_STATUS_CODE: `films/getStatusCode`,
   DISABLE_FORM: `user/disableForm`,
+  REQUIRED_AUTHORIZATION: `user/requiredAuthorization`,
+  REMEMBER_USER: `user/rememberUser`,
 };
 
 export const loadFilms = (films) => ({
