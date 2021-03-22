@@ -30,7 +30,7 @@ const FilmScreen = (props) => {
   const currentFilm = films.find((el) => el.id === parseInt(match.params.id, 10));
 
   const [activeTab, setActiveTab] = useState(TabType.OVERVIEW);
-  
+
   const changeTabHandler = (tab) => {
     setActiveTab(tab);
   };

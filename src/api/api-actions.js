@@ -1,4 +1,4 @@
-import {loadFilms, loadPromoFilm, rememberUser, requireAuthorization, loadMyFilmsList, loadReviews} from "../store/action";
+import {loadFilms, loadPromoFilm, rememberUser, requireAuthorization, loadMyFilmsList, loadReviews, disableForm} from "../store/action";
 import {AppRoute} from '../utils/const';
 
 export const fetchFilmsList = () => (dispatch, _getState, api) => (
@@ -43,7 +43,6 @@ export const loadComments = ({id}) => (dispatch, _getState, api) => (
     .then((response) => dispatch(loadReviews(response.data)))
 );
 
-export const sendComment = ({id, rating, comment}) => (dispatch, _getState, api) => (
-  api.post(`${AppRoute.COMMENTS}/${id}`, {rating, comment})
-    .catch(() => {})
+export const sendComment = ({_id, _rating, _comment}) => (dispatch, _getState, _api) => (
+  () => dispatch(disableForm(true))
 );

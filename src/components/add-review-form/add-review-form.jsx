@@ -5,7 +5,7 @@ import {MAX_RATING, COMMENT_MIN_LENGTH} from '../../utils/const';
 import {sendComment} from "../../api/api-actions";
 import {getStatus} from '../../store/user-interaction/selectors';
 
-const AddReviewForm = ({onSubmit, id}) => {
+const AddReviewForm = ({onSubmit, id, status}) => {
   const [review, setReview] = useState({
     rating: 0,
     comment: ``
@@ -62,7 +62,7 @@ const AddReviewForm = ({onSubmit, id}) => {
 
       <div className="add-review__text">
         <textarea className="add-review__textarea" name="comment" id="comment" placeholder="Review text" minLength="50" maxLength="400"
-          onChange={handleCommentChange} >
+          onChange={handleCommentChange} disabled={status}>
         </textarea>
         <div className="add-review__submit">
           <button className="add-review__btn" type="submit" disabled={isSubmitDisabled} >Post</button>
