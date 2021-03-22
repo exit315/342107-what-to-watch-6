@@ -43,6 +43,19 @@ export const loadComments = ({id}) => (dispatch, _getState, api) => (
     .then((response) => dispatch(loadReviews(response.data)))
 );
 
-export const sendComment = ({_id, _rating, _comment}) => (dispatch, _getState, _api) => (
-  () => dispatch(disableForm(true))
+export const sendComment = ({id, rating, comment}) => (dispatch, _getState, api) => (
+  api.post(`${AppRoute.COMMENTS}/${id}`, {rating, comment})
+    .then((responce) => {
+      dispatch(disableForm(true));
+      return responce;
+    })
+    .then((responce) => {
+      if (responce.status === 200) {
+        dispatch(disableForm(false));
+        history.back();
+      } else {
+        dispatch(disableForm(false));
+      }
+    })
+    .catch(() => {})
 );

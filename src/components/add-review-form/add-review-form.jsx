@@ -34,7 +34,7 @@ const AddReviewForm = ({onSubmit, id, status}) => {
     for (let i = 1; i <= MAX_RATING; i++) {
       ratingRange.push(
           <React.Fragment key={i}>
-            <input className="rating__input" id={`star-${i}`} type="radio" name="rating" value={i} onChange={handleRatingChange} key={`input-key` + i} />
+            <input className="rating__input" id={`star-${i}`} type="radio" name="rating" value={i} onChange={handleRatingChange} key={`input-key` + i} disabled={status} />
             <label className="rating__label" htmlFor={`star-${i}`} key={`label-key` + i}>Rating {i}</label>
           </React.Fragment>
       );
