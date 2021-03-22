@@ -50,7 +50,7 @@ export const getStatusCode = (statusCode) => ({
   payload: statusCode
 });
 
-export const disableForm = (status) => ({
+export const disableForm = (isFormDisabled) => ({
   type: ActionType.DISABLE_FORM,
-  payload: status
+  payload: isFormDisabled
 });

@@ -6,7 +6,6 @@ import AddReviewForm from '../add-review-form/add-review-form.jsx';
 import {AppRoute} from '../../utils/const';
 import Header from '../header/header';
 import {getFilms} from '../../store/films-data/selectors';
-import {getStatus} from '../../store/user-interaction/selectors';
 
 const AddReview = (props) => {
   const {films, match} = props;
@@ -53,14 +52,10 @@ const AddReview = (props) => {
 AddReview.propTypes = {
   films: PropTypes.array.isRequired,
   match: PropTypes.object.isRequired,
-  status: PropTypes.bool
-
 };
 
 const mapStateToProps = (state) => ({
   films: getFilms(state),
-  status: getStatus(state),
-
 });
 
 export {AddReview};

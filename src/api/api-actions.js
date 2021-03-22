@@ -1,4 +1,4 @@
-import {loadFilms, loadPromoFilm, rememberUser, requireAuthorization, loadMyFilmsList, loadReviews, disableForm} from "../store/action";
+import {loadFilms, loadPromoFilm, rememberUser, requireAuthorization, loadMyFilmsList, loadReviews, disableForm, getStatusCode} from "../store/action";
 import {AppRoute} from '../utils/const';
 
 export const fetchFilmsList = () => (dispatch, _getState, api) => (
@@ -52,10 +52,11 @@ export const sendComment = ({id, rating, comment}) => (dispatch, _getState, api)
     .then((responce) => {
       if (responce.status === 200) {
         dispatch(disableForm(false));
-        history.back();
-      } else {
-        dispatch(disableForm(false));
+        dispatch(getStatusCode(responce.status));
+        // history.back();
       }
     })
-    .catch(() => {})
+    .catch(() => {
+      dispatch(disableForm(false));
+    })
 );

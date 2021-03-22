@@ -2,8 +2,8 @@ import {ActionType} from '../action';
 
 const initialState = {
   myFilmsList: [],
-  sendStatusCode: null,
-  status: false,
+  statusCode: null,
+  isFormDisabled: false,
 };
 
 const userInteraction = (state = initialState, action) => {
@@ -17,13 +17,13 @@ const userInteraction = (state = initialState, action) => {
     case ActionType.GET_STATUS_CODE:
       return {
         ...state,
-        sendStatusCode: action.payload,
+        statusCode: action.payload,
       };
 
     case ActionType.DISABLE_FORM:
       return {
         ...state,
-        status: action.payload,
+        isFormDisabled: action.payload,
       };
 
     default:
