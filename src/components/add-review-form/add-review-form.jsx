@@ -1,17 +1,19 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import {MAX_RATING, COMMENT_MIN_LENGTH} from '../../utils/const';
 import {sendComment} from "../../api/api-actions";
-import {getIsFormDisabled, getStatusCode} from '../../store/user-interaction/selectors';
+import {getIsFormDisabled, getIsErrorShown} from '../../store/user-interaction/selectors';
+import {setIsErrorShown} from "../../store/action";
 
-const AddReviewForm = ({onSubmit, id, isFormDisabled, statusCode}) => {
-  const [review, setReview] = useState({
-    rating: 0,
-    comment: ``
-  });
+const AddReviewForm = ({onSubmit, id, isFormDisabled, isErrorShown}) => {
+  const {shown, errorText} = isErrorShown;
 
+  const dispatch = useDispatch();
+
+  const [review, setReview] = useState({rating: 0, comment: ``});
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+  const [messageText, setMessageText] = useState(``);
 
   useEffect(() => {
     if (review.rating === 0 || review.comment.length < COMMENT_MIN_LENGTH) {
@@ -52,16 +54,22 @@ const AddReviewForm = ({onSubmit, id, isFormDisabled, statusCode}) => {
     });
   };
 
-  const renderErrorMessage = () => {
-    if (statusCode && statusCode === 200) {
-      return (
-        <div className="add-review__submit">
-          <p className="add-review__btn">Something went wrong. Please, retry sending your review again.</p>
-        </div>
-      );
+  useEffect(() => {
+    if (shown) {
+      setMessageText(errorText);
     }
 
-    return null;
+    return () => {
+      dispatch(setIsErrorShown({shown: false, errorText: ``}));
+    };
+  }, [shown]);
+
+  const renderErrorMessage = () => {
+    return (
+      <div>
+        <p style={{color: `#866866`}}><strong>{messageText}</strong></p>
+      </div>
+    );
   };
 
   return (
@@ -91,12 +99,12 @@ AddReviewForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
   isFormDisabled: PropTypes.bool.isRequired,
-  statusCode: PropTypes.number,
+  isErrorShown: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({
   isFormDisabled: getIsFormDisabled(state),
-  statusCode: getStatusCode(state),
+  isErrorShown: getIsErrorShown(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

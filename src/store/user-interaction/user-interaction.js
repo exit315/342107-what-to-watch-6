@@ -2,7 +2,10 @@ import {ActionType} from '../action';
 
 const initialState = {
   myFilmsList: [],
-  statusCode: null,
+  isErrorShown: {
+    shown: false,
+    errorText: ``
+  },
   isFormDisabled: false,
 };
 
@@ -14,10 +17,13 @@ const userInteraction = (state = initialState, action) => {
         myFilmsList: action.payload,
       };
 
-    case ActionType.GET_STATUS_CODE:
+    case ActionType.SET_IS_ERROR_SHOWN:
       return {
         ...state,
-        statusCode: action.payload,
+        isErrorShown: {
+          shown: action.payload.shown,
+          errorText: action.payload.errorText
+        },
       };
 
     case ActionType.DISABLE_FORM:

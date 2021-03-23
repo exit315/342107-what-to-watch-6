@@ -1,5 +1,5 @@
-import {loadFilms, loadPromoFilm, rememberUser, requireAuthorization, loadMyFilmsList, loadReviews, disableForm, getStatusCode} from "../store/action";
-import {AppRoute} from '../utils/const';
+import {loadFilms, loadPromoFilm, rememberUser, requireAuthorization, loadMyFilmsList, loadReviews, disableForm, setIsErrorShown} from "../store/action";
+import {AppRoute, ERROR_MESSAGE} from '../utils/const';
 
 export const fetchFilmsList = () => (dispatch, _getState, api) => (
   api.get(AppRoute.FILMS)
@@ -18,11 +18,20 @@ export const checkAuth = () => (dispatch, _getState, api) => (
     .catch(() => {})
 );
 
-export const login = ({login: email, password}) => (dispatch, _getState, api) => (
+export const login = ({login: email, password}) => (dispatch, _getState, api) => {
+  dispatch(disableForm(true));
+
   api.post(AppRoute.LOGIN, {email, password})
-    .then(() => dispatch(rememberUser(email)))
-    .then(() => dispatch(requireAuthorization(true)))
-);
+    .then(() => {
+      dispatch(disableForm(false));
+      dispatch(rememberUser(email));
+      dispatch(requireAuthorization(true));
+    })
+    .catch(() => {
+      dispatch(disableForm(false));
+      dispatch(setIsErrorShown({shown: true, errorText: ERROR_MESSAGE}));
+    });
+};
 
 export const logout = ({login: email, password}) => (dispatch, _getState, api) => (
   api.get(AppRoute.LOGOUT, {email, password})
@@ -43,20 +52,17 @@ export const loadComments = ({id}) => (dispatch, _getState, api) => (
     .then((response) => dispatch(loadReviews(response.data)))
 );
 
-export const sendComment = ({id, rating, comment}) => (dispatch, _getState, api) => (
+export const sendComment = ({id, rating, comment}) => (dispatch, _getState, api) => {
+  dispatch(disableForm(true));
+
   api.post(`${AppRoute.COMMENTS}/${id}`, {rating, comment})
-    .then((responce) => {
-      dispatch(disableForm(true));
-      return responce;
-    })
-    .then((responce) => {
-      if (responce.status === 200) {
-        dispatch(disableForm(false));
-        dispatch(getStatusCode(responce.status));
-        // history.back();
-      }
+    .then(() => {
+      dispatch(disableForm(false));
+      dispatch(setIsErrorShown({shown: true, errorText: ERROR_MESSAGE}));
+
     })
     .catch(() => {
       dispatch(disableForm(false));
-    })
-);
+      dispatch(setIsErrorShown({shown: true, errorText: ERROR_MESSAGE}));
+    });
+};

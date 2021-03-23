@@ -4,7 +4,7 @@ export const ActionType = {
   LOAD_PROMO_FILM: `films/loadPromoFilm`,
   LOAD_MY_FILMS_LIST: `films/loadMyFilmsList`,
   LOAD_REVIEWS: `films/loadReviews`,
-  GET_STATUS_CODE: `films/getStatusCode`,
+  SET_IS_ERROR_SHOWN: `films/setIsErrorShown`,
   DISABLE_FORM: `user/disableForm`,
   REQUIRED_AUTHORIZATION: `user/requiredAuthorization`,
   REMEMBER_USER: `user/rememberUser`,
@@ -45,9 +45,9 @@ export const loadReviews = (reviews) => ({
   payload: reviews,
 });
 
-export const getStatusCode = (statusCode) => ({
-  type: ActionType.GET_STATUS_CODE,
-  payload: statusCode
+export const setIsErrorShown = ({shown, errorText}) => ({
+  type: ActionType.SET_IS_ERROR_SHOWN,
+  payload: {shown, errorText}
 });
 
 export const disableForm = (isFormDisabled) => ({

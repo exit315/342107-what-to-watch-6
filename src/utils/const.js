@@ -31,3 +31,5 @@ export const AppRoute = {
   FAVORITE: `/favorite`,
   COMMENTS: `/comments`
 };
+
+export const ERROR_MESSAGE = `Something went wrong. Please, try again or later.`;
