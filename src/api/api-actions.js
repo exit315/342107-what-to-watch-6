@@ -58,8 +58,7 @@ export const sendComment = ({id, rating, comment}) => (dispatch, _getState, api)
   api.post(`${AppRoute.COMMENTS}/${id}`, {rating, comment})
     .then(() => {
       dispatch(disableForm(false));
-      dispatch(setIsErrorShown({shown: true, errorText: ERROR_MESSAGE}));
-
+      history.back();
     })
     .catch(() => {
       dispatch(disableForm(false));
