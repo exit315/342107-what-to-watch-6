@@ -76,7 +76,7 @@ const SignIn = ({onSubmit, isFormDisabled, isErrorShown}) => {
 SignIn.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   isFormDisabled: PropTypes.bool.isRequired,
-  isErrorShown: PropTypes.bool,
+  isErrorShown: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({

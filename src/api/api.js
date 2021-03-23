@@ -5,10 +5,10 @@ const REQUEST_TIMEOUT = 5000;
 
 const HttpCode = {
   UNAUTHORIZED: 401,
-  UNREACHEABLE: 500,
+  UNAVAILABLE: 500,
 };
 
-export const createAPI = (onUnauthorized) => {
+export const createAPI = (onUnauthorized, onUnavailable) => {
   const api = axios.create({
     baseURL: BACKEND_URL,
     timeout: REQUEST_TIMEOUT,
@@ -17,22 +17,22 @@ export const createAPI = (onUnauthorized) => {
 
   const onSuccess = (response) => response;
 
-  const onFail = (err) => {
-    const {response} = err;
+  const onFail = (error) => {
+    const {response} = error;
 
     if (response.status === HttpCode.UNAUTHORIZED) {
       onUnauthorized();
 
-      throw err;
+      throw error;
     }
 
-    // if (response.status === HttpCode.UNREACHEABLE) {
-    //   onUnreacheable();
+    if (response.status === HttpCode.UNREACHEABLE) {
+      onUnavailable();
 
-    //   throw err;
-    // }
+      throw error;
+    }
 
-    throw err;
+    throw error;
   };
 
   api.interceptors.response.use(onSuccess, onFail);
