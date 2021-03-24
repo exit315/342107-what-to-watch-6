@@ -39,7 +39,7 @@ const Player = (props) => {
   }, []);
 
   useEffect(() => {
-    if (isPlaying) {
+    if (isPlaying && !isLoading) {
       videoRef.current.play();
 
       return;
