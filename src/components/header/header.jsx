@@ -5,28 +5,8 @@ import {Link} from 'react-router-dom';
 import {logout} from "../../api/api-actions";
 import {AppRoute} from '../../utils/const';
 import {getAuthorizationStatus, getUserEmail} from '../../store/user/selectors';
-
-const SignInLinkElement = () => {
-  return (
-    <Link to={AppRoute.LOGIN} className="user-block__link">Sign in</Link>
-  );
-};
-
-const UserPicElement = (props) => {
-  const {onClick, userEmail} = props;
-
-  return (
-    <>
-      <div className="user-block__avatar">
-        <Link to={AppRoute.MYLIST} className="logo__link">
-          <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-        </Link>
-
-      </div>
-      <Link to={AppRoute.ROOT} className="user-block__link" onClick={onClick}>{userEmail}</Link>
-    </>
-  );
-};
+import UserBlock from '../user-block/user-block';
+import SignInLink from '../sign-in-link/sign-in-link';
 
 const Header = (props) => {
   const {title, authorizationStatus, onClick, userEmail, isUserBlockShown, breadcrumbs} = props;
@@ -46,7 +26,7 @@ const Header = (props) => {
       {breadcrumbs}
 
       {isUserBlockShown ? <div className="user-block">
-        {authorizationStatus ? <UserPicElement onClick={onClick} userEmail={userEmail}/> : <SignInLinkElement />}
+        {authorizationStatus ? <UserBlock onClick={onClick} userEmail={userEmail}/> : <SignInLink />}
       </div> : ``}
     </header>
   );
@@ -59,11 +39,6 @@ Header.propTypes = {
   onClick: PropTypes.func.isRequired,
   isUserBlockShown: PropTypes.bool,
   breadcrumbs: PropTypes.object,
-};
-
-UserPicElement.propTypes = {
-  userEmail: PropTypes.string,
-  onClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
