@@ -99,7 +99,7 @@ AddReviewForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
   isFormDisabled: PropTypes.bool.isRequired,
-  isErrorShown: PropTypes.object,
+  isErrorShown: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -113,5 +113,4 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-export {AddReviewForm};
 export default connect(mapStateToProps, mapDispatchToProps)(AddReviewForm);

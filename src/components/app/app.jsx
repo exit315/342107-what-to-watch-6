@@ -17,9 +17,7 @@ import browserHistory from "../../browser-history";
 import {getFilms, getIsDataLoaded} from '../../store/films-data/selectors';
 import {getAuthorizationStatus} from '../../store/user/selectors';
 
-const App = (props) => {
-  const {isDataLoaded, onLoadFilmsData, authorizationStatus} = props;
-
+const App = ({isDataLoaded, onLoadFilmsData, authorizationStatus}) => {
   useEffect(() => {
     if (!isDataLoaded) {
       onLoadFilmsData();
@@ -73,8 +71,7 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  films: PropTypes.array,
-  genre: PropTypes.string,
+  films: PropTypes.array.isRequired,
   isDataLoaded: PropTypes.bool.isRequired,
   onLoadFilmsData: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.bool.isRequired,

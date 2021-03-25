@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
 import {getTextRating} from '../../utils/utils';
 
-const FilmOverview = (props) => {
-  const {currentFilm} = props;
-
+const FilmOverview = ({currentFilm}) => {
   return (
     <React.Fragment>
       <div className="movie-rating">

@@ -7,8 +7,7 @@ import {AppRoute} from '../../utils/const';
 import Header from '../header/header';
 import {getFilms} from '../../store/films-data/selectors';
 
-const AddReview = (props) => {
-  const {films, match} = props;
+const AddReview = ({films, match}) => {
   const currentFilm = films.find((el) => el.id === parseInt(match.params.id, 10));
 
   const breadcrumbs = () => {
@@ -58,5 +57,4 @@ const mapStateToProps = (state) => ({
   films: getFilms(state),
 });
 
-export {AddReview};
 export default connect(mapStateToProps, null)(withRouter(AddReview));

@@ -5,9 +5,7 @@ import {withRouter} from 'react-router-dom';
 import dayjs from 'dayjs';
 import {getFilmReviews} from '../../store/films-data/selectors';
 
-const FilmReviews = (props) => {
-  const {filmReviews} = props;
-
+const FilmReviews = ({filmReviews}) => {
   return (
     <div className="movie-card__reviews movie-card__row">
       <div className="movie-card__reviews-col">
@@ -36,5 +34,4 @@ const mapStateToProps = (state) => ({
   filmReviews: getFilmReviews(state),
 });
 
-export {FilmReviews};
 export default connect(mapStateToProps, null)(withRouter(FilmReviews));

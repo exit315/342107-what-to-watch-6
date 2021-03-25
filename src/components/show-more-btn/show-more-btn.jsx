@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ShowMoreBtn = (props) => {
-  const {handleFilmCountChange, showBtn} = props;
-
+const ShowMoreBtn = ({handleFilmCountChange, showBtn}) => {
   if (!showBtn) {
     return false;
   }

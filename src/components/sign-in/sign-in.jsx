@@ -76,7 +76,7 @@ const SignIn = ({onSubmit, isFormDisabled, isErrorShown}) => {
 SignIn.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   isFormDisabled: PropTypes.bool.isRequired,
-  isErrorShown: PropTypes.object,
+  isErrorShown: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -90,5 +90,4 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-export {SignIn};
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

@@ -3,11 +3,9 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import MovieItemCard from '../movie-item-card/movie-item-card.jsx';
 import {getFilms, getGenre} from '../../store/films-data/selectors';
+import {FILMS_LIKE_THIS} from '../../utils/const';
 
-const FILMS_LIKE_THIS = 4;
-const FilmsLikeThis = (props) => {
-  const {films, currentFilm} = props;
-
+const FilmsLikeThis = ({films, currentFilm}) => {
   const [activeCard, setActiveCard] = useState(null);
   const handleActiveCardChange = (id = null) => {
     setActiveCard(id);
@@ -61,5 +59,4 @@ const mapStateToProps = (state) => ({
   films: getFilms(state),
 });
 
-export {FilmsLikeThis};
 export default connect(mapStateToProps, null)(FilmsLikeThis);

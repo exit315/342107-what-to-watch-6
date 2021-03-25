@@ -1,11 +1,11 @@
 import {ActionType} from '../action';
-import {GenreType} from '../../utils/const';
+import {GENRE_TYPE_ALL} from '../../utils/const';
 
 const initialState = {
   films: [],
   filmReviews: [],
   promoFilm: null,
-  genre: GenreType.ALL,
+  genre: GENRE_TYPE_ALL,
   isDataLoaded: false,
   isPromoFilmDataLoaded: false,
 };

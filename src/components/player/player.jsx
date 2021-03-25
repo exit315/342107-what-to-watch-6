@@ -5,9 +5,7 @@ import {withRouter} from 'react-router-dom';
 import {getRunTimeInPlayer} from '../../utils/utils';
 import {getFilms} from '../../store/films-data/selectors';
 
-const Player = (props) => {
-  const {films, match, onExitPlayerClick} = props;
-
+const Player = ({films, match, onExitPlayerClick}) => {
   const currentFilm = films.find((el) => el.id === parseInt(match.params.id, 10));
 
   const [isLoading, setIsLoading] = useState(true);
@@ -94,5 +92,4 @@ const mapStateToProps = (state) => ({
   films: getFilms(state),
 });
 
-export {Player};
 export default connect(mapStateToProps, null)(withRouter(Player));

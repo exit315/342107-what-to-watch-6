@@ -9,9 +9,7 @@ import FilmsList from '../films-list/films-list';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {getFilms, getGenre, getIsPromoFilmDataLoaded} from '../../store/films-data/selectors';
 
-const MainPage = (props) => {
-  const {films, genre, onLoadPromoFilmData, isPromoFilmDataLoaded} = props;
-
+const MainPage = ({films, genre, onLoadPromoFilmData, isPromoFilmDataLoaded}) => {
   useEffect(() => {
     if (!isPromoFilmDataLoaded) {
       onLoadPromoFilmData();
@@ -46,10 +44,10 @@ const MainPage = (props) => {
 };
 
 MainPage.propTypes = {
-  films: PropTypes.array,
-  genre: PropTypes.string,
-  onLoadPromoFilmData: PropTypes.func,
-  isPromoFilmDataLoaded: PropTypes.bool,
+  films: PropTypes.array.isRequired,
+  genre: PropTypes.string.isRequired,
+  onLoadPromoFilmData: PropTypes.func.isRequired,
+  isPromoFilmDataLoaded: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({

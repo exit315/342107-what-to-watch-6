@@ -16,9 +16,7 @@ import {loadComments} from "../../api/api-actions";
 import {getFilms} from '../../store/films-data/selectors';
 import {getAuthorizationStatus} from '../../store/user/selectors';
 
-const FilmScreen = (props) => {
-  const {films, match, authorizationStatus, onFavoriteClick, onLoadReviewsData} = props;
-
+const FilmScreen = ({films, match, authorizationStatus, onFavoriteClick, onLoadReviewsData}) => {
   const currentFilmItem = films.findIndex((el) => el.id === parseInt(match.params.id, 10));
 
   if (currentFilmItem === -1) {
@@ -162,5 +160,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export {FilmScreen};
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(FilmScreen));

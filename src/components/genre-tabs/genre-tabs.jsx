@@ -4,12 +4,10 @@ import {Link} from 'react-router-dom';
 import {createGenreTypesList} from '../../utils/utils';
 import {connect} from 'react-redux';
 import {changeGenre} from '../../store/action';
-import {GenreType, MAX_GENRE_COUNT} from '../../utils/const';
+import {GENRE_TYPE_ALL, MAX_GENRE_COUNT} from '../../utils/const';
 import {getFilms, getGenre} from '../../store/films-data/selectors';
 
-const GenreTabs = (props) => {
-  const {films, genre, onTabClick} = props;
-
+const GenreTabs = ({films, genre, onTabClick}) => {
   const createFilterTypesList = () => {
     let filterTypesList = Array.from(createGenreTypesList(films));
 
@@ -17,7 +15,7 @@ const GenreTabs = (props) => {
       filterTypesList = filterTypesList.slice(0, MAX_GENRE_COUNT);
     }
 
-    filterTypesList.unshift(GenreType.ALL);
+    filterTypesList.unshift(GENRE_TYPE_ALL);
 
     return filterTypesList;
   };
@@ -62,5 +60,4 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-export {GenreTabs};
 export default connect(mapStateToProps, mapDispatchToProps)(GenreTabs);

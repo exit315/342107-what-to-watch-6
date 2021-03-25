@@ -4,8 +4,7 @@ import {Link} from 'react-router-dom';
 import VideoPlayer from '../preview-player/preview-player';
 import {AppRoute} from '../../utils/const';
 
-const MovieItemCard = (props) => {
-  const {id, name, src, previewVideoLink} = props;
+const MovieItemCard = ({id, name, src, previewVideoLink}) => {
   const videoPlayerRef = useRef();
 
   const [activeCard, setActiveCard] = useState(null);
@@ -53,10 +52,10 @@ const MovieItemCard = (props) => {
 };
 
 MovieItemCard.propTypes = {
-  src: PropTypes.string,
-  name: PropTypes.string,
-  id: PropTypes.number,
-  previewVideoLink: PropTypes.string,
+  src: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  previewVideoLink: PropTypes.string.isRequired,
 };
 
 export default MovieItemCard;

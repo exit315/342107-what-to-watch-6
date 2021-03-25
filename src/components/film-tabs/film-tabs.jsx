@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {TabType} from '../../utils/const.js';
 
-const FilmTabs = (props) => {
-  const {changeTabHandler, activeTab} = props;
-
+const FilmTabs = ({changeTabHandler, activeTab}) => {
   const onTabClick = (evt) => {
     changeTabHandler(evt.target.textContent);
   };

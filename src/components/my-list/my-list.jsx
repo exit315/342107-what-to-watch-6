@@ -8,9 +8,7 @@ import Header from '../header/header.jsx';
 import Footer from '../footer/footer.jsx';
 import {getMyFilmsList} from '../../store/user-interaction/selectors';
 
-const MyList = (props) => {
-  const {myFilmsList, onLoadMyFilmsListData} = props;
-
+const MyList = ({myFilmsList, onLoadMyFilmsListData}) => {
   const [activeCard, setActiveCard] = useState(null);
   const handleActiveCardChange = (id = null) => {
     setActiveCard(id);
@@ -56,7 +54,7 @@ const MyList = (props) => {
 };
 
 MyList.propTypes = {
-  myFilmsList: PropTypes.array,
+  myFilmsList: PropTypes.array.isRequired,
   onLoadMyFilmsListData: PropTypes.func.isRequired,
 };
 
@@ -70,5 +68,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export {MyList};
 export default connect(mapStateToProps, mapDispatchToProps)(MyList);

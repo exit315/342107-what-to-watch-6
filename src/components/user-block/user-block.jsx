@@ -6,9 +6,7 @@ import {logout} from "../../api/api-actions";
 import {AppRoute} from '../../utils/const';
 import {getUserEmail} from '../../store/user/selectors';
 
-const UserBlock = (props) => {
-  const {onClick, userEmail} = props;
-
+const UserBlock = ({onClick, userEmail}) => {
   return (
     <>
       <div className="user-block__avatar">

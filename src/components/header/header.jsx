@@ -37,7 +37,7 @@ Header.propTypes = {
   authorizationStatus: PropTypes.bool.isRequired,
   userEmail: PropTypes.string,
   onClick: PropTypes.func.isRequired,
-  isUserBlockShown: PropTypes.bool,
+  isUserBlockShown: PropTypes.bool.isRequired,
   breadcrumbs: PropTypes.object,
 };
 

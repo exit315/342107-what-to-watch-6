@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
 import {getRunTime} from '../../utils/utils';
 
-const FilmDetails = (props) => {
-  const {currentFilm} = props;
-
+const FilmDetails = ({currentFilm}) => {
   return (
     <React.Fragment>
       <div className="movie-card__text movie-card__row">

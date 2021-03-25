@@ -6,9 +6,7 @@ import {changeFavorite} from "../../api/api-actions";
 import Header from '../header/header';
 import {getPromoFilm} from '../../store/films-data/selectors';
 
-const PromoFilm = (props) => {
-  const {promoFilm, onFavoriteClick} = props;
-
+const PromoFilm = ({promoFilm, onFavoriteClick}) => {
   const handleFavoriteClick = () => {
     onFavoriteClick({
       id: promoFilm.id,
@@ -61,7 +59,7 @@ const PromoFilm = (props) => {
 };
 
 PromoFilm.propTypes = {
-  promoFilm: PropTypes.object,
+  promoFilm: PropTypes.object.isRequired,
   onFavoriteClick: PropTypes.func.isRequired,
 };
 

@@ -2,15 +2,13 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {filterFilmsByGenre} from '../../utils/utils';
-import {GenreType} from '../../utils/const';
+import {GENRE_TYPE_ALL} from '../../utils/const';
 import MovieItemCard from '../movie-item-card/movie-item-card.jsx';
 import ShowMoreBtn from '../show-more-btn/show-more-btn';
 import {FILM_COUNT_PER_STEP, INITIAL_FILM_COUNT} from '../../utils/const';
 import {getFilms, getGenre} from '../../store/films-data/selectors';
 
-const FilmsList = (props) => {
-  const {films, genre} = props;
-
+const FilmsList = ({films, genre}) => {
   const [filmCount, setFilmCount] = useState(FILM_COUNT_PER_STEP);
   const handleFilmCountChange = (evt) => {
     evt.preventDefault();
@@ -19,7 +17,7 @@ const FilmsList = (props) => {
 
   const renderFilteredFilmsList = () => {
     switch (genre) {
-      case GenreType.ALL:
+      case GENRE_TYPE_ALL:
         return films;
       case genre:
         let filteredFilms = filterFilmsByGenre(films, genre);
@@ -52,8 +50,8 @@ const FilmsList = (props) => {
 };
 
 FilmsList.propTypes = {
-  films: PropTypes.array,
-  genre: PropTypes.string,
+  films: PropTypes.array.isRequired,
+  genre: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -61,5 +59,4 @@ const mapStateToProps = (state) => ({
   films: getFilms(state),
 });
 
-export {FilmsList};
 export default connect(mapStateToProps, null)(FilmsList);

@@ -8,15 +8,15 @@ export const MAX_RATING = 10;
 
 export const COMMENT_MIN_LENGTH = 50;
 
+export const FILMS_LIKE_THIS = 4;
+
 export const TabType = {
   OVERVIEW: `Overview`,
   DETAILS: `Details`,
   REVIEWS: `Reviews`
 };
 
-export const GenreType = {
-  ALL: `All genres`
-};
+export const GENRE_TYPE_ALL = `All genres`;
 
 export const AppRoute = {
   ROOT: `/`,
