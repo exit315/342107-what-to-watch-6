@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link, withRouter, Redirect} from 'react-router-dom';
 import {TabType, AppRoute} from '../../utils/const';
-import {changeFavorite} from "../../api/api-actions";
 import Header from '../header/header';
 import Footer from '../footer/footer';
 import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
@@ -12,11 +11,12 @@ import FilmOverview from '../film-overview/film-overview';
 import FilmDetails from '../film-details/film-details';
 import FilmReviews from '../film-reviews/film-reviews';
 import FilmsLikeThis from '../films-like-this/films-like-this';
+import AddToFavoriteBtn from '../add-to-favorite-btn/add-to-favorite-btn';
 import {loadComments} from "../../api/api-actions";
 import {getFilms} from '../../store/films-data/selectors';
 import {getAuthorizationStatus} from '../../store/user/selectors';
 
-const FilmScreen = ({films, match, authorizationStatus, onFavoriteClick, onLoadReviewsData}) => {
+const FilmScreen = ({films, match, authorizationStatus, onLoadReviewsData}) => {
   const currentFilmItem = films.findIndex((el) => el.id === parseInt(match.params.id, 10));
 
   if (currentFilmItem === -1) {
@@ -57,13 +57,6 @@ const FilmScreen = ({films, match, authorizationStatus, onFavoriteClick, onLoadR
     return <Redirect to={AppRoute.ROOT} />;
   };
 
-  const handleFavoriteClick = () => {
-    onFavoriteClick({
-      id: currentFilm.id,
-      status: +(!currentFilm.is_favorite),
-    });
-  };
-
   const [isReviewsDataLoaded, setIsReviewsDataLoaded] = useState(false);
 
   useEffect(() => {
@@ -102,12 +95,9 @@ const FilmScreen = ({films, match, authorizationStatus, onFavoriteClick, onLoadR
                   </svg>
                   <span>Play</span>
                 </Link>
-                <button className="btn btn--list movie-card__button" type="button" onClick={handleFavoriteClick}>
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+
+                <AddToFavoriteBtn currentFilm={currentFilm}/>
+
                 {authorizationStatus && <Link to={`${currentFilm.id}/review`} className="btn movie-card__button">Add review</Link>}
               </div>
             </div>
@@ -142,7 +132,6 @@ FilmScreen.propTypes = {
   films: PropTypes.array.isRequired,
   match: PropTypes.object.isRequired,
   authorizationStatus: PropTypes.bool.isRequired,
-  onFavoriteClick: PropTypes.func.isRequired,
   onLoadReviewsData: PropTypes.func.isRequired,
 };
 
@@ -152,9 +141,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onFavoriteClick(id, status) {
-    dispatch(changeFavorite(id, status));
-  },
   onLoadReviewsData(id) {
     dispatch(loadComments(id));
   },
