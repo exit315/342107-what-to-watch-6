@@ -21,7 +21,7 @@ const SignIn = ({onSubmit, isFormDisabled, isErrorShown}) => {
     evt.preventDefault();
 
     onSubmit({
-      login: loginRef.current.value,
+      login: loginRef.current.value.toLowerCase(),
       password: passwordRef.current.value,
     });
   };
