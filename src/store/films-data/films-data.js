@@ -4,6 +4,7 @@ import {GENRE_TYPE_ALL} from '../../utils/const';
 const initialState = {
   films: [],
   filmReviews: [],
+  myFilmsList: [],
   promoFilm: null,
   genre: GENRE_TYPE_ALL,
   isDataLoaded: false,
@@ -26,12 +27,6 @@ const filmsData = (state = initialState, action) => {
         isPromoFilmDataLoaded: true,
       };
 
-    case ActionType.CHANGE_GENRE:
-      return {
-        ...state,
-        genre: action.payload,
-      };
-
     case ActionType.LOAD_MY_FILMS_LIST:
       return {
         ...state,
@@ -42,6 +37,12 @@ const filmsData = (state = initialState, action) => {
       return {
         ...state,
         filmReviews: action.payload,
+      };
+
+    case ActionType.CHANGE_GENRE:
+      return {
+        ...state,
+        genre: action.payload,
       };
 
     default:

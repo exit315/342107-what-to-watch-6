@@ -6,7 +6,7 @@ import LoadingScreen from '../loading-screen/loading-screen';
 import MovieItemCard from '../movie-item-card/movie-item-card.jsx';
 import Header from '../header/header.jsx';
 import Footer from '../footer/footer.jsx';
-import {getMyFilmsList} from '../../store/user-interaction/selectors';
+import {getMyFilmsList} from '../../store/films-data/selectors';
 
 const MyList = ({myFilmsList, onLoadMyFilmsListData}) => {
   const [activeCard, setActiveCard] = useState(null);
@@ -21,7 +21,7 @@ const MyList = ({myFilmsList, onLoadMyFilmsListData}) => {
       onLoadMyFilmsListData();
       setIsMyFilmsListDataLoaded(true);
     }
-  }, []);
+  }, [myFilmsList]);
 
   if (!isMyFilmsListDataLoaded) {
     return (

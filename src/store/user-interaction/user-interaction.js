@@ -1,7 +1,6 @@
 import {ActionType} from '../action';
 
 const initialState = {
-  myFilmsList: [],
   isErrorShown: {
     shown: false,
     errorText: ``
@@ -11,12 +10,6 @@ const initialState = {
 
 const userInteraction = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.LOAD_MY_FILMS_LIST:
-      return {
-        ...state,
-        myFilmsList: action.payload,
-      };
-
     case ActionType.SET_IS_ERROR_SHOWN:
       return {
         ...state,

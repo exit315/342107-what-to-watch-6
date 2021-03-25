@@ -47,10 +47,10 @@ export const loadReviews = (reviews) => ({
 
 export const setIsErrorShown = ({shown, errorText}) => ({
   type: ActionType.SET_IS_ERROR_SHOWN,
-  payload: {shown, errorText}
+  payload: {shown, errorText},
 });
 
 export const disableForm = (isFormDisabled) => ({
   type: ActionType.DISABLE_FORM,
-  payload: isFormDisabled
+  payload: isFormDisabled,
 });
