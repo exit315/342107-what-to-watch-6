@@ -38,9 +38,9 @@ export const logout = ({login: email, password}) => (dispatch, _getState, api) =
     .then(() => dispatch(requireAuthorization(false)))
 );
 
-export const changeFavorite = ({id, status}) => (_dispatch, _getState, api) => (
-  api.post(`${AppRoute.FAVORITE}/${id}/${status}`, {id, status})
-);
+export const changeFavorite = ({id, status}) => (_dispatch, _getState, api) => {
+  api.post(`${AppRoute.FAVORITE}/${id}/${status}`, {id, status});
+};
 
 export const loadFavorite = () => (dispatch, _getState, api) => (
   api.get(AppRoute.FAVORITE)

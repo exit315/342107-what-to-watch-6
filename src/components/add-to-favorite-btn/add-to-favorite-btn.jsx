@@ -12,7 +12,7 @@ const AddToFavoriteBtn = ({onFavoriteClick, currentFilm}) => {
   };
 
   return (
-    <button className="btn btn--list movie-card__button" type="button" onClick={handleFavoriteClick}>
+    <button className="btn btn--list movie-card__button" type="button" onClick={handleFavoriteClick} key={currentFilm.id}>
       <svg viewBox="0 0 19 20" width="19" height="20">
         <use xlinkHref="#add"></use>
       </svg>
@@ -33,4 +33,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(null, mapDispatchToProps)(AddToFavoriteBtn);
-
