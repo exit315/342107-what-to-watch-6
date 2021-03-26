@@ -53,7 +53,11 @@ export const changeFavorite = ({id, status}) => (dispatch, _getState, api) => {
       api.get(AppRoute.PROMO)
         .then(({data}) => dispatch(loadPromoFilm(data)));
     })
-    .then(() => dispatch(disableForm(false)));
+    .then(() => dispatch(disableForm(false)))
+    .catch(() => {
+      dispatch(disableForm(false));
+      dispatch(setIsErrorShown({shown: true, errorText: ERROR_MESSAGE}));
+    });
 };
 
 export const loadFavorite = () => (dispatch, _getState, api) => (
