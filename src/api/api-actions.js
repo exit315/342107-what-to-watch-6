@@ -39,9 +39,18 @@ export const logout = ({login: email, password}) => (dispatch, _getState, api) =
 );
 
 export const changeFavorite = ({id, status}) => (dispatch, _getState, api) => {
-  api.post(`${AppRoute.FAVORITE}/${id}/${status}`, {id, status});
-  api.get(AppRoute.FAVORITE)
-  .then(({data}) => dispatch(loadMyFilmsList(data)));
+  dispatch(disableForm(true));
+
+  api.post(`${AppRoute.FAVORITE}/${id}/${status}`, {id, status})
+    .then(() => {
+      api.get(AppRoute.FAVORITE)
+        .then(({data}) => dispatch(loadMyFilmsList(data)));
+    })
+    .then(() => {
+      api.get(AppRoute.FILMS)
+        .then(({data}) => dispatch(loadFilms(data)));
+    })
+    .then(() => dispatch(disableForm(false)));
 };
 
 export const loadFavorite = () => (dispatch, _getState, api) => (

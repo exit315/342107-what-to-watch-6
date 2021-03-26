@@ -17,10 +17,16 @@ const MyList = ({myFilmsList, onLoadMyFilmsListData}) => {
   const [isMyFilmsListDataLoaded, setIsMyFilmsListDataLoaded] = useState(false);
 
   useEffect(() => {
-    if (!isMyFilmsListDataLoaded) {
+    let isMounted = true;
+
+    if (!isMyFilmsListDataLoaded && isMounted) {
       onLoadMyFilmsListData();
       setIsMyFilmsListDataLoaded(true);
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [myFilmsList]);
 
   if (!isMyFilmsListDataLoaded) {
