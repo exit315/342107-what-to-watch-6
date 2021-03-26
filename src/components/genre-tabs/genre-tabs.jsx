@@ -1,22 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-import {createGenreTypesList} from '../../utils/utils';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../store/action';
-import {GenreType} from '../../utils/const';
+import {GENRE_TYPE_ALL, MAX_GENRE_COUNT} from '../../utils/const';
+import {createGenreTypesList} from '../../utils/utils';
+import {changeGenre} from '../../store/action';
+import {getFilms, getGenre} from '../../store/films-data/selectors';
 
-const GenreTabs = (props) => {
-  const {films, genre, onTabClick} = props;
+const GenreTabs = ({films, genre, onTabClick}) => {
+  const createFilterTypesList = () => {
+    let filterTypesList = Array.from(createGenreTypesList(films));
 
-  const filterTypesList = Array.from(createGenreTypesList(films));
-  filterTypesList.unshift(GenreType.ALL);
+    if (filterTypesList.length > MAX_GENRE_COUNT) {
+      filterTypesList = filterTypesList.slice(0, MAX_GENRE_COUNT);
+    }
 
+    filterTypesList.unshift(GENRE_TYPE_ALL);
+
+    return filterTypesList;
+  };
 
   const renderGenreTypesList = () => {
     const genreTypesList = [];
 
-    filterTypesList.forEach((item) => {
+    createFilterTypesList().forEach((item) => {
       genreTypesList.push(
           <li className={`catalog__genres-item ${genre === item ? `catalog__genres-item--active` : ``}`} onClick={onTabClick} key={item}>
             <Link to="#" className="catalog__genres-link">{item}</Link>
@@ -43,15 +50,14 @@ GenreTabs.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  genre: state.genre,
-  films: state.films,
+  genre: getGenre(state),
+  films: getFilms(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onTabClick(evt) {
-    dispatch(ActionCreator.changeGenre(evt));
+    dispatch(changeGenre(evt));
   }
 });
 
-export {GenreTabs};
 export default connect(mapStateToProps, mapDispatchToProps)(GenreTabs);

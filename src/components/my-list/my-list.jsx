@@ -1,33 +1,55 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import MovieItemCard from '../movie-item-card/movie-item-card.jsx';
-import Header from '../header/header.jsx';
-import Footer from '../footer/footer.jsx';
+import {loadFavorite} from "../../api/api-actions";
+import {getMyFilmsList} from '../../store/films-data/selectors';
+import LoadingScreen from '../loading-screen/loading-screen';
+import MovieItemCard from '../movie-item-card/movie-item-card';
+import Header from '../header/header';
+import Footer from '../footer/footer';
 
-const MyList = (props) => {
-  const {films} = props;
+const MyList = ({myFilmsList, onLoadMyFilmsListData}) => {
+  const [activeCard, setActiveCard] = useState(null);
+  const handleActiveCardChange = (id = null) => {
+    setActiveCard(id);
+  };
 
-  const filmsList = films.filter((el) => {
-    if (el.is_favorite === false) {
-      return null;
-    } else {
-      return el.is_favorite === true;
+  const [isMyFilmsListDataLoaded, setIsMyFilmsListDataLoaded] = useState(false);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    if (!isMyFilmsListDataLoaded && isMounted) {
+      onLoadMyFilmsListData();
+      setIsMyFilmsListDataLoaded(true);
     }
-  });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [myFilmsList]);
+
+  if (!isMyFilmsListDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <div className="user-page">
-      <Header title={`My List`}/>
+      <Header title={`My List`} isUserBlockShown={true}/>
 
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <div className="catalog__movies-list">
-          {filmsList.map((film) => <MovieItemCard
+          {myFilmsList.map((film) => <MovieItemCard
             key={`${film.name}-${film.id}`}
             name={film.name} id={film.id}
             src={film.preview_image}
+            previewVideoLink={film.preview_video_link}
+            handleActiveCardChange={handleActiveCardChange}
+            activeCard={activeCard}
           />)}
         </div>
       </section>
@@ -38,12 +60,18 @@ const MyList = (props) => {
 };
 
 MyList.propTypes = {
-  films: PropTypes.array
+  myFilmsList: PropTypes.array.isRequired,
+  onLoadMyFilmsListData: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  films: state.films,
+  myFilmsList: getMyFilmsList(state),
 });
 
-export {MyList};
-export default connect(mapStateToProps, null)(MyList);
+const mapDispatchToProps = (dispatch) => ({
+  onLoadMyFilmsListData() {
+    dispatch(loadFavorite());
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyList);

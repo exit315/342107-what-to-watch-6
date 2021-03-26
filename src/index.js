@@ -7,15 +7,16 @@ import {createStore, applyMiddleware} from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {createAPI} from "./api/api";
 import {checkAuth} from "./api/api-actions";
-import {ActionCreator} from './store/action';
-import {reducer} from './store/reducer';
+import {requireAuthorization, setIsErrorShown} from './store/action';
+import rootReducer from './store/root-reducer';
 
 const api = createAPI(
-    () => store.dispatch(ActionCreator.requireAuthorization(false))
+    () => store.dispatch(requireAuthorization(false)),
+    () => store.dispatch(setIsErrorShown({shown: true, errorText: `Service is not available. Please, try again later.`}))
 );
 
 const store = createStore(
-    reducer,
+    rootReducer,
     composeWithDevTools(
         applyMiddleware(thunk.withExtraArgument(api))
     )
@@ -23,21 +24,13 @@ const store = createStore(
 
 store.dispatch(checkAuth());
 
-const promoFilmData = {
-  promoName: `The Grand Budapest Hotel`,
-  promoGenre: `Drama`,
-  promoReleaseDate: `2014`
-};
-
 ReactDOM.render(
     <Provider store={store}>
       <App
-        promoName={promoFilmData.promoName}
-        promoGenre={promoFilmData.promoGenre}
-        promoReleaseDate={promoFilmData.promoReleaseDate}
+        promoFilm={store.getState().promoFilm}
         films={store.getState().films}
         genre={store.getState().genre}
-      />,
+      />
     </Provider>,
     document.querySelector(`#root`)
 );

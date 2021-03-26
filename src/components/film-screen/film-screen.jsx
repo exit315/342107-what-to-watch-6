@@ -1,18 +1,30 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link, withRouter, Redirect} from 'react-router-dom';
-import {TabType} from '../../utils/const.js';
+import {TabType, AppRoute} from '../../utils/const';
+import {loadComments} from "../../api/api-actions";
+import {getFilms} from '../../store/films-data/selectors';
+import {getAuthorizationStatus} from '../../store/user/selectors';
 import Header from '../header/header';
 import Footer from '../footer/footer';
-import Tabs from '../tabs/tabs';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
+import FilmTabs from '../film-tabs/film-tabs';
 import FilmOverview from '../film-overview/film-overview';
 import FilmDetails from '../film-details/film-details';
 import FilmReviews from '../film-reviews/film-reviews';
 import FilmsLikeThis from '../films-like-this/films-like-this';
+import AddToFavoriteBtn from '../add-to-favorite-btn/add-to-favorite-btn';
 
-const FilmScreen = (props) => {
-  const {films, match} = props;
+const FilmScreen = ({films, match, authorizationStatus, onLoadReviewsData}) => {
+  const currentFilmItem = films.findIndex((el) => el.id === parseInt(match.params.id, 10));
+
+  if (currentFilmItem === -1) {
+    return (
+      <NotFoundScreen />
+    );
+  }
+
   const currentFilm = films.find((el) => el.id === parseInt(match.params.id, 10));
 
   const [activeTab, setActiveTab] = useState(TabType.OVERVIEW);
@@ -42,8 +54,19 @@ const FilmScreen = (props) => {
           />
         );
     }
-    return <Redirect to="/" />;
+    return <Redirect to={AppRoute.ROOT} />;
   };
+
+  const [isReviewsDataLoaded, setIsReviewsDataLoaded] = useState(false);
+
+  useEffect(() => {
+    if (!isReviewsDataLoaded) {
+      onLoadReviewsData({
+        id: currentFilm.id
+      });
+      setIsReviewsDataLoaded(true);
+    }
+  }, []);
 
   return (
     <React.Fragment>
@@ -55,7 +78,7 @@ const FilmScreen = (props) => {
 
           <h1 className="visually-hidden">WTW</h1>
 
-          <Header />
+          <Header isUserBlockShown={true}/>
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
@@ -66,19 +89,16 @@ const FilmScreen = (props) => {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
+                <Link to={`/player/${currentFilm.id}`} className="btn btn--play movie-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
-                </button>
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
-                <Link to={`${currentFilm.id}/review`} className="btn movie-card__button">Add review</Link>
+                </Link>
+
+                <AddToFavoriteBtn currentFilm={currentFilm}/>
+
+                {authorizationStatus && <Link to={`${currentFilm.id}/review`} className="btn movie-card__button">Add review</Link>}
               </div>
             </div>
           </div>
@@ -91,7 +111,7 @@ const FilmScreen = (props) => {
             </div>
 
             <div className="movie-card__desc">
-              <Tabs changeTabHandler={changeTabHandler} activeTab={activeTab}/>
+              <FilmTabs changeTabHandler={changeTabHandler} activeTab={activeTab}/>
 
               {changeScreenHandler(activeTab)}
             </div>
@@ -110,12 +130,20 @@ const FilmScreen = (props) => {
 
 FilmScreen.propTypes = {
   films: PropTypes.array.isRequired,
-  match: PropTypes.object.isRequired
+  match: PropTypes.object.isRequired,
+  authorizationStatus: PropTypes.bool.isRequired,
+  onLoadReviewsData: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  films: state.films,
+  films: getFilms(state),
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
-export {FilmScreen};
-export default connect(mapStateToProps, null)(withRouter(FilmScreen));
+const mapDispatchToProps = (dispatch) => ({
+  onLoadReviewsData(id) {
+    dispatch(loadComments(id));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(FilmScreen));

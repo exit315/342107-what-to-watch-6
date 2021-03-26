@@ -1,26 +1,26 @@
 import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {Router as BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
-import MainPage from '../main-page/main-page.jsx';
-import MyList from '../my-list/my-list.jsx';
-import Player from '../player/player.jsx';
-import SignIn from '../sign-in/sign-in.jsx';
-import AddReview from '../add-review/add-review.jsx';
-import FilmScreen from '../film-screen/film-screen.jsx';
-import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
-import LoadingScreen from '../loading-screen/loading-screen';
-import {fetchFilmsList} from "../../api/api-actions";
 import PrivateRoute from '../private-route/private-route';
+import browserHistory from "../../browser-history";
 import {AppRoute} from '../../utils/const';
+import {fetchFilmsList} from "../../api/api-actions";
+import {getIsDataLoaded} from '../../store/films-data/selectors';
+import {getAuthorizationStatus} from '../../store/user/selectors';
+import MainPage from '../main-page/main-page';
+import MyList from '../my-list/my-list';
+import Player from '../player/player';
+import SignIn from '../sign-in/sign-in';
+import AddReview from '../add-review/add-review';
+import FilmScreen from '../film-screen/film-screen';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
+import LoadingScreen from '../loading-screen/loading-screen';
 
-const App = (props) => {
-  const {promoName, promoGenre, promoReleaseDate, films, isDataLoaded, onLoadData, authorizationStatus} = props;
-  const [film] = films;
-
+const App = ({isDataLoaded, onLoadFilmsData, authorizationStatus}) => {
   useEffect(() => {
     if (!isDataLoaded) {
-      onLoadData();
+      onLoadFilmsData();
     }
   }, [isDataLoaded]);
 
@@ -31,39 +31,34 @@ const App = (props) => {
   }
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path={AppRoute.ROOT}>
-          <MainPage
-            promoName={promoName}
-            promoGenre={promoGenre}
-            promoReleaseDate={promoReleaseDate}
-          />
+          <MainPage />
         </Route>
         <Route
           exact
           path={AppRoute.LOGIN}>
-          {authorizationStatus ? <MainPage
-            promoName={promoName}
-            promoGenre={promoGenre}
-            promoReleaseDate={promoReleaseDate}
-          /> : <SignIn />}
+          {authorizationStatus ? <Redirect to={AppRoute.ROOT} /> : <SignIn />}
         </Route>
         <PrivateRoute
           exact
           path={AppRoute.MYLIST}
-          render={() => <MyList films={films} />}>
-        </PrivateRoute>
+          render={() => <MyList />} />
         <PrivateRoute
           exact
           path={AppRoute.REVIEW}
-          render={() => <AddReview films={films} />}>
-        </PrivateRoute>
-        <Route exact path={AppRoute.PLAYER}>
-          <Player
-            film={film}
-          />
-        </Route>
+          render={() => <AddReview />}
+        />
+        <Route
+          exact
+          path={AppRoute.PLAYER}
+          render={({history}) => (
+            <Player
+              onExitPlayerClick={() => history.goBack()}
+            />
+          )}
+        />
         <Route exact path={AppRoute.FILM}>
           <FilmScreen />
         </Route>
@@ -76,24 +71,18 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  promoName: PropTypes.string,
-  promoGenre: PropTypes.string,
-  promoReleaseDate: PropTypes.string,
-  films: PropTypes.array,
-  genre: PropTypes.string,
   isDataLoaded: PropTypes.bool.isRequired,
-  onLoadData: PropTypes.func.isRequired,
+  onLoadFilmsData: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  films: state.films,
-  isDataLoaded: state.isDataLoaded,
-  authorizationStatus: state.authorizationStatus,
+  isDataLoaded: getIsDataLoaded(state),
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onLoadData() {
+  onLoadFilmsData() {
     dispatch(fetchFilmsList());
   },
 });

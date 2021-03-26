@@ -1,47 +1,61 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-import VideoPlayer from '../video-player/video-player';
+import {AppRoute} from '../../utils/const';
+import VideoPlayer from '../preview-player/preview-player';
 
-const MovieItemCard = (props) => {
-  const {id, name, src, handleActiveCardChange, previewVideoLink, activeCard} = props;
-  const [timer, setTimer] = useState(null);
+const MovieItemCard = ({id, name, src, previewVideoLink}) => {
+  const videoPlayerRef = useRef();
 
-  const onFilmHover = (e) => {
-    setTimer(setTimeout(handleActiveCardChange, 1000, e.currentTarget.id));
-  };
+  const [activeCard, setActiveCard] = useState(null);
 
-  const onFilmUnhover = () => {
-    clearTimeout(timer);
-    setTimer(null);
-    handleActiveCardChange(null);
-  };
+  useEffect(() => {
+    let isMounted = true;
+    let timer = null;
+
+    videoPlayerRef.current.onmouseenter = (evt) => {
+      timer = setTimeout(() => {
+        if (isMounted) {
+          setActiveCard(id);
+        }
+      }, 1000, evt.currentTarget.id);
+    };
+
+    videoPlayerRef.current.onmouseleave = () => {
+      clearTimeout(timer);
+      setActiveCard(null);
+    };
+
+    return () => {
+      isMounted = false;
+      timer = null;
+      videoPlayerRef.current.onmouseenter = null;
+      videoPlayerRef.current.onmouseleave = null;
+    };
+  }, []);
 
   return (
     <article className="small-movie-card catalog__movies-card"
       id={id}
       key={`${name}-${id}`}
-      onMouseEnter={onFilmHover}
-      onMouseLeave={onFilmUnhover}>
+      ref={videoPlayerRef}>
       <div className="small-movie-card__image">
         {parseInt(activeCard, 10) === id ?
           <VideoPlayer previewVideoLink={previewVideoLink} defaultIsPlaying={true} defaultIsMuted={true}/> :
           <img src={src} alt={name} width="280" height="175"/>}
       </div>
       <h3 className="small-movie-card__title">
-        <Link to={`films/${id}`} className="small-movie-card__link">{name}</Link>
+        <Link to={`${AppRoute.FILMS}/${id}`} className="small-movie-card__link">{name}</Link>
       </h3>
     </article>
   );
 };
 
 MovieItemCard.propTypes = {
-  src: PropTypes.string,
-  name: PropTypes.string,
-  id: PropTypes.number,
-  handleActiveCardChange: PropTypes.func,
-  previewVideoLink: PropTypes.string,
-  activeCard: PropTypes.string
+  src: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  previewVideoLink: PropTypes.string.isRequired,
 };
 
 export default MovieItemCard;

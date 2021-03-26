@@ -2,37 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {Link} from 'react-router-dom';
+import {AppRoute} from '../../utils/const';
 import {logout} from "../../api/api-actions";
-
-const SignInLinkElement = () => {
-  return (
-    <Link to="/login" className="user-block__link">Sign in</Link>
-  );
-};
-
-const UserPicElement = (props) => {
-  const {onClick, userEmail} = props;
-
-  return (
-    <>
-      <div className="user-block__avatar">
-        <Link to="/mylist" className="logo__link">
-          <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-        </Link>
-
-      </div>
-      <Link to="/" className="user-block__link" onClick={onClick}>{userEmail}</Link>
-    </>
-  );
-};
+import {getAuthorizationStatus, getUserEmail} from '../../store/user/selectors';
+import UserBlock from '../user-block/user-block';
+import SignInLink from '../sign-in-link/sign-in-link';
 
 const Header = (props) => {
-  const {title, authorizationStatus, onClick, userEmail} = props;
+  const {title, authorizationStatus, onClick, userEmail, isUserBlockShown, breadcrumbs} = props;
 
   return (
     <header className="page-header user-page__head">
       <div className="logo">
-        <Link to="/" className="logo__link">
+        <Link to={AppRoute.ROOT} className="logo__link">
           <span className="logo__letter logo__letter--1">W</span>
           <span className="logo__letter logo__letter--2">T</span>
           <span className="logo__letter logo__letter--3">W</span>
@@ -41,9 +23,11 @@ const Header = (props) => {
 
       <h1 className="page-title user-page__title">{title}</h1>
 
-      <div className="user-block">
-        {authorizationStatus ? <UserPicElement onClick={onClick} userEmail={userEmail}/> : <SignInLinkElement />}
-      </div>
+      {breadcrumbs}
+
+      {isUserBlockShown ? <div className="user-block">
+        {authorizationStatus ? <UserBlock onClick={onClick} userEmail={userEmail}/> : <SignInLink />}
+      </div> : ``}
     </header>
   );
 };
@@ -53,16 +37,13 @@ Header.propTypes = {
   authorizationStatus: PropTypes.bool.isRequired,
   userEmail: PropTypes.string,
   onClick: PropTypes.func.isRequired,
-};
-
-UserPicElement.propTypes = {
-  userEmail: PropTypes.string,
-  onClick: PropTypes.func.isRequired,
+  isUserBlockShown: PropTypes.bool.isRequired,
+  breadcrumbs: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({
-  authorizationStatus: state.authorizationStatus,
-  userEmail: state.userEmail,
+  authorizationStatus: getAuthorizationStatus(state),
+  userEmail: getUserEmail(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
