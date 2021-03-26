@@ -5,17 +5,24 @@ import {changeFavorite} from "../../api/api-actions";
 import {loadFavorite} from "../../api/api-actions";
 import {getMyFilmsList} from '../../store/films-data/selectors';
 import {getIsFormDisabled} from '../../store/user-interaction/selectors';
+import {getAuthorizationStatus} from '../../store/user/selectors';
+import {AppRoute} from '../../utils/const';
+import browserHistory from "../../browser-history";
 
-const AddToFavoriteBtn = ({currentFilm, onFavoriteClick, isFormDisabled}) => {
-  const currentmyFilmsList = useSelector(getMyFilmsList);
+const AddToFavoriteBtn = ({currentFilm, onFavoriteClick, isFormDisabled, authorizationStatus}) => {
+  const currentMyFilmsList = useSelector(getMyFilmsList);
 
-  const isInMyFilmsList = currentmyFilmsList.findIndex((el) => el.id === currentFilm.id);
+  const isInMyFilmsList = currentMyFilmsList.findIndex((el) => el.id === currentFilm.id);
 
   const handleFavoriteClick = () => {
-    onFavoriteClick({
-      id: currentFilm.id,
-      status: +(!currentFilm.is_favorite),
-    });
+    if (!authorizationStatus) {
+      browserHistory.push(AppRoute.LOGIN);
+    } else {
+      onFavoriteClick({
+        id: currentFilm.id,
+        status: +(!currentFilm.is_favorite),
+      });
+    }
   };
 
   return (
@@ -34,10 +41,12 @@ AddToFavoriteBtn.propTypes = {
   currentFilm: PropTypes.object.isRequired,
   onFavoriteClick: PropTypes.func.isRequired,
   isFormDisabled: PropTypes.bool.isRequired,
+  authorizationStatus: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   isFormDisabled: getIsFormDisabled(state),
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
