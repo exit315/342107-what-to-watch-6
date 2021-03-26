@@ -3,18 +3,18 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link, withRouter, Redirect} from 'react-router-dom';
 import {TabType, AppRoute} from '../../utils/const';
+import {loadComments} from "../../api/api-actions";
+import {getFilms} from '../../store/films-data/selectors';
+import {getAuthorizationStatus} from '../../store/user/selectors';
 import Header from '../header/header';
 import Footer from '../footer/footer';
-import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
 import FilmTabs from '../film-tabs/film-tabs';
 import FilmOverview from '../film-overview/film-overview';
 import FilmDetails from '../film-details/film-details';
 import FilmReviews from '../film-reviews/film-reviews';
 import FilmsLikeThis from '../films-like-this/films-like-this';
 import AddToFavoriteBtn from '../add-to-favorite-btn/add-to-favorite-btn';
-import {loadComments} from "../../api/api-actions";
-import {getFilms} from '../../store/films-data/selectors';
-import {getAuthorizationStatus} from '../../store/user/selectors';
 
 const FilmScreen = ({films, match, authorizationStatus, onLoadReviewsData}) => {
   const currentFilmItem = films.findIndex((el) => el.id === parseInt(match.params.id, 10));

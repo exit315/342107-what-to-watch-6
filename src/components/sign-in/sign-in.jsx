@@ -2,10 +2,10 @@ import React, {useRef, useEffect, useState} from 'react';
 import PropTypes from "prop-types";
 import {connect, useDispatch} from "react-redux";
 import {login} from "../../api/api-actions";
+import {setIsErrorShown} from "../../store/action";
+import {getIsFormDisabled, getIsErrorShown} from '../../store/user-interaction/selectors';
 import Header from '../header/header';
 import Footer from '../footer/footer';
-import {getIsFormDisabled, getIsErrorShown} from '../../store/user-interaction/selectors';
-import {setIsErrorShown} from "../../store/action";
 
 const SignIn = ({onSubmit, isFormDisabled, isErrorShown}) => {
   const {shown, errorText} = isErrorShown;

@@ -2,20 +2,20 @@ import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {Router as BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
-import MainPage from '../main-page/main-page.jsx';
-import MyList from '../my-list/my-list.jsx';
-import Player from '../player/player.jsx';
-import SignIn from '../sign-in/sign-in.jsx';
-import AddReview from '../add-review/add-review.jsx';
-import FilmScreen from '../film-screen/film-screen.jsx';
-import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
-import LoadingScreen from '../loading-screen/loading-screen';
-import {fetchFilmsList} from "../../api/api-actions";
 import PrivateRoute from '../private-route/private-route';
-import {AppRoute} from '../../utils/const';
 import browserHistory from "../../browser-history";
+import {AppRoute} from '../../utils/const';
+import {fetchFilmsList} from "../../api/api-actions";
 import {getIsDataLoaded} from '../../store/films-data/selectors';
 import {getAuthorizationStatus} from '../../store/user/selectors';
+import MainPage from '../main-page/main-page';
+import MyList from '../my-list/my-list';
+import Player from '../player/player';
+import SignIn from '../sign-in/sign-in';
+import AddReview from '../add-review/add-review';
+import FilmScreen from '../film-screen/film-screen';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 const App = ({isDataLoaded, onLoadFilmsData, authorizationStatus}) => {
   useEffect(() => {

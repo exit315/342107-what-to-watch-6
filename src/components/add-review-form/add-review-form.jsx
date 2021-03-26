@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import {connect, useDispatch} from "react-redux";
 import {MAX_RATING, COMMENT_MIN_LENGTH} from '../../utils/const';
 import {sendComment} from "../../api/api-actions";
-import {getIsFormDisabled, getIsErrorShown} from '../../store/user-interaction/selectors';
 import {setIsErrorShown} from "../../store/action";
+import {getIsFormDisabled, getIsErrorShown} from '../../store/user-interaction/selectors';
 
 const AddReviewForm = ({onSubmit, id, isFormDisabled, isErrorShown}) => {
   const {shown, errorText} = isErrorShown;

@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import MovieItemCard from '../movie-item-card/movie-item-card.jsx';
-import {getFilms, getGenre} from '../../store/films-data/selectors';
 import {FILMS_LIKE_THIS} from '../../utils/const';
+import {getFilms, getGenre} from '../../store/films-data/selectors';
+import MovieItemCard from '../movie-item-card/movie-item-card';
 
 const FilmsLikeThis = ({films, currentFilm}) => {
   const [activeCard, setActiveCard] = useState(null);

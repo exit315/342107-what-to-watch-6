@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link, withRouter} from 'react-router-dom';
-import AddReviewForm from '../add-review-form/add-review-form.jsx';
 import {AppRoute} from '../../utils/const';
-import Header from '../header/header';
 import {getFilms} from '../../store/films-data/selectors';
+import AddReviewForm from '../add-review-form/add-review-form';
+import Header from '../header/header';
 
 const AddReview = ({films, match}) => {
   const currentFilm = films.find((el) => el.id === parseInt(match.params.id, 10));

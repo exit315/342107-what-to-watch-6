@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import Header from '../header/header';
-import AddToFavoriteBtn from '../add-to-favorite-btn/add-to-favorite-btn';
 import {getPromoFilm} from '../../store/films-data/selectors';
+import AddToFavoriteBtn from '../add-to-favorite-btn/add-to-favorite-btn';
 
 const PromoFilm = ({promoFilm}) => {
   return (

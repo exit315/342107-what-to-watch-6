@@ -1,8 +1,8 @@
 import React, {useEffect, useState, useRef} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-import VideoPlayer from '../preview-player/preview-player';
 import {AppRoute} from '../../utils/const';
+import VideoPlayer from '../preview-player/preview-player';
 
 const MovieItemCard = ({id, name, src, previewVideoLink}) => {
   const videoPlayerRef = useRef();

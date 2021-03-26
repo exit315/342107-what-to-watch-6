@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-import {createGenreTypesList} from '../../utils/utils';
 import {connect} from 'react-redux';
-import {changeGenre} from '../../store/action';
 import {GENRE_TYPE_ALL, MAX_GENRE_COUNT} from '../../utils/const';
+import {createGenreTypesList} from '../../utils/utils';
+import {changeGenre} from '../../store/action';
 import {getFilms, getGenre} from '../../store/films-data/selectors';
 
 const GenreTabs = ({films, genre, onTabClick}) => {

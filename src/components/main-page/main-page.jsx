@@ -2,12 +2,12 @@ import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {fetchPromoFilm} from "../../api/api-actions";
+import {getFilms, getGenre, getIsPromoFilmDataLoaded} from '../../store/films-data/selectors';
 import PromoFilm from '../promo-film/promo-film';
 import GenreTabs from '../genre-tabs/genre-tabs';
 import Footer from '../footer/footer';
 import FilmsList from '../films-list/films-list';
 import LoadingScreen from '../loading-screen/loading-screen';
-import {getFilms, getGenre, getIsPromoFilmDataLoaded} from '../../store/films-data/selectors';
 
 const MainPage = ({films, genre, onLoadPromoFilmData, isPromoFilmDataLoaded}) => {
   useEffect(() => {

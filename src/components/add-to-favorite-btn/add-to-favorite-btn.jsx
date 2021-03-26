@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect, useSelector} from 'react-redux';
+import browserHistory from "../../browser-history";
+import {AppRoute} from '../../utils/const';
 import {changeFavorite} from "../../api/api-actions";
 import {loadFavorite} from "../../api/api-actions";
 import {getMyFilmsList} from '../../store/films-data/selectors';
 import {getIsFormDisabled} from '../../store/user-interaction/selectors';
 import {getAuthorizationStatus} from '../../store/user/selectors';
-import {AppRoute} from '../../utils/const';
-import browserHistory from "../../browser-history";
 
 const AddToFavoriteBtn = ({currentFilm, onFavoriteClick, isFormDisabled, authorizationStatus}) => {
   const currentMyFilmsList = useSelector(getMyFilmsList);

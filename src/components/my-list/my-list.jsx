@@ -2,11 +2,11 @@ import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {loadFavorite} from "../../api/api-actions";
-import LoadingScreen from '../loading-screen/loading-screen';
-import MovieItemCard from '../movie-item-card/movie-item-card.jsx';
-import Header from '../header/header.jsx';
-import Footer from '../footer/footer.jsx';
 import {getMyFilmsList} from '../../store/films-data/selectors';
+import LoadingScreen from '../loading-screen/loading-screen';
+import MovieItemCard from '../movie-item-card/movie-item-card';
+import Header from '../header/header';
+import Footer from '../footer/footer';
 
 const MyList = ({myFilmsList, onLoadMyFilmsListData}) => {
   const [activeCard, setActiveCard] = useState(null);
