@@ -41,7 +41,7 @@ const MovieItemCard = ({id, name, src, previewVideoLink}) => {
       ref={videoPlayerRef}>
       <div className="small-movie-card__image">
         {parseInt(activeCard, 10) === id ?
-          <VideoPlayer previewVideoLink={previewVideoLink} defaultIsPlaying={true} defaultIsMuted={true}/> :
+          <VideoPlayer previewVideoLink={previewVideoLink} defaultIsPlaying={true} defaultIsMuted={false}/> :
           <img src={src} alt={name} width="280" height="175"/>}
       </div>
       <h3 className="small-movie-card__title">

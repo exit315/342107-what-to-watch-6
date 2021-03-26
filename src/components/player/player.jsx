@@ -9,7 +9,7 @@ const Player = ({films, match, onExitPlayerClick}) => {
   const currentFilm = films.find((el) => el.id === parseInt(match.params.id, 10));
 
   const [isLoading, setIsLoading] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [videoTime, setVideoTime] = useState(``);
 
   const videoRef = useRef();
@@ -18,6 +18,7 @@ const Player = ({films, match, onExitPlayerClick}) => {
     videoRef.current.oncanplaythrough = () => {
       setVideoTime(getRunTimeInPlayer(videoRef.current.duration));
       setIsLoading(false);
+      setIsPlaying(true);
     };
 
     videoRef.current.ontimeupdate = () => {
