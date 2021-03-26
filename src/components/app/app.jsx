@@ -14,7 +14,7 @@ import {fetchFilmsList} from "../../api/api-actions";
 import PrivateRoute from '../private-route/private-route';
 import {AppRoute} from '../../utils/const';
 import browserHistory from "../../browser-history";
-import {getFilms, getIsDataLoaded} from '../../store/films-data/selectors';
+import {getIsDataLoaded} from '../../store/films-data/selectors';
 import {getAuthorizationStatus} from '../../store/user/selectors';
 
 const App = ({isDataLoaded, onLoadFilmsData, authorizationStatus}) => {
@@ -71,14 +71,12 @@ const App = ({isDataLoaded, onLoadFilmsData, authorizationStatus}) => {
 };
 
 App.propTypes = {
-  films: PropTypes.array.isRequired,
   isDataLoaded: PropTypes.bool.isRequired,
   onLoadFilmsData: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  films: getFilms(state),
   isDataLoaded: getIsDataLoaded(state),
   authorizationStatus: getAuthorizationStatus(state),
 });
