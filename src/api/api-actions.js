@@ -1,4 +1,4 @@
-import {loadFilms, loadPromoFilm, rememberUser, requireAuthorization, loadMyFilmsList, loadReviews, disableForm, setIsErrorShown} from "../store/action";
+import {loadFilms, loadPromoFilm, rememberUser, requireAuthorization, loadMyFilmsList, loadReviews, disableForm, setIsErrorShown, updateFilmData} from "../store/action";
 import {AppRoute, ERROR_MESSAGE} from '../utils/const';
 
 export const fetchFilmsList = () => (dispatch, _getState, api) => (
@@ -15,7 +15,6 @@ export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(AppRoute.LOGIN)
     .then((response) => dispatch(rememberUser(response.data.email)))
     .then(() => dispatch(requireAuthorization(true)))
-    .catch(() => {})
 );
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => {
@@ -43,12 +42,16 @@ export const changeFavorite = ({id, status}) => (dispatch, _getState, api) => {
 
   api.post(`${AppRoute.FAVORITE}/${id}/${status}`, {id, status})
     .then(() => {
+      api.get(`${AppRoute.FILMS}/${id}`)
+        .then(({data}) => dispatch(updateFilmData({data, id})));
+    })
+    .then(() => {
       api.get(AppRoute.FAVORITE)
         .then(({data}) => dispatch(loadMyFilmsList(data)));
     })
     .then(() => {
-      api.get(AppRoute.FILMS)
-        .then(({data}) => dispatch(loadFilms(data)));
+      api.get(AppRoute.PROMO)
+        .then(({data}) => dispatch(loadPromoFilm(data)));
     })
     .then(() => dispatch(disableForm(false)));
 };

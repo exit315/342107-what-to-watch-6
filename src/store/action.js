@@ -5,6 +5,7 @@ export const ActionType = {
   LOAD_MY_FILMS_LIST: `films/loadMyFilmsList`,
   LOAD_REVIEWS: `films/loadReviews`,
   SET_IS_ERROR_SHOWN: `films/setIsErrorShown`,
+  UPDATE_FILM_DATA: `films/updateFilmData`,
   DISABLE_FORM: `user/disableForm`,
   REQUIRED_AUTHORIZATION: `user/requiredAuthorization`,
   REMEMBER_USER: `user/rememberUser`,
@@ -53,4 +54,9 @@ export const setIsErrorShown = ({shown, errorText}) => ({
 export const disableForm = (isFormDisabled) => ({
   type: ActionType.DISABLE_FORM,
   payload: isFormDisabled,
+});
+
+export const updateFilmData = (data) => ({
+  type: ActionType.UPDATE_FILM_DATA,
+  payload: data,
 });

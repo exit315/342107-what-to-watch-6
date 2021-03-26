@@ -45,6 +45,18 @@ const filmsData = (state = initialState, action) => {
         genre: action.payload,
       };
 
+    case ActionType.UPDATE_FILM_DATA:
+      const updatedFilmIndex = state.films.findIndex((el) => el.id === action.payload.id);
+
+      return {
+        ...state,
+        films: [
+          ...state.films.slice(0, updatedFilmIndex),
+          action.payload.data,
+          ...state.films.slice(updatedFilmIndex + 1)
+        ],
+      };
+
     default:
       return state;
   }
