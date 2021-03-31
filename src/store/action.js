@@ -9,6 +9,7 @@ export const ActionType = {
   DISABLE_FORM: `user/disableForm`,
   REQUIRED_AUTHORIZATION: `user/requiredAuthorization`,
   REMEMBER_USER: `user/rememberUser`,
+  SHOW_SERVER_UNAVAILABLE_SCREEN: `site/showServerUnavailableScreen`,
 };
 
 export const loadFilms = (films) => ({
@@ -59,4 +60,9 @@ export const disableForm = (isFormDisabled) => ({
 export const updateFilmData = (data) => ({
   type: ActionType.UPDATE_FILM_DATA,
   payload: data,
+});
+
+export const showServerUnavailableScreen = (serverUnavailable) => ({
+  type: ActionType.SHOW_SERVER_UNAVAILABLE_SCREEN,
+  payload: serverUnavailable,
 });

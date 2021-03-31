@@ -6,6 +6,7 @@ import PrivateRoute from '../private-route/private-route';
 import browserHistory from "../../browser-history";
 import {AppRoute} from '../../utils/const';
 import {fetchFilmsList} from "../../api/api-actions";
+import {getServerStatus} from '../../store/server-logic/selectors';
 import {getIsDataLoaded} from '../../store/films-data/selectors';
 import {getAuthorizationStatus} from '../../store/user/selectors';
 import MainPage from '../main-page/main-page';
@@ -16,8 +17,15 @@ import AddReview from '../add-review/add-review';
 import FilmScreen from '../film-screen/film-screen';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import LoadingScreen from '../loading-screen/loading-screen';
+import ServerUnavailableScreen from '../server-unavailable-screen/server-unavailable-screen';
 
-const App = ({isDataLoaded, onLoadFilmsData, authorizationStatus}) => {
+const App = ({isDataLoaded, onLoadFilmsData, authorizationStatus, serverUnavailable}) => {
+  if (serverUnavailable) {
+    return (
+      <ServerUnavailableScreen />
+    );
+  }
+
   useEffect(() => {
     if (!isDataLoaded) {
       onLoadFilmsData();
@@ -74,11 +82,13 @@ App.propTypes = {
   isDataLoaded: PropTypes.bool.isRequired,
   onLoadFilmsData: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.bool.isRequired,
+  serverUnavailable: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   isDataLoaded: getIsDataLoaded(state),
   authorizationStatus: getAuthorizationStatus(state),
+  serverUnavailable: getServerStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
