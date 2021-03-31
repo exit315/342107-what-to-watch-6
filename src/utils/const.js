@@ -10,10 +10,18 @@ export const COMMENT_MIN_LENGTH = 50;
 
 export const FILMS_LIKE_THIS = 4;
 
+export const TextRatingType = {
+  BAD: `Bad`,
+  NORMAL: `Normal`,
+  GOOD: `Good`,
+  VERY_GOOD: `Very good`,
+  AWESOME: `Awesome`,
+};
+
 export const TabType = {
   OVERVIEW: `Overview`,
   DETAILS: `Details`,
-  REVIEWS: `Reviews`
+  REVIEWS: `Reviews`,
 };
 
 export const GENRE_TYPE_ALL = `All genres`;
@@ -29,7 +37,7 @@ export const AppRoute = {
   FILMS: `/films`,
   PROMO: `/films/promo`,
   FAVORITE: `/favorite`,
-  COMMENTS: `/comments`
+  COMMENTS: `/comments`,
 };
 
 export const ERROR_MESSAGE = `Something went wrong. Please, try again or later.`;

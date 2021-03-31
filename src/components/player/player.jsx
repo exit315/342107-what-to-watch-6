@@ -64,10 +64,14 @@ const Player = ({films, match, onExitPlayerClick}) => {
 
         <div className="player__controls-row">
           <button type="button" className="player__play" disabled={isLoading} onClick={() => setIsPlaying(!isPlaying)}>
-            <svg viewBox="0 0 19 19" width="19" height="19">
-              <use xlinkHref="#play-s"></use>
+            {isPlaying ? <><svg viewBox="0 0 14 21" width="14" height="21">
+              <use xlinkHref="#pause"></use>
             </svg>
-            <span>Play</span>
+            <span>Pause</span></> :
+              <><svg viewBox="0 0 19 19" width="19" height="19">
+                <use xlinkHref="#play-s"></use>
+              </svg>
+              <span>Play</span></>}
           </button>
           <div className="player__name">{currentFilm.name}</div>
 
