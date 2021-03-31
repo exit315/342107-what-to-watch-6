@@ -26,7 +26,7 @@ export const createAPI = (onUnauthorized, onUnavailable) => {
       throw error;
     }
 
-    if (response.status === HttpCode.UNREACHEABLE) {
+    if (response.status === HttpCode.UNAVAILABLE) {
       onUnavailable();
 
       throw error;

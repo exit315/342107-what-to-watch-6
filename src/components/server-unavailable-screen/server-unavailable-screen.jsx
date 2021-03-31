@@ -1,7 +1,7 @@
 import React from 'react';
 import Footer from '../footer/footer';
 
-const LoadingScreen = () => {
+const ServerUnavailableScreen = () => {
   return (
     <div>
       <div className="user-page">
@@ -11,7 +11,8 @@ const LoadingScreen = () => {
             textAlign: `center`,
           }
         }>
-          <h1>Loading...</h1>
+          <h1>Service is not available</h1>
+          <p>Please, refresh the page or try again later</p>
         </div>
       </div>
 
@@ -20,4 +21,4 @@ const LoadingScreen = () => {
   );
 };
 
-export default LoadingScreen;
+export default ServerUnavailableScreen;

@@ -7,12 +7,12 @@ import {createStore, applyMiddleware} from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {createAPI} from "./api/api";
 import {checkAuth} from "./api/api-actions";
-import {requireAuthorization, setIsErrorShown} from './store/action';
+import {requireAuthorization, showServerUnavailableScreen} from './store/action';
 import rootReducer from './store/root-reducer';
 
 const api = createAPI(
     () => store.dispatch(requireAuthorization(false)),
-    () => store.dispatch(setIsErrorShown({shown: true, errorText: `Service is not available. Please, try again later.`}))
+    () => store.dispatch(showServerUnavailableScreen(true))
 );
 
 const store = createStore(

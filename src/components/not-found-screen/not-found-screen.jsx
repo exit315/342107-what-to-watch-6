@@ -7,7 +7,7 @@ import Footer from '../footer/footer';
 const NotFoundScreen = () => {
   return (
     <div className="user-page">
-      <Header />
+      <Header isUserBlockShown={true}/>
 
       <div className="user-page__content page-not-found" style={
         {
@@ -24,6 +24,7 @@ const NotFoundScreen = () => {
           }
         }>Return to the main page</Link>
       </div>
+
       <Footer />
     </div>
   );
