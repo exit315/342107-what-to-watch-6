@@ -20,9 +20,6 @@ const FilmsList = ({films, genre}) => {
         return films;
       case genre:
         let filteredFilms = filterFilmsByGenre(films, genre);
-        if (filmCount !== FILM_COUNT_PER_STEP) {
-          setFilmCount(FILM_COUNT_PER_STEP);
-        }
         return filteredFilms;
       default:
         return films;

@@ -1,3 +1,4 @@
+import {TextRatingType} from './const';
 export const filterFilmsByGenre = (films, genre) => {
   return films.filter((film) => film.genre === genre);
 };
@@ -43,19 +44,19 @@ export const getRunTimeInPlayer = (time) => {
 export const getTextRating = (numberRating) => {
   switch (true) {
     case numberRating >= 0 && numberRating < 3:
-      return `Bad`;
+      return TextRatingType.BAD;
 
     case numberRating >= 3 && numberRating < 5:
-      return `Normal`;
+      return TextRatingType.NORMAL;
 
     case numberRating >= 5 && numberRating < 8:
-      return `Good`;
+      return TextRatingType.GOOD;
 
     case numberRating >= 8 && numberRating < 10:
-      return `Good`;
+      return TextRatingType.VERY_GOOD;
 
     case numberRating >= 10:
-      return `Awesome`;
+      return TextRatingType.AWESOME;
 
     default:
       return ``;
