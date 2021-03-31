@@ -15,14 +15,14 @@ const FilmsList = ({films, genre}) => {
   };
 
   const renderFilteredFilmsList = () => {
-    switch (genre) {
-      case GENRE_TYPE_ALL:
-        return films;
-      case genre:
-        let filteredFilms = filterFilmsByGenre(films, genre);
-        return filteredFilms;
-      default:
-        return films;
+    if (genre === GENRE_TYPE_ALL) {
+      return films;
+    } else {
+      let filteredFilms = filterFilmsByGenre(films, genre);
+      if (filmCount !== FILM_COUNT_PER_STEP) {
+        setFilmCount(FILM_COUNT_PER_STEP);
+      }
+      return filteredFilms;
     }
   };
 
