@@ -56,7 +56,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onTabClick(evt) {
-    dispatch(changeGenre(evt));
+    dispatch(changeGenre(evt.target.textContent));
   }
 });
 

@@ -7,7 +7,7 @@ export const ActionType = {
   SET_IS_ERROR_SHOWN: `films/setIsErrorShown`,
   UPDATE_FILM_DATA: `films/updateFilmData`,
   DISABLE_FORM: `user/disableForm`,
-  REQUIRED_AUTHORIZATION: `user/requiredAuthorization`,
+  REQUIRE_AUTHORIZATION: `user/requireAuthorization`,
   REMEMBER_USER: `user/rememberUser`,
   SHOW_SERVER_UNAVAILABLE_SCREEN: `site/showServerUnavailableScreen`,
 };
@@ -23,13 +23,13 @@ export const loadPromoFilm = (promoFilm) => ({
 });
 
 export const requireAuthorization = (status) => ({
-  type: ActionType.REQUIRED_AUTHORIZATION,
+  type: ActionType.REQUIRE_AUTHORIZATION,
   payload: status,
 });
 
-export const changeGenre = (evt) => ({
+export const changeGenre = (genre) => ({
   type: ActionType.CHANGE_GENRE,
-  payload: evt.target.textContent,
+  payload: genre,
 });
 
 export const rememberUser = (userEmail) => ({
