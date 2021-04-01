@@ -42,13 +42,13 @@ describe(`Action creators work correctly`, () => {
     const expectedAction = {
       type: ActionType.SET_IS_ERROR_SHOWN,
       payload: {
-        shown: true, 
+        shown: true,
         errorText: `Test error message`,
       },
     };
 
     const error = {
-      shown: true, 
+      shown: true,
       errorText: `Test error message`,
     };
 
