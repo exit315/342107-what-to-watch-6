@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link, withRouter, Redirect} from 'react-router-dom';
 import {TabType, AppRoute} from '../../utils/const';
-import {loadComments} from "../../api/api-actions";
+import {fetchComments} from "../../api/api-actions";
 import {getFilms} from '../../store/films-data/selectors';
 import {getAuthorizationStatus} from '../../store/user/selectors';
 import Header from '../header/header';
@@ -142,7 +142,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onLoadReviewsData(id) {
-    dispatch(loadComments(id));
+    dispatch(fetchComments(id));
   },
 });
 

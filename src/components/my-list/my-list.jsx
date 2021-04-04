@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {loadFavorite} from "../../api/api-actions";
+import {fetchFavorite} from "../../api/api-actions";
 import {getMyFilmsList} from '../../store/films-data/selectors';
 import LoadingScreen from '../loading-screen/loading-screen';
 import MovieItemCard from '../movie-item-card/movie-item-card';
@@ -70,7 +70,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onLoadMyFilmsListData() {
-    dispatch(loadFavorite());
+    dispatch(fetchFavorite());
   },
 });
 
