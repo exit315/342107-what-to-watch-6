@@ -129,7 +129,7 @@ const FilmScreen = ({films, match, authorizationStatus, onLoadReviewsData}) => {
 };
 
 FilmScreen.propTypes = {
-  films: PropTypes.array.isRequired,
+  films: PropTypes.arrayOf(PropTypes.object).isRequired,
   match: PropTypes.object.isRequired,
   authorizationStatus: PropTypes.bool.isRequired,
   onLoadReviewsData: PropTypes.func.isRequired,

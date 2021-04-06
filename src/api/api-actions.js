@@ -22,9 +22,13 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
 
   api.post(AppRoute.LOGIN, {email, password})
     .then(() => {
+      dispatch(disableForm(false));
+      dispatch(rememberUser(email));
       dispatch(requireAuthorization(true));
     })
     .catch(() => {
+      dispatch(disableForm(false));
+      dispatch(setIsErrorShown({shown: true, errorText: ERROR_MESSAGE}));
     });
 };
 

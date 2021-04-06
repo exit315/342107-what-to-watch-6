@@ -44,7 +44,7 @@ const MainPage = ({films, genre, onLoadPromoFilmData, isPromoFilmDataLoaded}) =>
 };
 
 MainPage.propTypes = {
-  films: PropTypes.array.isRequired,
+  films: PropTypes.arrayOf(PropTypes.object).isRequired,
   genre: PropTypes.string.isRequired,
   onLoadPromoFilmData: PropTypes.func.isRequired,
   isPromoFilmDataLoaded: PropTypes.bool.isRequired,

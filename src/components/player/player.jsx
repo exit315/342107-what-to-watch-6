@@ -88,7 +88,7 @@ const Player = ({films, match, onExitPlayerClick}) => {
 };
 
 Player.propTypes = {
-  films: PropTypes.array.isRequired,
+  films: PropTypes.arrayOf(PropTypes.object).isRequired,
   match: PropTypes.object.isRequired,
   onExitPlayerClick: PropTypes.func.isRequired,
 };

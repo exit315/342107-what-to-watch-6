@@ -40,7 +40,7 @@ const FilmDetails = ({currentFilm}) => {
 };
 
 FilmDetails.propTypes = {
-  currentFilm: PropTypes.object.isRequired
+  currentFilm: PropTypes.object.isRequired,
 };
 
 export default withRouter(FilmDetails);

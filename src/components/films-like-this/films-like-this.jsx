@@ -50,8 +50,8 @@ const FilmsLikeThis = ({films, currentFilm}) => {
 };
 
 FilmsLikeThis.propTypes = {
-  films: PropTypes.array.isRequired,
-  currentFilm: PropTypes.object.isRequired
+  films: PropTypes.arrayOf(PropTypes.object).isRequired,
+  currentFilm: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({

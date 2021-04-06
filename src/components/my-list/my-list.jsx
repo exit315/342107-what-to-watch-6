@@ -60,7 +60,7 @@ const MyList = ({myFilmsList, onLoadMyFilmsListData}) => {
 };
 
 MyList.propTypes = {
-  myFilmsList: PropTypes.array.isRequired,
+  myFilmsList: PropTypes.arrayOf(PropTypes.object).isRequired,
   onLoadMyFilmsListData: PropTypes.func.isRequired,
 };
 

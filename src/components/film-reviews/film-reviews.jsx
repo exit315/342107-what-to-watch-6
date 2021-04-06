@@ -27,7 +27,7 @@ const FilmReviews = ({filmReviews}) => {
 };
 
 FilmReviews.propTypes = {
-  filmReviews: PropTypes.array.isRequired,
+  filmReviews: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 const mapStateToProps = (state) => ({
