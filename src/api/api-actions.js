@@ -20,12 +20,10 @@ export const checkAuth = () => (dispatch, _getState, api) => (
 export const login = ({login: email, password}) => (dispatch, _getState, api) => {
   dispatch(disableForm(true));
 
-  api.post(AppRoute.LOGIN, {email, password})
-    .then(() => {
-      dispatch(disableForm(false));
-      dispatch(rememberUser(email));
-      dispatch(requireAuthorization(true));
-    })
+  return api.post(AppRoute.LOGIN, {email, password})
+    .then((response) => dispatch(rememberUser(response.data.email)))
+    .then(() => dispatch(requireAuthorization(true)))
+    .then(() => dispatch(disableForm(false)))
     .catch(() => {
       dispatch(disableForm(false));
       dispatch(setIsErrorShown({shown: true, errorText: ERROR_MESSAGE}));
@@ -60,12 +58,12 @@ export const changeFavorite = ({id, status}) => (dispatch, _getState, api) => {
     });
 };
 
-export const loadFavorite = () => (dispatch, _getState, api) => (
+export const fetchFavorite = () => (dispatch, _getState, api) => (
   api.get(AppRoute.FAVORITE)
     .then(({data}) => dispatch(loadMyFilmsList(data)))
 );
 
-export const loadComments = ({id}) => (dispatch, _getState, api) => (
+export const fetchComments = ({id}) => (dispatch, _getState, api) => (
   api.get(`${AppRoute.COMMENTS}/${id}`)
     .then((response) => dispatch(loadReviews(response.data)))
 );

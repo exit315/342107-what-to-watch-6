@@ -49,7 +49,7 @@ const AddReview = ({films, match}) => {
 };
 
 AddReview.propTypes = {
-  films: PropTypes.array.isRequired,
+  films: PropTypes.arrayOf(PropTypes.object).isRequired,
   match: PropTypes.object.isRequired,
 };
 

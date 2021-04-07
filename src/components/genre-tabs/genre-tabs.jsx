@@ -44,7 +44,7 @@ const GenreTabs = ({films, genre, onTabClick}) => {
 };
 
 GenreTabs.propTypes = {
-  films: PropTypes.array.isRequired,
+  films: PropTypes.arrayOf(PropTypes.object).isRequired,
   genre: PropTypes.string.isRequired,
   onTabClick: PropTypes.func.isRequired
 };
@@ -56,7 +56,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onTabClick(evt) {
-    dispatch(changeGenre(evt));
+    dispatch(changeGenre(evt.target.textContent));
   }
 });
 

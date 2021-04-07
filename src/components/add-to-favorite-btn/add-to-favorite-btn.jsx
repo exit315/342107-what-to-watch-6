@@ -4,7 +4,7 @@ import {connect, useSelector, useDispatch} from 'react-redux';
 import browserHistory from "../../browser-history";
 import {AppRoute} from '../../utils/const';
 import {changeFavorite} from "../../api/api-actions";
-import {loadFavorite} from "../../api/api-actions";
+import {fetchFavorite} from "../../api/api-actions";
 import {setIsErrorShown} from "../../store/action";
 import {getMyFilmsList} from '../../store/films-data/selectors';
 import {getIsFormDisabled, getIsErrorShown} from '../../store/user-interaction/selectors';
@@ -83,7 +83,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(changeFavorite(id, status));
   },
   onLoadMyFilmsListData() {
-    dispatch(loadFavorite());
+    dispatch(fetchFavorite());
   },
 });
 
