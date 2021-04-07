@@ -42,7 +42,7 @@ describe(`Reducers work correctly`, () => {
 });
 
 describe(`Async operation work correctly`, () => {
-  const responseEmail = `test@test.ru`;
+  const fakeUser = {email: `test@test.ru`, password: `123456`};
 
   it(`Should make a correct API call to /login`, () => {
     const apiMock = new MockAdapter(api);
@@ -51,7 +51,7 @@ describe(`Async operation work correctly`, () => {
 
     apiMock
       .onGet(AppRoute.LOGIN)
-      .reply(200, [{fake: true}]);
+      .reply(200, fakeUser);
 
     return checkAuthLoader(dispatch, () => {}, api)
       .then(() => {
@@ -59,7 +59,7 @@ describe(`Async operation work correctly`, () => {
 
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.REMEMBER_USER,
-          payload: responseEmail,
+          payload: fakeUser.email,
         });
 
         expect(dispatch).toHaveBeenNthCalledWith(2, {
@@ -72,20 +72,19 @@ describe(`Async operation work correctly`, () => {
   it(`Should make a correct API call to /login`, () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
-    const fakeUser = {email: `test@test.ru`, password: `123456`};
     const loginLoader = login(fakeUser);
 
     apiMock
       .onPost(AppRoute.LOGIN)
-      .reply(200, [{fake: true}]);
+      .reply(200, fakeUser);
 
     return loginLoader(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(3);
+        expect(dispatch).toHaveBeenCalledTimes(4);
 
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.DISABLE_FORM,
-          payload: false,
+          payload: true,
         });
 
         expect(dispatch).toHaveBeenNthCalledWith(2, {
@@ -96,6 +95,11 @@ describe(`Async operation work correctly`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(3, {
           type: ActionType.REQUIRE_AUTHORIZATION,
           payload: true,
+        });
+
+        expect(dispatch).toHaveBeenNthCalledWith(4, {
+          type: ActionType.DISABLE_FORM,
+          payload: false,
         });
       });
   });
