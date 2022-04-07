@@ -1,7 +1,8 @@
 import {ActionType} from '../action';
+import {FilmItemType, InitialFilmsDataStateType} from './films-data-types';
 import {GENRE_TYPE_ALL} from '../../utils/const';
 
-const initialState = {
+const initialState: InitialFilmsDataStateType = {
   films: [],
   filmReviews: [],
   myFilmsList: [],
@@ -11,7 +12,7 @@ const initialState = {
   isPromoFilmDataLoaded: false,
 };
 
-const filmsData = (state = initialState, action) => {
+const filmsData = (state = initialState, action: {type: string; payload: any}): InitialFilmsDataStateType => {
   switch (action.type) {
     case ActionType.LOAD_FILMS:
       return {
@@ -46,7 +47,7 @@ const filmsData = (state = initialState, action) => {
       };
 
     case ActionType.UPDATE_FILM_DATA:
-      const updatedFilmIndex = state.films.findIndex((el) => el.id === action.payload.id);
+      const updatedFilmIndex = state.films.findIndex((el: FilmItemType) => {el.id === action.payload.id});
 
       return {
         ...state,
