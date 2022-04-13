@@ -1,6 +1,7 @@
 import {ActionType} from '../action';
+import {InitialUserInteractionStateType} from './user-interaction-types';
 
-const initialState = {
+const initialState: InitialUserInteractionStateType = {
   isErrorShown: {
     shown: false,
     errorText: ``
@@ -8,7 +9,7 @@ const initialState = {
   isFormDisabled: false,
 };
 
-const userInteraction = (state = initialState, action) => {
+const userInteraction = (state = initialState, action: any): InitialUserInteractionStateType => {
   switch (action.type) {
     case ActionType.SET_IS_ERROR_SHOWN:
       return {

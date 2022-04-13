@@ -1,11 +1,12 @@
 import {ActionType} from '../action';
+import {InitialUserStateType} from './user-types';
 
-const initialState = {
+const initialState: InitialUserStateType = {
   authorizationStatus: false,
   userEmail: null,
 };
 
-const user = (state = initialState, action) => {
+const user = (state = initialState, action: any): InitialUserStateType => {
   switch (action.type) {
     case ActionType.REQUIRE_AUTHORIZATION:
       return {
