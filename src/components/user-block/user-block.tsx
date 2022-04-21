@@ -1,12 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../utils/const';
 import {logout} from "../../api/api-actions";
 import {getUserEmail} from '../../store/user/selectors';
+import {AppStateType} from '../../store/root-reducer';
 
-const UserBlock = ({onClick, userEmail}) => {
+type PropsType = {
+  onLogoutClick: (email: string) => void
+  userEmail: string
+}
+
+const UserBlock: React.FC<PropsType> = ({onLogoutClick, userEmail}) => {
+
   return (
     <>
       <div className="user-block__avatar">
@@ -15,23 +21,18 @@ const UserBlock = ({onClick, userEmail}) => {
         </Link>
 
       </div>
-      <Link to={AppRoute.ROOT} className="user-block__link" onClick={onClick}>{userEmail}</Link>
+      <Link to={AppRoute.ROOT} className="user-block__link" onClick={(e: React.MouseEvent) => onLogoutClick(userEmail)}>{userEmail}</Link>
     </>
   );
 };
 
-UserBlock.propTypes = {
-  userEmail: PropTypes.string,
-  onClick: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType) => ({
   userEmail: getUserEmail(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onClick(authData) {
-    dispatch(logout(authData));
+const mapDispatchToProps = (dispatch: any) => ({
+  onLogoutClick(userEmail: string) {
+    dispatch(logout(userEmail));
   }
 });
 

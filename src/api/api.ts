@@ -8,16 +8,16 @@ const HttpCode = {
   UNAVAILABLE: 500,
 };
 
-export const createAPI = (onUnauthorized, onUnavailable) => {
+export const createAPI = (onUnauthorized: any, onUnavailable: any) => {
   const api = axios.create({
     baseURL: BACKEND_URL,
     timeout: REQUEST_TIMEOUT,
     withCredentials: true,
   });
 
-  const onSuccess = (response) => response;
+  const onSuccess = (response: any) => response;
 
-  const onFail = (error) => {
+  const onFail = (error: any) => {
     const {response} = error;
 
     if (response.status === HttpCode.UNAUTHORIZED) {

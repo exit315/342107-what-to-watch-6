@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../utils/const';
@@ -7,9 +6,16 @@ import {logout} from "../../api/api-actions";
 import {getAuthorizationStatus, getUserEmail} from '../../store/user/selectors';
 import UserBlock from '../user-block/user-block';
 import SignInLink from '../sign-in-link/sign-in-link';
+import {AppStateType} from '../../store/root-reducer';
 
-const Header = (props) => {
-  const {title, authorizationStatus, onClick, userEmail, isUserBlockShown, breadcrumbs} = props;
+type PropsType = {
+  title: string
+  authorizationStatus: boolean
+  isUserBlockShown: boolean
+  breadcrumbs: {}
+}
+
+const Header: React.FC<PropsType> = ({title, authorizationStatus, isUserBlockShown, breadcrumbs}) => {
 
   return (
     <header className="page-header user-page__head">
@@ -26,30 +32,14 @@ const Header = (props) => {
       {breadcrumbs}
 
       {isUserBlockShown ? <div className="user-block">
-        {authorizationStatus ? <UserBlock onClick={onClick} userEmail={userEmail}/> : <SignInLink />}
+        {authorizationStatus ? <UserBlock /> : <SignInLink />}
       </div> : ``}
     </header>
   );
 };
 
-Header.propTypes = {
-  title: PropTypes.string,
-  authorizationStatus: PropTypes.bool.isRequired,
-  userEmail: PropTypes.string,
-  onClick: PropTypes.func.isRequired,
-  isUserBlockShown: PropTypes.bool.isRequired,
-  breadcrumbs: PropTypes.object,
-};
-
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType) => ({
   authorizationStatus: getAuthorizationStatus(state),
-  userEmail: getUserEmail(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onClick(authData) {
-    dispatch(logout(authData));
-  }
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, null)(Header);
