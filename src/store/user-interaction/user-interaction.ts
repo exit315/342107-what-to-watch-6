@@ -1,5 +1,5 @@
 import {ActionType} from '../action';
-import {InitialUserInteractionStateType} from './user-interaction-types';
+import {InitialUserInteractionStateType} from '../../types/user-interaction-types';
 
 const initialState: InitialUserInteractionStateType = {
   isErrorShown: {

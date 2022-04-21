@@ -1,5 +1,5 @@
 import {ActionType} from '../action';
-import {FilmItemType, InitialFilmsDataStateType} from './films-data-types';
+import {FilmItemType, InitialFilmsDataStateType} from '../../types/films-data-types';
 import {GENRE_TYPE_ALL} from '../../utils/const';
 
 const initialState: InitialFilmsDataStateType = {

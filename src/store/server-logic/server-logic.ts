@@ -1,5 +1,5 @@
 import {ActionType} from '../action';
-import {InitialServerLogicStateType} from './server-logic-types';
+import {InitialServerLogicStateType} from '../../types/server-logic-types';
 
 const initialState: InitialServerLogicStateType = {
   serverUnavailable: false,

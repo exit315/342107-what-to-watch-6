@@ -1,5 +1,5 @@
 import {ActionType} from '../action';
-import {InitialUserStateType} from './user-types';
+import {InitialUserStateType} from '../../types/user-types';
 
 const initialState: InitialUserStateType = {
   authorizationStatus: false,
