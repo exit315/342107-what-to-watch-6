@@ -1,3 +1,3 @@
-import {NameSpace} from '../root-reducer';
+import {AppStateType} from '../../store/root-reducer';
 
-export const getServerStatus = (state: any) => state[NameSpace.SERVER_LOGIC].serverUnavailable;
+export const getServerStatus = (state: AppStateType) => state.serverUnavailable;

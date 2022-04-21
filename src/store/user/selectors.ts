@@ -1,4 +1,4 @@
-import {NameSpace} from '../root-reducer';
+import {AppStateType} from '../../store/root-reducer';
 
-export const getAuthorizationStatus = (state: any) => state[NameSpace.USER].authorizationStatus;
-export const getUserEmail = (state: any) => state[NameSpace.USER].userEmail;
+export const getAuthorizationStatus = (state: AppStateType) => state.authorizationStatus;
+export const getUserEmail = (state: AppStateType) => state.userEmail;

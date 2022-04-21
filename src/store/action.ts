@@ -1,4 +1,4 @@
-import {FilmItemType, FilmReviewItemType} from './films-data/films-data-types';
+import {FilmItemType, FilmReviewItemType} from '../types/films-data-types';
 import {LoadFilmsActionType, 
   LoadPromoFilmActionType, 
   RequireAuthorizationActionType, 
@@ -9,7 +9,7 @@ import {LoadFilmsActionType,
   SetIsErrorShownActionType, 
   DisableFormActionType, 
   UpdateFilmDataActionType, 
-  ShowServerUnavailableScreenActionType} from './reducer-types';
+  ShowServerUnavailableScreenActionType} from '../types/action-types';
 
 export const ActionType = {
   CHANGE_GENRE: `films/changeGenre`,
@@ -25,7 +25,7 @@ export const ActionType = {
   SHOW_SERVER_UNAVAILABLE_SCREEN: `site/showServerUnavailableScreen`,
 };
 
-export const loadFilms = (films: FilmItemType[]): LoadFilmsActionType => ({
+export const loadFilms = (films: Array<FilmItemType>): LoadFilmsActionType => ({
   type: ActionType.LOAD_FILMS,
   payload: films,
 });
@@ -50,12 +50,12 @@ export const rememberUser = (userEmail: string): RememberUserActionType => ({
   payload: userEmail,
 });
 
-export const loadMyFilmsList = (myFilmsList: FilmItemType[]): LoadMyFilmsListActionType => ({
+export const loadMyFilmsList = (myFilmsList: Array<FilmItemType>): LoadMyFilmsListActionType => ({
   type: ActionType.LOAD_MY_FILMS_LIST,
   payload: myFilmsList,
 });
 
-export const loadReviews = (reviews: FilmReviewItemType[]): LoadReviewsActionType => ({
+export const loadReviews = (reviews: Array<FilmReviewItemType>): LoadReviewsActionType => ({
   type: ActionType.LOAD_REVIEWS,
   payload: reviews,
 });

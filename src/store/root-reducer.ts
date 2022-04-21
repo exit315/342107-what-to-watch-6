@@ -11,9 +11,12 @@ export const NameSpace = {
   INTERACTION: `INTERACTION`,
 };
 
-export default combineReducers({
+export const rootReducer = combineReducers({
   [NameSpace.SERVER_LOGIC]: serverLogic,
   [NameSpace.DATA]: filmsData,
   [NameSpace.USER]: user,
   [NameSpace.INTERACTION]: userInteraction,
 });
+
+type RootReducerType = typeof rootReducer;
+export type AppStateType = ReturnType<RootReducerType>;

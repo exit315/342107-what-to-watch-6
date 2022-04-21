@@ -8,7 +8,7 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import {createAPI} from "./api/api";
 import {checkAuth} from "./api/api-actions";
 import {requireAuthorization, showServerUnavailableScreen} from './store/action';
-import rootReducer from './store/root-reducer';
+import {rootReducer} from './store/root-reducer';
 
 const api = createAPI(
     () => store.dispatch(requireAuthorization(false)),

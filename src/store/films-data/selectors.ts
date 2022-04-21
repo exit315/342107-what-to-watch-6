@@ -1,11 +1,9 @@
-import {NameSpace} from '../root-reducer';
-import {FilmItemType, InitialFilmsDataStateType} from './films-data-types';
-import {StateType} from '../reducer-types';
+import {AppStateType} from '../../store/root-reducer';
 
-export const getFilms = (state: any) => state[NameSpace.DATA].films;
-export const getFilmReviews = (state: any) => state[NameSpace.DATA].filmReviews;
-export const getMyFilmsList = (state: any) => state[NameSpace.DATA].myFilmsList;
-export const getPromoFilm = (state: any) => state[NameSpace.DATA].promoFilm;
-export const getGenre = (state: any) => state[NameSpace.DATA].genre;
-export const getIsDataLoaded = (state: any) => state[NameSpace.DATA].isDataLoaded;
-export const getIsPromoFilmDataLoaded = (state: any) => state[NameSpace.DATA].isPromoFilmDataLoaded;
+export const getFilms = (state: AppStateType) => state.films;
+export const getFilmReviews = (state: AppStateType) => state.filmReviews;
+export const getMyFilmsList = (state: AppStateType) => state.myFilmsList;
+export const getPromoFilm = (state: AppStateType) => state.promoFilm;
+export const getGenre = (state: AppStateType) => state.genre;
+export const getIsDataLoaded = (state: AppStateType) => state.isDataLoaded;
+export const getIsPromoFilmDataLoaded = (state: AppStateType) => state.isPromoFilmDataLoaded;

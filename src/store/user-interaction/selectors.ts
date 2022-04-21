@@ -1,4 +1,4 @@
-import {NameSpace} from '../root-reducer';
+import {AppStateType} from '../../store/root-reducer';
 
-export const getIsErrorShown = (state: any) => state[NameSpace.INTERACTION].isErrorShown;
-export const getIsFormDisabled = (state: any) => state[NameSpace.INTERACTION].isFormDisabled;
+export const getIsErrorShown = (state: AppStateType) => state.isErrorShown;
+export const getIsFormDisabled = (state: AppStateType) => state.isFormDisabled;
