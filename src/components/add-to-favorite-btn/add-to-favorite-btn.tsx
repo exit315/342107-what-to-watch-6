@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import PropTypes from 'prop-types';
 import {connect, useSelector, useDispatch} from 'react-redux';
 import browserHistory from "../../browser-history";
 import {AppRoute} from '../../utils/const';
@@ -9,16 +8,28 @@ import {setIsErrorShown} from "../../store/action";
 import {getMyFilmsList} from '../../store/films-data/selectors';
 import {getIsFormDisabled, getIsErrorShown} from '../../store/user-interaction/selectors';
 import {getAuthorizationStatus} from '../../store/user/selectors';
+import {AppStateType} from '../../store/root-reducer';
+import {FilmItemType} from '../../types/films-data-types';
+import {FavoriteFilmData} from '../../types/types';
 
-const AddToFavoriteBtn = ({currentFilm, onFavoriteClick, isFormDisabled, authorizationStatus, isErrorShown}) => {
+type Props = {
+  currentFilm: FilmItemType
+  onFavoriteClick: ({}: FavoriteFilmData) => void
+  isFormDisabled: boolean
+  authorizationStatus: boolean
+  isErrorShown: {
+    shown: boolean
+    errorText: string
+  },
+  myFilmsList: Array<FilmItemType>
+}
+
+const AddToFavoriteBtn: React.FC<Props> = ({currentFilm, onFavoriteClick, isFormDisabled, authorizationStatus, isErrorShown, myFilmsList}) => {
   const {shown, errorText} = isErrorShown;
-
+  const [messageText, setMessageText] = useState(``);
   const dispatch = useDispatch();
 
-  const currentMyFilmsList = useSelector(getMyFilmsList);
-  const [messageText, setMessageText] = useState(``);
-
-  const isInMyFilmsList = currentMyFilmsList.findIndex((el) => el.id === currentFilm.id);
+  const isInMyFilmsList = myFilmsList.findIndex((el: FilmItemType): boolean => el.id === currentFilm.id);
 
   const handleFavoriteClick = () => {
     if (!authorizationStatus) {
@@ -64,23 +75,16 @@ const AddToFavoriteBtn = ({currentFilm, onFavoriteClick, isFormDisabled, authori
   );
 };
 
-AddToFavoriteBtn.propTypes = {
-  currentFilm: PropTypes.object.isRequired,
-  onFavoriteClick: PropTypes.func.isRequired,
-  isFormDisabled: PropTypes.bool.isRequired,
-  authorizationStatus: PropTypes.bool.isRequired,
-  isErrorShown: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType) => ({
   isFormDisabled: getIsFormDisabled(state),
   authorizationStatus: getAuthorizationStatus(state),
   isErrorShown: getIsErrorShown(state),
+  myFilmsList: getMyFilmsList(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onFavoriteClick(id, status) {
-    dispatch(changeFavorite(id, status));
+const mapDispatchToProps = (dispatch: any) => ({
+  onFavoriteClick({id, status}: FavoriteFilmData) {
+    dispatch(changeFavorite({id, status}));
   },
   onLoadMyFilmsListData() {
     dispatch(fetchFavorite());

@@ -1,6 +1,6 @@
 import React, {memo} from 'react';
 
-const Footer = () => {
+const Footer: React.FC = () => {
   return (
     <footer className="page-footer">
       <div className="logo">

@@ -40,7 +40,7 @@ const FilmsList = ({films, genre}) => {
         />)}
       </div>
 
-      <ShowMoreBtn handleFilmCountChange={handleFilmCountChange} filmCount={filmCount} showBtn={curentFilms.length >= filmCount}/>
+      <ShowMoreBtn handleFilmCountChange={handleFilmCountChange} showBtn={curentFilms.length >= filmCount}/>
     </>
   );
 };
