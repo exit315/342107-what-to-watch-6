@@ -11,5 +11,5 @@ export type NewCommentDataType = {
 
 export type FavoriteFilmData = {
   id: number
-  status: boolean
+  status: number
 }
