@@ -6,12 +6,20 @@ import {logout} from "../../api/api-actions";
 import {getUserEmail} from '../../store/user/selectors';
 import {AppStateType} from '../../store/root-reducer';
 
-type PropsType = {
-  onLogoutClick: (email: string) => void
-  userEmail: string
+type MapStatePropsType = {
+  userEmail: string | null
 }
 
-const UserBlock: React.FC<PropsType> = ({onLogoutClick, userEmail}) => {
+type MapDispatchPropsType = {
+  onLogoutClick: (userEmail: string) => void
+}
+
+const UserBlock: React.FC<MapStatePropsType & MapDispatchPropsType> = ({userEmail, onLogoutClick}) => {
+  const handlLogOut = () => {
+    if (userEmail) {
+      (e: React.MouseEvent) => onLogoutClick(userEmail)
+    }
+  }
 
   return (
     <>
@@ -19,18 +27,18 @@ const UserBlock: React.FC<PropsType> = ({onLogoutClick, userEmail}) => {
         <Link to={AppRoute.MYLIST} className="logo__link">
           <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
         </Link>
-
       </div>
-      <Link to={AppRoute.ROOT} className="user-block__link" onClick={(e: React.MouseEvent) => onLogoutClick(userEmail)}>{userEmail}</Link>
+      
+      <Link to={AppRoute.ROOT} className="user-block__link" onClick={handlLogOut}>{userEmail}</Link>
     </>
   );
 };
 
-const mapStateToProps = (state: AppStateType) => ({
+const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
   userEmail: getUserEmail(state),
 });
 
-const mapDispatchToProps = (dispatch: any) => ({
+const mapDispatchToProps = (dispatch: any): MapDispatchPropsType => ({
   onLogoutClick(userEmail: string) {
     dispatch(logout(userEmail));
   }

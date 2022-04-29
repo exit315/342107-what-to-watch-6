@@ -12,7 +12,7 @@ const initialState: InitialFilmsDataStateType = {
   isPromoFilmDataLoaded: false,
 };
 
-const filmsData = (state = initialState, action: {type: string; payload: any}): InitialFilmsDataStateType => {
+const filmsData = (state = initialState, action: any): InitialFilmsDataStateType => {
   switch (action.type) {
     case ActionType.LOAD_FILMS:
       return {

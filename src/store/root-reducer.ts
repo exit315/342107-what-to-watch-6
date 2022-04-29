@@ -12,10 +12,10 @@ export const NameSpace = {
 };
 
 export const rootReducer = combineReducers({
-  [NameSpace.SERVER_LOGIC]: serverLogic,
-  [NameSpace.DATA]: filmsData,
-  [NameSpace.USER]: user,
-  [NameSpace.INTERACTION]: userInteraction,
+  serverLogic: serverLogic,
+  filmsData: filmsData,
+  user: user,
+  userInteraction: userInteraction,
 });
 
 type RootReducerType = typeof rootReducer;

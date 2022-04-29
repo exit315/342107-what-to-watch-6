@@ -1,18 +1,32 @@
-import React, {useState, useEffect, useRef} from 'react';
-import PropTypes from 'prop-types';
+import React, {useState, useEffect, useRef, MutableRefObject} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {getRunTimeInPlayer} from '../../utils/utils';
 import {getFilms} from '../../store/films-data/selectors';
+import {FilmItemType} from '../../types/films-data-types';
+import {AppStateType} from '../../store/root-reducer';
+import type {RouteComponentProps} from 'react-router';
+import {match} from "react-router-dom";
 
-const Player = ({films, match, onExitPlayerClick}) => {
-  const currentFilm = films.find((el) => el.id === parseInt(match.params.id, 10));
+type MapStatePropsType = {
+  films: Array<FilmItemType>
+}
 
+interface CurrentFilmParams {
+  id: string;
+}
+
+interface CurrentFilmProps {
+  match?: match<CurrentFilmParams>;
+}
+
+const Player: React.FC<MapStatePropsType & RouteComponentProps & CurrentFilmProps> = ({films, match}) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
   const [videoTime, setVideoTime] = useState(``);
+  const videoRef = useRef() as MutableRefObject<HTMLVideoElement>;
 
-  const videoRef = useRef();
+  const currentFilm: FilmItemType | undefined = films.find((el: FilmItemType) => el.id === parseInt(match.params.id, 10));
 
   useEffect(() => {
     videoRef.current.oncanplaythrough = () => {
@@ -53,9 +67,9 @@ const Player = ({films, match, onExitPlayerClick}) => {
 
   return (
     <div className="player">
-      <video src={currentFilm.video_link} className="player__video" ref={videoRef}></video>
+      <video src={currentFilm!.video_link} className="player__video" ref={videoRef}></video>
 
-      <button type="button" className="player__exit" onClick={onExitPlayerClick}>Exit</button>
+      <button type="button" className="player__exit">Exit</button>
 
       <div className="player__controls">
         <div className="player__controls-row">
@@ -73,7 +87,7 @@ const Player = ({films, match, onExitPlayerClick}) => {
               </svg>
               <span>Play</span></>}
           </button>
-          <div className="player__name">{currentFilm.name}</div>
+          <div className="player__name">{currentFilm!.name}</div>
 
           <button type="button" className="player__full-screen" onClick={handleFullScreenClick}>
             <svg viewBox="0 0 27 27" width="27" height="27">
@@ -87,13 +101,7 @@ const Player = ({films, match, onExitPlayerClick}) => {
   );
 };
 
-Player.propTypes = {
-  films: PropTypes.arrayOf(PropTypes.object).isRequired,
-  match: PropTypes.object.isRequired,
-  onExitPlayerClick: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
   films: getFilms(state),
 });
 

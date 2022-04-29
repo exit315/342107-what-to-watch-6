@@ -2,17 +2,16 @@ import React from 'react';
 import {connect} from "react-redux";
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../utils/const';
-import {logout} from "../../api/api-actions";
-import {getAuthorizationStatus, getUserEmail} from '../../store/user/selectors';
+import {getAuthorizationStatus} from '../../store/user/selectors';
 import UserBlock from '../user-block/user-block';
 import SignInLink from '../sign-in-link/sign-in-link';
 import {AppStateType} from '../../store/root-reducer';
 
 type PropsType = {
-  title: string
-  authorizationStatus: boolean
-  isUserBlockShown: boolean
-  breadcrumbs: {}
+  title?: string
+  authorizationStatus?: boolean
+  isUserBlockShown?: boolean
+  breadcrumbs?: {}
 }
 
 const Header: React.FC<PropsType> = ({title, authorizationStatus, isUserBlockShown, breadcrumbs}) => {

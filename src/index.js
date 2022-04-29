@@ -26,11 +26,7 @@ store.dispatch(checkAuth());
 
 ReactDOM.render(
     <Provider store={store}>
-      <App
-        promoFilm={store.getState().promoFilm}
-        films={store.getState().films}
-        genre={store.getState().genre}
-      />
+      <App />
     </Provider>,
     document.querySelector(`#root`)
 );

@@ -1,14 +1,19 @@
 import React, {useEffect} from 'react';
-import PropTypes from 'prop-types';
 import {Router as BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
-import PrivateRoute from '../private-route/private-route';
-import browserHistory from "../../browser-history";
+import {RouteComponentProps} from 'react-router';
+
 import {AppRoute} from '../../utils/const';
 import {fetchFilmsList} from "../../api/api-actions";
+
 import {getServerStatus} from '../../store/server-logic/selectors';
-import {getIsDataLoaded} from '../../store/films-data/selectors';
+import {getIsDataLoaded, getFilms} from '../../store/films-data/selectors';
 import {getAuthorizationStatus} from '../../store/user/selectors';
+import {AppStateType} from '../../store/root-reducer';
+
+import PrivateRoute from '../private-route/private-route';
+import browserHistory from "../../browser-history";
+
 import MainPage from '../main-page/main-page';
 import MyList from '../my-list/my-list';
 import Player from '../player/player';
@@ -18,8 +23,20 @@ import FilmScreen from '../film-screen/film-screen';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import LoadingScreen from '../loading-screen/loading-screen';
 import ServerUnavailableScreen from '../server-unavailable-screen/server-unavailable-screen';
+import {FilmItemType} from '../../types/films-data-types';
 
-const App = ({isDataLoaded, onLoadFilmsData, authorizationStatus, serverUnavailable}) => {
+type MapStatePropsType = {
+  isDataLoaded: boolean
+  authorizationStatus: boolean
+  serverUnavailable: boolean
+  films: Array<FilmItemType>
+}
+
+type MapDispatchPropsType = {
+  onLoadFilmsData: () => void
+}
+
+const App: React.FC<MapStatePropsType & MapDispatchPropsType & RouteComponentProps> = ({isDataLoaded, onLoadFilmsData, authorizationStatus, serverUnavailable, films}) => {
   if (serverUnavailable) {
     return (
       <ServerUnavailableScreen />
@@ -27,6 +44,8 @@ const App = ({isDataLoaded, onLoadFilmsData, authorizationStatus, serverUnavaila
   }
 
   useEffect(() => {
+    console.log(films);
+
     if (!isDataLoaded) {
       onLoadFilmsData();
     }
@@ -58,15 +77,12 @@ const App = ({isDataLoaded, onLoadFilmsData, authorizationStatus, serverUnavaila
           path={AppRoute.REVIEW}
           render={() => <AddReview />}
         />
-        <Route
+        {/* <Route
           exact
           path={AppRoute.PLAYER}
-          render={({history}) => (
-            <Player
-              onExitPlayerClick={() => history.goBack()}
-            />
-          )}
-        />
+        >
+          <Player /> // требует films
+        </Route> */}
         <Route exact path={AppRoute.FILM}>
           <FilmScreen />
         </Route>
@@ -78,20 +94,14 @@ const App = ({isDataLoaded, onLoadFilmsData, authorizationStatus, serverUnavaila
   );
 };
 
-App.propTypes = {
-  isDataLoaded: PropTypes.bool.isRequired,
-  onLoadFilmsData: PropTypes.func.isRequired,
-  authorizationStatus: PropTypes.bool.isRequired,
-  serverUnavailable: PropTypes.bool.isRequired,
-};
-
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
   isDataLoaded: getIsDataLoaded(state),
   authorizationStatus: getAuthorizationStatus(state),
   serverUnavailable: getServerStatus(state),
+  films: getFilms(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch: any): MapDispatchPropsType => ({
   onLoadFilmsData() {
     dispatch(fetchFilmsList());
   },
