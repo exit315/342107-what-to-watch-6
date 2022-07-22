@@ -1,16 +1,17 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {FILMS_LIKE_THIS} from '../../utils/const';
 import {getFilms, getGenre} from '../../store/films-data/selectors';
 import MovieItemCard from '../movie-item-card/movie-item-card';
+import {FilmItemType} from '../../types/films-data-types';
+import {AppStateType} from '../../store/root-reducer';
 
-const FilmsLikeThis = ({films, currentFilm}) => {
-  const [activeCard, setActiveCard] = useState(null);
-  const handleActiveCardChange = (id = null) => {
-    setActiveCard(id);
-  };
+type Props = {
+  films: FilmItemType[]
+  currentFilm: FilmItemType
+}
 
+const FilmsLikeThis:React.FC<Props> = ({films, currentFilm}) => {
   const filmsList = films.filter((el) => {
     if (el.name === currentFilm.name) {
       return null;
@@ -31,8 +32,6 @@ const FilmsLikeThis = ({films, currentFilm}) => {
             name={film.name}
             src={film.preview_image}
             previewVideoLink={film.preview_video_link}
-            handleActiveCardChange={handleActiveCardChange}
-            activeCard={activeCard}
           />) :
           filmsList.slice(0, FILMS_LIKE_THIS).map((film) => <MovieItemCard
             key={`${film.name}-${film.id}`}
@@ -40,8 +39,6 @@ const FilmsLikeThis = ({films, currentFilm}) => {
             name={film.name}
             src={film.preview_image}
             previewVideoLink={film.preview_video_link}
-            handleActiveCardChange={handleActiveCardChange}
-            activeCard={activeCard}
           />)
         }
       </div>
@@ -49,12 +46,7 @@ const FilmsLikeThis = ({films, currentFilm}) => {
   );
 };
 
-FilmsLikeThis.propTypes = {
-  films: PropTypes.arrayOf(PropTypes.object).isRequired,
-  currentFilm: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType) => ({
   genre: getGenre(state),
   films: getFilms(state),
 });

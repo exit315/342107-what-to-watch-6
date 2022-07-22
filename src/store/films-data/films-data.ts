@@ -1,5 +1,5 @@
 import {ActionType} from '../action';
-import {FilmItemType, InitialFilmsDataStateType} from './films-data-types';
+import {FilmItemType, InitialFilmsDataStateType} from '../../types/films-data-types';
 import {GENRE_TYPE_ALL} from '../../utils/const';
 
 const initialState: InitialFilmsDataStateType = {
@@ -12,7 +12,7 @@ const initialState: InitialFilmsDataStateType = {
   isPromoFilmDataLoaded: false,
 };
 
-const filmsData = (state = initialState, action: {type: string; payload: any}): InitialFilmsDataStateType => {
+const filmsData = (state = initialState, action: any): InitialFilmsDataStateType => {
   switch (action.type) {
     case ActionType.LOAD_FILMS:
       return {

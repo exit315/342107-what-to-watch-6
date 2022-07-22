@@ -1,16 +1,21 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {FILM_COUNT_PER_STEP, INITIAL_FILM_COUNT, GENRE_TYPE_ALL} from '../../utils/const';
 import {filterFilmsByGenre} from '../../utils/utils';
 import {getFilms, getGenre} from '../../store/films-data/selectors';
 import MovieItemCard from '../movie-item-card/movie-item-card';
 import ShowMoreBtn from '../show-more-btn/show-more-btn';
+import {FilmItemType} from '../../types/films-data-types';
+import {AppStateType} from '../../store/root-reducer';
 
-const FilmsList = ({films, genre}) => {
+type Props = {
+  films: FilmItemType[]
+  genre: string
+}
+
+const FilmsList:React.FC<Props> = ({films, genre}) => {
   const [filmCount, setFilmCount] = useState(FILM_COUNT_PER_STEP);
-  const handleFilmCountChange = (evt) => {
-    evt.preventDefault();
+  const handleFilmCountChange = () => {
     setFilmCount(filmCount + FILM_COUNT_PER_STEP);
   };
 
@@ -31,7 +36,7 @@ const FilmsList = ({films, genre}) => {
   return (
     <>
       <div className="catalog__movies-list">
-        {curentFilms.map((film) => <MovieItemCard
+        {curentFilms.map((film: FilmItemType) => <MovieItemCard
           key={`${film.name}-${film.id}`}
           id={film.id}
           name={film.name}
@@ -40,17 +45,12 @@ const FilmsList = ({films, genre}) => {
         />)}
       </div>
 
-      <ShowMoreBtn handleFilmCountChange={handleFilmCountChange} filmCount={filmCount} showBtn={curentFilms.length >= filmCount}/>
+      <ShowMoreBtn handleFilmCountChange={handleFilmCountChange} showBtn={curentFilms.length >= filmCount}/>
     </>
   );
 };
 
-FilmsList.propTypes = {
-  films: PropTypes.arrayOf(PropTypes.object).isRequired,
-  genre: PropTypes.string.isRequired,
-};
-
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType) => ({
   genre: getGenre(state),
   films: getFilms(state),
 });

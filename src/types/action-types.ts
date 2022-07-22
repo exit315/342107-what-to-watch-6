@@ -1,19 +1,9 @@
-import {InitialFilmsDataStateType, FilmItemType, FilmReviewItemType} from './films-data/films-data-types';
-import {InitialServerLogicStateType} from './server-logic/server-logic-types';
-import {InitialUserStateType} from './user/user-types';
-import {InitialUserInteractionStateType} from './user-interaction/user-interaction-types';
-import {ActionType} from './action';
-
-export type StateType = {
-  SERVER_LOGIC: InitialServerLogicStateType;
-  DATA: InitialFilmsDataStateType;
-  USER: InitialUserStateType;
-  INTERACTION: InitialUserInteractionStateType;
-};
+import {FilmItemType, FilmReviewItemType} from './films-data-types';
+import {ActionType} from '../store/action';
 
 export type LoadFilmsActionType = {
   type: typeof ActionType.LOAD_FILMS;
-  payload: FilmItemType[];
+  payload: Array<FilmItemType>;
 };
 
 export type LoadPromoFilmActionType = {
@@ -38,12 +28,12 @@ export type RememberUserActionType = {
 
 export type LoadMyFilmsListActionType = {
   type: typeof ActionType.LOAD_MY_FILMS_LIST;
-  payload: FilmItemType[];
+  payload: Array<FilmItemType>;
 };
 
 export type LoadReviewsActionType = {
   type: typeof ActionType.LOAD_REVIEWS;
-  payload: FilmReviewItemType[];
+  payload: Array<FilmReviewItemType>;
 };
 
 export type SetIsErrorShownActionType = {

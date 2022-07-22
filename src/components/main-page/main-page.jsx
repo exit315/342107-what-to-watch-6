@@ -2,14 +2,14 @@ import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {fetchPromoFilm} from "../../api/api-actions";
-import {getFilms, getGenre, getIsPromoFilmDataLoaded} from '../../store/films-data/selectors';
+import {getIsPromoFilmDataLoaded} from '../../store/films-data/selectors';
 import PromoFilm from '../promo-film/promo-film';
 import GenreTabs from '../genre-tabs/genre-tabs';
 import Footer from '../footer/footer';
 import FilmsList from '../films-list/films-list';
 import LoadingScreen from '../loading-screen/loading-screen';
 
-const MainPage = ({films, genre, onLoadPromoFilmData, isPromoFilmDataLoaded}) => {
+const MainPage = ({onLoadPromoFilmData, isPromoFilmDataLoaded}) => {
   useEffect(() => {
     if (!isPromoFilmDataLoaded) {
       onLoadPromoFilmData();
@@ -32,9 +32,7 @@ const MainPage = ({films, genre, onLoadPromoFilmData, isPromoFilmDataLoaded}) =>
 
           <GenreTabs />
 
-          <FilmsList
-            films={films} genre={genre}
-          />
+          <FilmsList />
         </section>
 
         <Footer />
@@ -44,15 +42,11 @@ const MainPage = ({films, genre, onLoadPromoFilmData, isPromoFilmDataLoaded}) =>
 };
 
 MainPage.propTypes = {
-  films: PropTypes.arrayOf(PropTypes.object).isRequired,
-  genre: PropTypes.string.isRequired,
   onLoadPromoFilmData: PropTypes.func.isRequired,
   isPromoFilmDataLoaded: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  genre: getGenre(state),
-  films: getFilms(state),
   isPromoFilmDataLoaded: getIsPromoFilmDataLoaded(state),
 });
 

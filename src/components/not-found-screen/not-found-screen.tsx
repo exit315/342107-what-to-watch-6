@@ -4,10 +4,11 @@ import {AppRoute} from '../../utils/const';
 import Header from '../header/header';
 import Footer from '../footer/footer';
 
-const NotFoundScreen = () => {
+const NotFoundScreen: React.FC = () => {
+  
   return (
     <div className="user-page">
-      <Header isUserBlockShown={true}/>
+      <Header isUserBlockShown={true} />
 
       <div className="user-page__content page-not-found" style={
         {

@@ -1,7 +1,7 @@
 import React from 'react';
 import Footer from '../footer/footer';
 
-const ServerUnavailableScreen = () => {
+const ServerUnavailableScreen: React.FC = () => {
   return (
     <div>
       <div className="user-page">

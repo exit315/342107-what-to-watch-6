@@ -1,7 +1,7 @@
 import React from 'react';
 import Footer from '../footer/footer';
 
-const LoadingScreen = () => {
+const LoadingScreen: React.FC = () => {
   return (
     <div>
       <div className="user-page">

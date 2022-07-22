@@ -1,5 +1,3 @@
-import {ActionType} from '../action';
-
 export type FilmItemType = {
   background_color: string;
   background_image: string;
@@ -16,7 +14,7 @@ export type FilmItemType = {
   released: number;
   run_time: number;
   scores_count: number;
-  starring: string[];
+  starring: Array<string>;
   video_link: string;
 };
 
@@ -25,18 +23,18 @@ export type FilmReviewItemType = {
   date: string;
   id: number;
   rating: number;
+  user: {
+    id: number
+    name: string
+  }
 };
 
 export type InitialFilmsDataStateType = {
-  films: FilmItemType[];
-  filmReviews: FilmReviewItemType[];
-  myFilmsList: FilmItemType[];
+  films: Array<FilmItemType>;
+  filmReviews: Array<FilmReviewItemType>;
+  myFilmsList: Array<FilmItemType>;
   promoFilm: FilmItemType | null;
   genre: string;
   isDataLoaded: boolean;
   isPromoFilmDataLoaded: boolean;
 };
-
-
-
-

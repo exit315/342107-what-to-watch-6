@@ -1,9 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
+import {RouteComponentProps} from "react-router";
 import {getRunTime} from '../../utils/utils';
+import {FilmItemType} from '../../types/films-data-types';
 
-const FilmDetails = ({currentFilm}) => {
+type Props = RouteComponentProps & {
+  currentFilm: FilmItemType
+}
+
+const FilmDetails:React.FC<Props> = ({currentFilm}) => {
   return (
     <React.Fragment>
       <div className="movie-card__text movie-card__row">
@@ -37,10 +42,6 @@ const FilmDetails = ({currentFilm}) => {
       </div>
     </React.Fragment>
   );
-};
-
-FilmDetails.propTypes = {
-  currentFilm: PropTypes.object.isRequired,
 };
 
 export default withRouter(FilmDetails);
