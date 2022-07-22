@@ -23,6 +23,10 @@ export type FilmReviewItemType = {
   date: string;
   id: number;
   rating: number;
+  user: {
+    id: number
+    name: string
+  }
 };
 
 export type InitialFilmsDataStateType = {

@@ -1,9 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import {RouteComponentProps} from "react-router";
 import {withRouter} from 'react-router-dom';
 import {getTextRating} from '../../utils/utils';
+import {FilmItemType} from '../../types/films-data-types';
 
-const FilmOverview = ({currentFilm}) => {
+type Props = RouteComponentProps & {
+  currentFilm: FilmItemType
+}
+
+const FilmOverview:React.FC<Props> = ({currentFilm}) => {
   return (
     <React.Fragment>
       <div className="movie-rating">
@@ -21,11 +26,6 @@ const FilmOverview = ({currentFilm}) => {
       </div>
     </React.Fragment>
   );
-};
-
-FilmOverview.propTypes = {
-  currentFilm: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired
 };
 
 export default withRouter(FilmOverview);

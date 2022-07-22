@@ -1,11 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
+import {RouteComponentProps} from "react-router";
+import {connect} from 'react-redux';
 import dayjs from 'dayjs';
 import {getFilmReviews} from '../../store/films-data/selectors';
+import {FilmReviewItemType} from '../../types/films-data-types';
+import {AppStateType} from '../../store/root-reducer';
 
-const FilmReviews = ({filmReviews}) => {
+type Props = RouteComponentProps & {
+  filmReviews: FilmReviewItemType[]
+}
+
+const FilmReviews:React.FC<Props> = ({filmReviews}) => {
   return (
     <div className="movie-card__reviews movie-card__row">
       <div className="movie-card__reviews-col">
@@ -26,11 +32,7 @@ const FilmReviews = ({filmReviews}) => {
   );
 };
 
-FilmReviews.propTypes = {
-  filmReviews: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
-
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType) => ({
   filmReviews: getFilmReviews(state),
 });
 

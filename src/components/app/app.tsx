@@ -44,8 +44,6 @@ const App: React.FC<MapStatePropsType & MapDispatchPropsType & RouteComponentPro
   }
 
   useEffect(() => {
-    console.log(films);
-
     if (!isDataLoaded) {
       onLoadFilmsData();
     }

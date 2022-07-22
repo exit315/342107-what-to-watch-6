@@ -1,13 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {GENRE_TYPE_ALL, MAX_GENRE_COUNT} from '../../utils/const';
 import {createGenreTypesList} from '../../utils/utils';
 import {changeGenre} from '../../store/action';
 import {getFilms, getGenre} from '../../store/films-data/selectors';
+import {FilmItemType} from '../../types/films-data-types';
+import {AppStateType} from '../../store/root-reducer';
 
-const GenreTabs = ({films, genre, onTabClick}) => {
+type Props = {
+  films: FilmItemType[]
+  genre: string
+  onTabClick: (tab: string) => void
+}
+
+const GenreTabs:React.FC<Props> = ({films, genre, onTabClick}) => {
   const createFilterTypesList = () => {
     let filterTypesList = Array.from(createGenreTypesList(films));
 
@@ -21,13 +28,13 @@ const GenreTabs = ({films, genre, onTabClick}) => {
   };
 
   const renderGenreTypesList = () => {
-    const genreTypesList = [];
+    const genreTypesList: React.ReactElement[] = [];
 
     createFilterTypesList().forEach((item) => {
       genreTypesList.push(
-          <li className={`catalog__genres-item ${genre === item ? `catalog__genres-item--active` : ``}`} onClick={onTabClick} key={item}>
-            <Link to="#" className="catalog__genres-link">{item}</Link>
-          </li>);
+        <li className={`catalog__genres-item ${genre === item ? `catalog__genres-item--active` : ``}`} onClick={() => onTabClick(item)} key={item}>
+          <Link to="#" className="catalog__genres-link">{item}</Link>
+        </li>);
     });
 
     return genreTypesList;
@@ -43,20 +50,14 @@ const GenreTabs = ({films, genre, onTabClick}) => {
   );
 };
 
-GenreTabs.propTypes = {
-  films: PropTypes.arrayOf(PropTypes.object).isRequired,
-  genre: PropTypes.string.isRequired,
-  onTabClick: PropTypes.func.isRequired
-};
-
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType) => ({
   genre: getGenre(state),
   films: getFilms(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onTabClick(evt) {
-    dispatch(changeGenre(evt.target.textContent));
+const mapDispatchToProps = (dispatch: any) => ({
+  onTabClick(tab: string) {
+    dispatch(changeGenre(tab));
   }
 });
 
